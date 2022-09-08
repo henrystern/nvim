@@ -2,7 +2,7 @@ set number
 set visualbell
 set cursorline
 set hlsearch
-set smartcase	
+set smartcase
 set ignorecase
 set incsearch
 set background=dark
@@ -74,8 +74,8 @@ Plug 'kyazdani42/nvim-tree.lua'
 Plug 'voldikss/vim-floaterm'
 
 Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/nvim-cmp' 
-Plug 'hrsh7th/cmp-nvim-lsp' 
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-calc'
 Plug 'hrsh7th/cmp-cmdline'
@@ -183,8 +183,8 @@ end
           end,
           { "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
 		),
-		
-    }), 
+
+    }),
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
       { name = 'ultisnips' },
@@ -244,7 +244,7 @@ wk.register({
 		}
 	}, { prefix = '<leader>' })
 
-require('lualine').setup { 
+require('lualine').setup {
 	options = {
 		icons_enabled = true,
 		theme = 'dracula-nvim',
