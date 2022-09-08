@@ -16,7 +16,6 @@ set tabstop=4 softtabstop=4 shiftwidth=4 shiftwidth=4 smarttab
 set encoding=UTF-8
 filetype plugin indent on
 
-
 set mouse=a
 
 map <Space> <Leader>
