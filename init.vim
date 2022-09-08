@@ -17,10 +17,6 @@ set encoding=UTF-8
 filetype plugin indent on
 
 set mouse=a
-"set guioptions -=m
-"set guioptions -=T
-"set guioptions-=r
-"set guioptions-=L 
 
 map <Space> <Leader>
 
@@ -29,13 +25,12 @@ inoremap <C-a> <esc>0i
 inoremap <C-e> <esc>$a
 inoremap <C-d> <delete>
 
-imap <expr> <Space><Space>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
-smap <expr> <Space><Space>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
-
 nnoremap o o<esc>
 nnoremap O O<esc>
 nnoremap h j
 nnoremap j h
+nnoremap dh dj
+nnoremap dj dh
 nnoremap <silent> <Tab> :bn<CR>
 nnoremap <silent> <leader>w :w<CR>
 nnoremap <silent> <leader>q :q<CR>
@@ -45,11 +40,13 @@ nnoremap <silent> <leader>n :NvimTreeFocus<CR>
 nnoremap <silent><expr> <Leader>h (&hls && v:hlsearch ? ':nohls' : ':set hls')."\n"
 set timeoutlen=500
 
-nmap <silent> <F8> :TagbarToggle<CR>
 nmap <silent> <leader>/ gcc
 
 vnoremap h j
 vnoremap j h
+vnoremap dh dj
+vnoremap dj dh
+
 vmap <leader>/ gc
 
 nnoremap   <silent>   <leader>t    :FloatermNew<CR>
@@ -58,12 +55,7 @@ tnoremap   <silent>   `    <C-\><C-n>:FloatermNext<CR>
 nnoremap   <silent>   <C-t>   :FloatermToggle<CR>
 tnoremap   <silent>   <C-t>   <C-\><C-n>:FloatermToggle<CR>
 
-let g:vimtex_view_general_options
-    \ = '-reuse-instance -forward-search @tex @line @pdf'
 
-filetype plugin indent on
-
-let g:vimtex_compiler_method = 'latexmk'
 
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
@@ -79,26 +71,44 @@ Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
 Plug 'kyazdani42/nvim-tree.lua'
-Plug 'neovim/nvim-lspconfig'
 Plug 'voldikss/vim-floaterm'
-Plug 'neovim/nvim-lspconfig' 
+
+Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-cmp' 
 Plug 'hrsh7th/cmp-nvim-lsp' 
-Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-calc'
 Plug 'hrsh7th/cmp-cmdline'
-Plug 'rafamadriz/friendly-snippets'
-Plug 'hrsh7th/cmp-vsnip'
-Plug 'hrsh7th/vim-vsnip'
-Plug 'hrsh7th/vim-vsnip-integ'
+Plug 'sirver/ultisnips'
+Plug 'quangnguyen30192/cmp-nvim-ultisnips'
+Plug 'honza/vim-snippets'
+
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
 Plug 'godlygeek/tabular'
 Plug 'junegunn/goyo.vim'
 Plug 'preservim/vim-markdown'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'folke/which-key.nvim'
-Plug 'preservim/tagbar'
 call plug#end()
+
+let g:vimtex_view_general_options
+    \ = '-reuse-instance -forward-search @tex @line @pdf'
+
+filetype plugin indent on
+
+let g:tex_flavor='latex'
+let g:vimtex_view_method='zathura'
+let g:vimtex_quickfix_mode=0
+set conceallevel=1
+let g:tex_conceal='abdmg'
+
+let g:vimtex_compiler_method = 'latexmk'
+
+setlocal spell
+set spelllang=en_gb
+inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 
 colorscheme dracula
 
@@ -137,14 +147,9 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<leader>f', vim.lsp.buf.formatting, bufopts)
 end
 
-local has_words_before = function()
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-	end
+      require("cmp_nvim_ultisnips").setup{}
+    local cmp_ultisnips_mappings = require("cmp_nvim_ultisnips.mappings")
 
-	local feedkey = function(key, mode)
-	  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
-	  end
 
   local cmp = require'cmp'
 
@@ -152,7 +157,7 @@ local has_words_before = function()
     snippet = {
       -- REQUIRED - you must specify a snippet engine
       expand = function(args)
-        vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+        vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
       end,
     },
     window = {
@@ -160,60 +165,39 @@ local has_words_before = function()
       -- documentation = cmp.config.window.bordered(),
     },
     mapping = cmp.mapping.preset.insert({
-	['<C-Space>'] = cmp.mapping.complete(),
-	['<CR>'] = cmp.mapping.confirm({ select = true }),
-	['<C-e>'] = cmp.mapping.abort(),
-	["<Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif vim.fn["vsnip#available"](1) == 1 then
-        feedkey("<Plug>(vsnip-expand-or-jump)", "")
-      elseif has_words_before() then
-        cmp.complete()
-      else
-        fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
-      end
-    end, { "i", "s" }),
-
-    ["<S-Tab>"] = cmp.mapping(function()
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif vim.fn["vsnip#jumpable"](-1) == 1 then
-        feedkey("<Plug>(vsnip-jump-prev)", "")
-      end
-    end, { "i", "s" }),
-    }),
+	  ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+	  ['<C-n>'] = cmp.mapping.select_next_item(),
+	  ['<S-n>'] = cmp.mapping.select_prev_item(),
+      ['<C-e>'] = cmp.mapping.abort(),
+      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+	  ["<Tab>"] = cmp.mapping(
+          function(fallback)
+            cmp_ultisnips_mappings.expand_or_jump_forwards(fallback)
+          end,
+          { "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
+        ),
+        ["<S-Tab>"] = cmp.mapping(
+          function(fallback)
+            cmp_ultisnips_mappings.jump_backwards(fallback)
+          end,
+          { "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
+		),
+		
+    }), 
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
-      { name = 'vsnip' }, -- For vsnip users.
+      { name = 'ultisnips' },
+	  { name = 'calc' },
     }, {
       { name = 'buffer' },
     })
-  })
-
-  -- Set configuration for specific filetype.
-  cmp.setup.filetype('gitcommit', {
-    sources = cmp.config.sources({
-      { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
-    }, {
-      { name = 'buffer' },
-    })
-  })
-
-  -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-  cmp.setup.cmdline('/', {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = {
-      { name = 'buffer' }
-    }
   })
 
   -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
   cmp.setup.cmdline(':', {
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
-      { name = 'path' }
-    }, {
       { name = 'cmdline' }
     })
   })
@@ -228,15 +212,19 @@ require('lspconfig')['html'].setup{
 
 require('lspconfig')['pyright'].setup{
 	on_attach = on_attach,
+    capabilities = capabilities,
 	flags = lsp_flags,
 }
 
 require('lspconfig')['tsserver'].setup{
     on_attach = on_attach,
+    capabilities = capabilities,
     flags = lsp_flags,
 }
 
-require'lspconfig'.vimls.setup{}
+require'lspconfig'.vimls.setup{
+    capabilities = capabilities,
+}
 
 require("which-key").setup {
 -- your configuration comes here
@@ -249,8 +237,12 @@ local wk = require("which-key")
 wk.register({
 	d = {
 		name = "diagnostics",
+		["e"] = { "open float" },
+		[ "[" ] = { "go to prev" },
+		["]"] = { "go to next" },
+		["q"] = { "set local list" },
 		}
-})
+	}, { prefix = '<leader>' })
 
 require('lualine').setup { 
 	options = {
