@@ -74,6 +74,9 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
 endif
 
 call plug#begin(stdpath('data') . '/plugged')
+
+" Plug 'dstein64/vim-startuptime'
+
 Plug 'lervag/vimtex', { 'for': ['tex']}
 Plug 'tpope/vim-surround' "<C-s>x and <C-ss>x in insert mode
 Plug 'Mofiqul/dracula.nvim'
@@ -83,6 +86,11 @@ Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'voldikss/vim-floaterm'
 Plug 'phaazon/hop.nvim'
+Plug 'godlygeek/tabular'
+Plug 'junegunn/goyo.vim'
+Plug 'preservim/vim-markdown', { 'for': ['markdown'] }
+Plug 'tpope/vim-commentary'
+Plug 'folke/which-key.nvim'
 
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-cmp'
@@ -96,11 +104,6 @@ Plug 'honza/vim-snippets'
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
-Plug 'godlygeek/tabular'
-Plug 'junegunn/goyo.vim'
-Plug 'preservim/vim-markdown', { 'for': ['markdown'] }
-Plug 'tpope/vim-commentary'
-Plug 'folke/which-key.nvim'
 call plug#end()
 
 let g:vimtex_view_general_viewer = 'SumatraPDF'
@@ -179,7 +182,7 @@ end
 	  ['<C-b>'] = cmp.mapping.scroll_docs(-4),
       ['<C-f>'] = cmp.mapping.scroll_docs(4),
 	  ['<C-n>'] = cmp.mapping.select_next_item(),
-	  ['<c-i>'] = cmp.mapping.select_prev_item(),
+	  ['<C-i>'] = cmp.mapping.select_prev_item(),
       ['<C-e>'] = cmp.mapping.abort(),
       ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 	  ["<Tab>"] = cmp.mapping(
@@ -201,7 +204,6 @@ end
       { name = 'ultisnips' },
 	  { name = 'calc' },
     }, {
-      { name = 'buffer' },
     })
   })
 
