@@ -133,7 +133,7 @@ let g:vimtex_compiler_latexmk = {
         \ 'hooks' : [],
         \ 'options' : [
         \   '-synctex=1',
-		\   '-aux-directory=.latex_aux_files',
+		\   '-aux-directory=' . stdpath('data') . '/.latex_aux_files',
         \ ],
         \}
 
@@ -254,6 +254,10 @@ require('lspconfig')['tsserver'].setup{
 }
 
 require'lspconfig'.vimls.setup{
+    capabilities = capabilities,
+}
+
+require'lspconfig'.texlab.setup{
     capabilities = capabilities,
 }
 
