@@ -16,16 +16,6 @@ set tabstop=4 softtabstop=4 shiftwidth=4 shiftwidth=4 smarttab
 set encoding=UTF-8
 filetype plugin indent on
 
-set confirm
-setglobal display=lastline
-setglobal scrolloff=1
-setglobal sidescrolloff=5
-setglobal lazyredraw
-set breakindent showbreak=\ +
-
-set undofile
-setglobal history=1000
-
 set mouse=a
 
 map <Space> <Leader>
@@ -66,31 +56,22 @@ nnoremap   <silent>   <C-t>   :FloatermToggle<CR>
 tnoremap   <silent>   <C-t>   <C-\><C-n>:FloatermToggle<CR>
 
 
-"uncomment if fresh install
-" let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
-" if empty(glob(data_dir . '/autoload/plug.vim'))
-" 	silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-" 	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-" endif
+
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+	silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
 call plug#begin(stdpath('data') . '/plugged')
-
-" Plug 'dstein64/vim-startuptime'
-
-Plug 'lervag/vimtex', { 'for': ['tex']}
-Plug 'tpope/vim-surround' "<C-s>x and <C-ss>x in insert mode
+Plug 'lervag/vimtex'
+Plug 'tpope/vim-surround'
 Plug 'Mofiqul/dracula.nvim'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'voldikss/vim-floaterm'
-Plug 'phaazon/hop.nvim'
-Plug 'godlygeek/tabular'
-Plug 'junegunn/goyo.vim'
-Plug 'preservim/vim-markdown', { 'for': ['markdown'] }
-Plug 'tpope/vim-commentary'
-Plug 'folke/which-key.nvim'
 
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-cmp'
@@ -104,9 +85,15 @@ Plug 'honza/vim-snippets'
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
+Plug 'godlygeek/tabular'
+Plug 'junegunn/goyo.vim'
+Plug 'preservim/vim-markdown'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'folke/which-key.nvim'
 call plug#end()
 
-let g:vimtex_view_general_viewer = 'SumatraPDF'
+let g:vimtex_view_general_viewer = 'C:\Program^ Files\SumatraPDF\SumatraPDF.exe\'
 let g:vimtex_view_general_options
   \ = '-reuse-instance -forward-search @tex @line @pdf'
 
@@ -118,28 +105,10 @@ let g:vimtex_quickfix_mode=0
 set conceallevel=1
 let g:tex_conceal='abdmg'
 
-" let g:vimtex_compiler_method = 'latexmk'
-" let g:vimtex_compiler_latexmk = {
-" 			 'executable' : 'latexmk',
-" 			 'options' : [
-" 			 ]
-" 	}
-
-let g:vimtex_compiler_latexmk = {
-        \ 'build_dir' : '',
-        \ 'callback' : 1,
-        \ 'continuous' : 1,
-        \ 'executable' : 'latexmk',
-        \ 'hooks' : [],
-        \ 'options' : [
-        \   '-synctex=1',
-		\   '-aux-directory=.latex_aux_files',
-        \ ],
-        \}
-
+let g:vimtex_compiler_method = 'latexmk'
 
 setlocal spell
-set spelllang=en_ca
+set spelllang=en_gb
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 
 colorscheme dracula
@@ -200,7 +169,7 @@ end
 	  ['<C-b>'] = cmp.mapping.scroll_docs(-4),
       ['<C-f>'] = cmp.mapping.scroll_docs(4),
 	  ['<C-n>'] = cmp.mapping.select_next_item(),
-	  ['<C-i>'] = cmp.mapping.select_prev_item(),
+	  ['<S-n>'] = cmp.mapping.select_prev_item(),
       ['<C-e>'] = cmp.mapping.abort(),
       ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 	  ["<Tab>"] = cmp.mapping(
@@ -222,6 +191,7 @@ end
       { name = 'ultisnips' },
 	  { name = 'calc' },
     }, {
+      { name = 'buffer' },
     })
   })
 
@@ -286,22 +256,6 @@ require('lualine').setup {
 require("nvim-tree").setup()
 
 vim.opt.termguicolors = true
-require("bufferline").setup{
-	options = {
-		always_show_bufferline = false,
-		}
-}
-
-require'hop'.setup({
-	keys = 'arstneiodhgm'
-	})
-vim.api.nvim_set_keymap('', '<leader>f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = false })<cr>", {})
-vim.api.nvim_set_keymap('', '<leader>F', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = false })<cr>", {})
-vim.api.nvim_set_keymap('', '<leader>t', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = false, hint_offset = -1 })<cr>", {})
-vim.api.nvim_set_keymap('', '<leader>T', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = false, hint_offset = 1 })<cr>", {})
-vim.api.nvim_set_keymap('', '<leader>f2', "<cmd>lua require'hop'.hint_char2({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = false })<cr>", {})
-vim.api.nvim_set_keymap('', '<leader>F2', "<cmd>lua require'hop'.hint_char2({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = false })<cr>", {})
-vim.api.nvim_set_keymap('', '<leader>t2', "<cmd>lua require'hop'.hint_char2({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = false, hint_offset = -1 })<cr>", {})
-vim.api.nvim_set_keymap('', '<leader>T2', "<cmd>lua require'hop'.hint_char2({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = false, hint_offset = 1 })<cr>", {})
+require("bufferline").setup{}
 
 EOF
