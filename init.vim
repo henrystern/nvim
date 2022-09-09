@@ -65,6 +65,9 @@ tnoremap   <silent>   `    <C-\><C-n>:FloatermNext<CR>
 nnoremap   <silent>   <C-t>   :FloatermToggle<CR>
 tnoremap   <silent>   <C-t>   <C-\><C-n>:FloatermToggle<CR>
 
+" reload init.vim
+nnoremap <silent> <leader>rr :source $MYVIMRC<cr>
+nnoremap <silent> <leader>re :edit $MYVIMRC<cr>
 
 "uncomment if fresh install
 " let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
