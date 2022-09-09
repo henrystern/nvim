@@ -74,7 +74,7 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
 endif
 
 call plug#begin(stdpath('data') . '/plugged')
-Plug 'lervag/vimtex', { 'for': ['latex']}
+Plug 'lervag/vimtex', { 'for': ['tex']}
 Plug 'tpope/vim-surround' "<C-s>x and <C-ss>x in insert mode
 Plug 'Mofiqul/dracula.nvim'
 Plug 'nvim-lualine/lualine.nvim'
@@ -179,7 +179,7 @@ end
 	  ['<C-b>'] = cmp.mapping.scroll_docs(-4),
       ['<C-f>'] = cmp.mapping.scroll_docs(4),
 	  ['<C-n>'] = cmp.mapping.select_next_item(),
-	  ['<S-n>'] = cmp.mapping.select_prev_item(),
+	  ['<c-i>'] = cmp.mapping.select_prev_item(),
       ['<C-e>'] = cmp.mapping.abort(),
       ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 	  ["<Tab>"] = cmp.mapping(
