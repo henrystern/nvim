@@ -100,6 +100,8 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-calc'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'sirver/ultisnips'
 Plug 'quangnguyen30192/cmp-nvim-ultisnips'
@@ -145,132 +147,60 @@ set completeopt=menu,menuone,noselect
 
 lua << EOF
 
--- Mappings.
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
-local opts = { noremap=true, silent=true }
-vim.keymap.set('n', '<leader>de', vim.diagnostic.open_float, opts)
-vim.keymap.set('n', '<leader>d[', vim.diagnostic.goto_prev, opts)
-vim.keymap.set('n', '<leader>d]', vim.diagnostic.goto_next, opts)
-vim.keymap.set('n', '<leader>dq', vim.diagnostic.setloclist, opts)
-
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
--- local on_attach = function(client, bufnr)
-  -- Mappings.
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
---  local bufopts = { noremap=true, silent=true, buffer=bufnr }
---  vim.keymap.set('n', '<leader>bgD', vim.lsp.buf.declaration, bufopts)
---  vim.keymap.set('n', '<leader>bgd', vim.lsp.buf.definition, bufopts)
---  vim.keymap.set('n', '<leader>bK', vim.lsp.buf.hover, bufopts)
---  vim.keymap.set('n', '<leader>bgi', vim.lsp.buf.implementation, bufopts)
---  vim.keymap.set('n', '<leader>b<C-k>', vim.lsp.buf.signature_help, bufopts)
---  vim.keymap.set('n', '<leader>bwa', vim.lsp.buf.add_workspace_folder, bufopts)
---  vim.keymap.set('n', '<leader>bwr', vim.lsp.buf.remove_workspace_folder, bufopts)
---  vim.keymap.set('n', '<leader>bwl', function()
---    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
---  end, bufopts)
---  vim.keymap.set('n', '<leader>bD', vim.lsp.buf.type_definition, bufopts)
---  vim.keymap.set('n', '<leader>brn', vim.lsp.buf.rename, bufopts)
---  vim.keymap.set('n', '<leader>bca', vim.lsp.buf.code_action, bufopts)
---  vim.keymap.set('n', '<leader>bgr', vim.lsp.buf.references, bufopts)
---  vim.keymap.set('n', '<leader>bf', vim.lsp.buf.formatting, bufopts)
---end
-
-      require("cmp_nvim_ultisnips").setup{}
-    local cmp_ultisnips_mappings = require("cmp_nvim_ultisnips.mappings")
-
-
-  local cmp = require'cmp'
-
-  cmp.setup({
-    snippet = {
-      -- REQUIRED - you must specify a snippet engine
-      expand = function(args)
-        vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-      end,
-    },
-    window = {
-      -- completion = cmp.config.window.bordered(),
-      -- documentation = cmp.config.window.bordered(),
-    },
-    mapping = {
---		['<C-n>'] = cmp.mapping.select_next_item(),
---		['<C-e>'] = cmp.mapping.select_prev_item(),
---		['<C-i>'] = cmp.mapping.abort(),
--- 	    ["<Tab>"] = cmp.mapping( 
---          function(fallback)
---            cmp_ultisnips_mappings.expand_or_jump_forwards(fallback)
---          end,
---          { "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
---        ),
---        ["<S-Tab>"] = cmp.mapping(
---          function(fallback)
---            cmp_ultisnips_mappings.jump_backwards(fallback)
---          end,
---          { "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
---		),
-    },
-    sources = cmp.config.sources({
-      { name = 'nvim_lsp' },
-      { name = 'ultisnips' },
-	  { name = 'calc' },
-    }, {
-    })
-  })
-
-  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-  cmp.setup.cmdline(':', {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = cmp.config.sources({
-      { name = 'cmdline' }
-    })
-  })
-
-  -- Set up lspconfig.
-  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-  capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-require('lspconfig')['html'].setup{
-    capabilities = capabilities,
-}
-
-require('lspconfig')['pyright'].setup{
-	on_attach = on_attach,
-    capabilities = capabilities,
-	flags = lsp_flags,
-}
-
-require('lspconfig')['tsserver'].setup{
-    on_attach = on_attach,
-    capabilities = capabilities,
-    flags = lsp_flags,
-}
-
-require'lspconfig'.vimls.setup{
-    capabilities = capabilities,
-}
-
-require'lspconfig'.texlab.setup{
-    capabilities = capabilities,
-}
+-- plugins
 
 require("which-key").setup {
--- your configuration comes here
--- or leave it empty to use the default settings
--- refer to the configuration section below
 }
 
 local wk = require("which-key")
 
 wk.register({
+	["<C-l>"] = "fix spelling",
+	["<tab>"] = "next buffer",
+})
+
+-- registers with leader prefix
+wk.register({
+	c = { "close buffer" },
+	w = { "save" },
+	q = { "quit nvim" },
+	h = { "toggle highlighting"},
+	["/"] = { "toggle comment"},
+	l = {
+		name = "vimtex",
+		["l"] = { "start compiling" },
+	},
+	f = {
+		name = "f-hop",
+		["2"] = {"Bigram Hop"},
+	},
+	F = { 
+		name = "F-hop",
+		["2"] = {"Bigram Hop"},
+	},
+	t = { 
+		name = "t-hop",
+		["2"] = {"Bigram Hop"},
+	},
+	T = { 
+		name = "T-hop",
+		["2"] = {"Bigram Hop"},
+	},
 	d = {
 		name = "diagnostics",
 		["e"] = { "open float" },
 		[ "[" ] = { "go to prev" },
 		["]"] = { "go to next" },
-		["q"] = { "set local list" },
-		}
-	}, { prefix = '<leader>' })
+		["s"] = { "toggle spell check" },
+	},
+	b = {
+		name = "buffer",
+	},
+	r = {
+		name = "config",
+	},
+},
+{ prefix = '<leader>' })
 
 require('lualine').setup {
 	options = {
@@ -300,5 +230,271 @@ vim.api.nvim_set_keymap('', '<leader>f2', "<cmd>lua require'hop'.hint_char2({ di
 vim.api.nvim_set_keymap('', '<leader>F2', "<cmd>lua require'hop'.hint_char2({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = false })<cr>", {})
 vim.api.nvim_set_keymap('', '<leader>t2', "<cmd>lua require'hop'.hint_char2({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = false, hint_offset = -1 })<cr>", {})
 vim.api.nvim_set_keymap('', '<leader>T2', "<cmd>lua require'hop'.hint_char2({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = false, hint_offset = 1 })<cr>", {})
+
+vim.api.nvim_create_autocmd('User', {
+  pattern = 'LspAttached',
+  desc = 'LSP actions',
+  callback = function()
+    local bufmap = function(mode, lhs, rhs)
+      local opts = {buffer = true}
+      vim.keymap.set(mode, lhs, rhs, opts)
+    end
+
+    bufmap('n', '<leader>bK', '<cmd>lua vim.lsp.buf.hover()<cr>')
+    bufmap('n', '<leader>bgd', '<cmd>lua vim.lsp.buf.definition()<cr>')
+    bufmap('n', '<leader>bgD', '<cmd>lua vim.lsp.buf.declaration()<cr>')
+    bufmap('n', '<leader>bgi', '<cmd>lua vim.lsp.buf.implementation()<cr>')
+    bufmap('n', '<leader>bgo', '<cmd>lua vim.lsp.buf.type_definition()<cr>')
+    bufmap('n', '<leader>bgr', '<cmd>lua vim.lsp.buf.references()<cr>')
+    bufmap('n', '<leader>b<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<cr>')
+    bufmap('n', '<leader>b<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>')
+    bufmap('n', '<leader>b<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>')
+    bufmap('x', '<leader>b<F4>', '<cmd>lua vim.lsp.buf.range_code_action()<cr>')
+    bufmap('n', '<leader>dgl', '<cmd>lua vim.diagnostic.open_float()<cr>')
+    bufmap('n', '<leader>d[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
+    bufmap('n', '<leader>d]d', '<cmd>lua vim.diagnostic.goto_next()<cr>')
+	bufmap('n', '<leader>f', '<cmd> vim.lsp.buf.formatting()<cr>')
+  end
+})
+
+local sign = function(opts)
+  vim.fn.sign_define(opts.name, {
+    texthl = opts.name,
+    text = opts.text,
+    numhl = ''
+  })
+end
+
+sign({name = 'DiagnosticSignError', text = '✘'})
+sign({name = 'DiagnosticSignWarn', text = '▲'})
+sign({name = 'DiagnosticSignHint', text = '⚑'})
+sign({name = 'DiagnosticSignInfo', text = ''})
+
+vim.diagnostic.config({
+  virtual_text = false,
+  severity_sort = true,
+  float = {
+    border = 'rounded',
+    source = 'always',
+    header = '',
+    prefix = '',
+  },
+})
+
+vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
+  vim.lsp.handlers.hover,
+  {border = 'rounded'}
+)
+
+vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
+  vim.lsp.handlers.signature_help,
+  {border = 'rounded'}
+)
+
+local lsp_defaults = {
+  flags = {
+    debounce_text_changes = 150,
+  },
+  capabilities = require('cmp_nvim_lsp').update_capabilities(
+    vim.lsp.protocol.make_client_capabilities()
+  ),
+  on_attach = function(client, bufnr)
+    vim.api.nvim_exec_autocmds('User', {pattern = 'LspAttached'})
+  end
+}
+
+local lspconfig = require('lspconfig')
+
+lspconfig.util.default_config = vim.tbl_deep_extend(
+  'force',
+  lspconfig.util.default_config,
+  lsp_defaults
+)
+
+require('lspconfig')['html'].setup{
+    capabilities = capabilities,
+}
+
+require('lspconfig')['pyright'].setup{
+	on_attach = on_attach,
+    capabilities = capabilities,
+	flags = lsp_flags,
+}
+
+require('lspconfig')['tsserver'].setup{
+    on_attach = on_attach,
+    capabilities = capabilities,
+    flags = lsp_flags,
+}
+
+require'lspconfig'.vimls.setup{
+    capabilities = capabilities,
+}
+
+require'lspconfig'.texlab.setup{
+    capabilities = capabilities,
+}
+
+require("cmp_nvim_ultisnips").setup{}
+
+vim.g.UltiSnipsExpandTrigger = '<Plug>(ultisnips_expand)'      
+vim.g.UltiSnipsJumpForwardTrigger = '<Plug>(ultisnips_jump_forward)'
+vim.g.UltiSnipsJumpBackwardTrigger = '<Plug>(ultisnips_jump_backward)'
+vim.g.UltiSnipsListSnippets = '<c-x><c-s>'
+vim.g.UltiSnipsRemoveSelectModeMappings = 0
+
+local t = function(str)
+    return vim.api.nvim_replace_termcodes(str, true, true, true)
+end
+
+local cmp = require('cmp')
+
+local select_opts = {behavior = cmp.SelectBehavior.Select}
+
+cmp.setup({
+  snippet = {
+    expand = function(args)
+      vim.fn["UltiSnips#Anon"](args.body)
+    end
+  },
+  sources = {
+    {name = 'path'},
+    {name = 'nvim_lsp', keyword_length = 3},
+    {name = 'buffer', keyword_length = 3},
+    {name = 'ultisnips', keyword_length = 2},
+	{name = 'calc'},
+  },
+  window = {
+    documentation = cmp.config.window.bordered()
+  },
+  formatting = {
+    fields = {'menu', 'abbr', 'kind'},
+    format = function(entry, item)
+      local menu_icon = {
+        nvim_lsp = 'λ',
+        ultisnips = '⋗',
+        buffer = 'Ω',
+        path = '🖫',
+      }
+
+      item.menu = menu_icon[entry.source.name]
+      return item
+    end,
+  },
+  mapping = {
+	["<Tab>"] = cmp.mapping({
+		c = function()
+			if cmp.visible() then
+				cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
+			else
+				cmp.complete()
+			end
+		end,
+		i = function(fallback)
+			if cmp.visible() then
+				cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
+			elseif vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
+				vim.api.nvim_feedkeys( t("<Plug>(ultisnips_jump_forward)"), 'm', true)
+			else
+				fallback()
+			end
+		end,
+		s = function(fallback)
+			if vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
+				vim.api.nvim_feedkeys( t("<Plug>(ultisnips_jump_forward)"), 'm', true)
+			else
+				fallback()
+			end
+		end
+	}),
+	["<S-Tab>"] = cmp.mapping({
+		c = function()
+			if cmp.visible() then
+				cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
+			else
+				cmp.complete()
+			end
+		end,
+		i = function(fallback)
+			if cmp.visible() then
+				cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
+			elseif vim.fn["UltiSnips#CanJumpBackwards"]() == 1 then
+				return vim.api.nvim_feedkeys( t("<Plug>(ultisnips_jump_backward)"), 'm', true)
+			else
+				fallback()
+			end
+		end,
+		s = function(fallback)
+			if vim.fn["UltiSnips#CanJumpBackwards"]() == 1 then
+				return vim.api.nvim_feedkeys( t("<Plug>(ultisnips_jump_backward)"), 'm', true)
+			else
+				fallback()
+			end
+		end
+	}),
+	['<Down>'] = cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }), {'i'}),
+	['<Up>'] = cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }), {'i'}),
+	['<C-n>'] = cmp.mapping({
+		c = function()
+			if cmp.visible() then
+				cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+			else
+				vim.api.nvim_feedkeys(t('<Down>'), 'n', true)
+			end
+		end,
+		i = function(fallback)
+			if cmp.visible() then
+				cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+			else
+				fallback()
+			end
+		end
+	}),
+	['<C-e>'] = cmp.mapping({
+		c = function()
+			if cmp.visible() then
+				cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+			else
+				vim.api.nvim_feedkeys(t('<Up>'), 'n', true)
+			end
+		end,
+		i = function(fallback)
+			if cmp.visible() then
+				cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+			else
+				fallback()
+			end
+		end
+	}),
+	['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), {'i', 'c'}),
+	['<C-h>'] = cmp.mapping({ i = cmp.mapping.close(), c = cmp.mapping.close() }),
+	['<CR>'] = cmp.mapping({
+		i = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false }),
+		c = function(fallback)
+			if cmp.visible() then
+				cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+			else
+				fallback()
+			end
+		end
+	}),
+  },
+})
+
+cmp.setup.cmdline('/', {
+    completion = { autocomplete = false },
+    sources = {
+        { name = 'buffer', opts = { keyword_pattern = [=[[^[:blank:]].*]=] } }
+    }
+})
+
+cmp.setup.cmdline(':', {
+    completion = { autocomplete = false },
+    sources = cmp.config.sources({
+        { name = 'path' }
+        }, {
+        { name = 'cmdline' }
+    })
+})
 
 EOF
