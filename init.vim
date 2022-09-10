@@ -109,6 +109,8 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 call plug#end()
 
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "personal_snippets"] "use :UltiSnipsEdit! to choose which snippet file to edit
+
 let g:vimtex_view_general_viewer = 'SumatraPDF'
 let g:vimtex_view_general_options
   \ = '-reuse-instance -forward-search @tex @line @pdf'
@@ -153,26 +155,26 @@ vim.keymap.set('n', '<leader>dq', vim.diagnostic.setloclist, opts)
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
+-- local on_attach = function(client, bufnr)
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  local bufopts = { noremap=true, silent=true, buffer=bufnr }
-  vim.keymap.set('n', '<leader>bgD', vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set('n', '<leader>bgd', vim.lsp.buf.definition, bufopts)
-  vim.keymap.set('n', '<leader>bK', vim.lsp.buf.hover, bufopts)
-  vim.keymap.set('n', '<leader>bgi', vim.lsp.buf.implementation, bufopts)
-  vim.keymap.set('n', '<leader>b<C-k>', vim.lsp.buf.signature_help, bufopts)
-  vim.keymap.set('n', '<leader>bwa', vim.lsp.buf.add_workspace_folder, bufopts)
-  vim.keymap.set('n', '<leader>bwr', vim.lsp.buf.remove_workspace_folder, bufopts)
-  vim.keymap.set('n', '<leader>bwl', function()
-    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, bufopts)
-  vim.keymap.set('n', '<leader>bD', vim.lsp.buf.type_definition, bufopts)
-  vim.keymap.set('n', '<leader>brn', vim.lsp.buf.rename, bufopts)
-  vim.keymap.set('n', '<leader>bca', vim.lsp.buf.code_action, bufopts)
-  vim.keymap.set('n', '<leader>bgr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', '<leader>bf', vim.lsp.buf.formatting, bufopts)
-end
+--  local bufopts = { noremap=true, silent=true, buffer=bufnr }
+--  vim.keymap.set('n', '<leader>bgD', vim.lsp.buf.declaration, bufopts)
+--  vim.keymap.set('n', '<leader>bgd', vim.lsp.buf.definition, bufopts)
+--  vim.keymap.set('n', '<leader>bK', vim.lsp.buf.hover, bufopts)
+--  vim.keymap.set('n', '<leader>bgi', vim.lsp.buf.implementation, bufopts)
+--  vim.keymap.set('n', '<leader>b<C-k>', vim.lsp.buf.signature_help, bufopts)
+--  vim.keymap.set('n', '<leader>bwa', vim.lsp.buf.add_workspace_folder, bufopts)
+--  vim.keymap.set('n', '<leader>bwr', vim.lsp.buf.remove_workspace_folder, bufopts)
+--  vim.keymap.set('n', '<leader>bwl', function()
+--    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+--  end, bufopts)
+--  vim.keymap.set('n', '<leader>bD', vim.lsp.buf.type_definition, bufopts)
+--  vim.keymap.set('n', '<leader>brn', vim.lsp.buf.rename, bufopts)
+--  vim.keymap.set('n', '<leader>bca', vim.lsp.buf.code_action, bufopts)
+--  vim.keymap.set('n', '<leader>bgr', vim.lsp.buf.references, bufopts)
+--  vim.keymap.set('n', '<leader>bf', vim.lsp.buf.formatting, bufopts)
+--end
 
       require("cmp_nvim_ultisnips").setup{}
     local cmp_ultisnips_mappings = require("cmp_nvim_ultisnips.mappings")
@@ -192,21 +194,21 @@ end
       -- documentation = cmp.config.window.bordered(),
     },
     mapping = {
-		['<C-n>'] = cmp.mapping.select_next_item(),
-		['<C-e>'] = cmp.mapping.select_prev_item(),
-		['<C-i>'] = cmp.mapping.abort(),
- 	    ["<Tab>"] = cmp.mapping( 
-          function(fallback)
-            cmp_ultisnips_mappings.expand_or_jump_forwards(fallback)
-          end,
-          { "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
-        ),
-        ["<S-Tab>"] = cmp.mapping(
-          function(fallback)
-            cmp_ultisnips_mappings.jump_backwards(fallback)
-          end,
-          { "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
-		),
+--		['<C-n>'] = cmp.mapping.select_next_item(),
+--		['<C-e>'] = cmp.mapping.select_prev_item(),
+--		['<C-i>'] = cmp.mapping.abort(),
+-- 	    ["<Tab>"] = cmp.mapping( 
+--          function(fallback)
+--            cmp_ultisnips_mappings.expand_or_jump_forwards(fallback)
+--          end,
+--          { "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
+--        ),
+--        ["<S-Tab>"] = cmp.mapping(
+--          function(fallback)
+--            cmp_ultisnips_mappings.jump_backwards(fallback)
+--          end,
+--          { "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
+--		),
     },
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
