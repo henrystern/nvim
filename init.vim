@@ -1,4 +1,4 @@
-set number
+set number relativenumber
 set visualbell
 set cursorline
 set hlsearch
@@ -39,6 +39,7 @@ nnoremap dh dj
 nnoremap dj dh
 nnoremap <c-w>h <c-w>j
 nnoremap <c-w>j <c-w>h
+nnoremap <silent> <leader>dl :set relativenumber!<CR>
 nnoremap <silent> <Tab> :bn<CR>
 nnoremap <silent> <leader>w :w<CR>
 nnoremap <silent> <leader>q :q<CR>
@@ -67,6 +68,8 @@ tnoremap   <silent>   <C-t>   <C-\><C-n>:FloatermToggle<CR>
 " reload init.vim
 nnoremap <silent> <leader>rr :source $MYVIMRC<cr>
 nnoremap <silent> <leader>re :edit $MYVIMRC<cr>
+" edit snips
+nnoremap <silent> <leader>ru :UltiSnipsEdit!<cr>
 
 "uncomment if fresh install
 " let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
