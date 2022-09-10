@@ -15,14 +15,13 @@ set encoding=UTF-8
 set tabstop=4 softtabstop=4 shiftwidth=4 shiftwidth=4 smarttab
 set encoding=UTF-8
 filetype plugin indent on
-
 set confirm
 setglobal display=lastline
 setglobal scrolloff=1
 setglobal sidescrolloff=5
 setglobal lazyredraw
 set breakindent showbreak=\ +
-
+set nospell
 set undofile
 setglobal history=1000
 
@@ -56,6 +55,7 @@ vnoremap h j
 vnoremap j h
 vnoremap dh dj
 vnoremap dj dh
+
 
 vmap <leader>/ gc
 
@@ -121,13 +121,6 @@ let g:vimtex_quickfix_mode=0
 set conceallevel=1
 let g:tex_conceal='abdmg'
 
-" let g:vimtex_compiler_method = 'latexmk'
-" let g:vimtex_compiler_latexmk = {
-" 			 'executable' : 'latexmk',
-" 			 'options' : [
-" 			 ]
-" 	}
-
 let g:vimtex_compiler_latexmk = {
         \ 'build_dir' : '',
         \ 'callback' : 1,
@@ -140,9 +133,8 @@ let g:vimtex_compiler_latexmk = {
         \ ],
         \}
 
+nnoremap <leader>ds :setlocal spell! spelllang=en_ca<CR>
 
-setlocal spell
-set spelllang=en_ca
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 
 colorscheme dracula
@@ -179,7 +171,7 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<leader>brn', vim.lsp.buf.rename, bufopts)
   vim.keymap.set('n', '<leader>bca', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', '<leader>bgr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', '<leader>f', vim.lsp.buf.formatting, bufopts)
+  vim.keymap.set('n', '<leader>bf', vim.lsp.buf.formatting, bufopts)
 end
 
       require("cmp_nvim_ultisnips").setup{}
@@ -199,14 +191,11 @@ end
       -- completion = cmp.config.window.bordered(),
       -- documentation = cmp.config.window.bordered(),
     },
-    mapping = cmp.mapping.preset.insert({
-	  ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-      ['<C-f>'] = cmp.mapping.scroll_docs(4),
-	  ['<C-n>'] = cmp.mapping.select_next_item(),
-	  ['<C-i>'] = cmp.mapping.select_prev_item(),
-      ['<C-e>'] = cmp.mapping.abort(),
-      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-	  ["<Tab>"] = cmp.mapping(
+    mapping = {
+		['<C-n>'] = cmp.mapping.select_next_item(),
+		['<C-e>'] = cmp.mapping.select_prev_item(),
+		['<C-i>'] = cmp.mapping.abort(),
+ 	    ["<Tab>"] = cmp.mapping( 
           function(fallback)
             cmp_ultisnips_mappings.expand_or_jump_forwards(fallback)
           end,
@@ -218,8 +207,7 @@ end
           end,
           { "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
 		),
-
-    }),
+    },
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
       { name = 'ultisnips' },
