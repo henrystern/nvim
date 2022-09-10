@@ -4,6 +4,13 @@ snippet datestr "Month DD, YYYY" w
 `!v strftime("%B %d, %Y")`
 endsnippet
 
+snippet box "Box"
+`!p snip.rv = '┌' + '─' * (len(t[1]) + 2) + '┐'`
+│ $1 │
+`!p snip.rv = '└' + '─' * (len(t[1]) + 2) + '┘'`
+$0
+endsnippet
+
 snippet signoff "Best Wishes" b
 Best Wishes,
 Henry Stern

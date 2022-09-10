@@ -99,6 +99,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'folke/which-key.nvim'
 Plug 'tpope/vim-repeat'
 " TODO: setup vim-repeat for custom mappings "
+Plug 'sbdchd/neoformat'
 
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-cmp'
