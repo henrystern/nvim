@@ -93,6 +93,7 @@ Plug 'godlygeek/tabular'
 Plug 'junegunn/goyo.vim'
 Plug 'preservim/vim-markdown', { 'for': ['markdown'] }
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
 Plug 'folke/which-key.nvim'
 
 Plug 'neovim/nvim-lspconfig'
