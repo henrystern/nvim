@@ -16,14 +16,11 @@ set tabstop=4 softtabstop=4 shiftwidth=4 shiftwidth=4 smarttab
 set encoding=UTF-8
 filetype plugin indent on
 set confirm
-setglobal display=lastline
-setglobal scrolloff=1
-setglobal sidescrolloff=5
-setglobal lazyredraw
-set breakindent showbreak=\ +
 set nospell
 set undofile
 setglobal history=1000
+
+set nrformats-=octal
 
 set mouse=a
 
@@ -40,6 +37,8 @@ nnoremap h j
 nnoremap j h
 nnoremap dh dj
 nnoremap dj dh
+nnoremap <c-w>h <c-w>j
+nnoremap <c-w>j <c-w>h
 nnoremap <silent> <Tab> :bn<CR>
 nnoremap <silent> <leader>w :w<CR>
 nnoremap <silent> <leader>q :q<CR>
@@ -95,6 +94,8 @@ Plug 'preservim/vim-markdown', { 'for': ['markdown'] }
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'folke/which-key.nvim'
+Plug 'tpope/vim-repeat'
+" TODO: setup vim-repeat for custom mappings "
 
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-cmp'
@@ -118,7 +119,6 @@ let g:vimtex_view_general_viewer = 'SumatraPDF'
 let g:vimtex_view_general_options
   \ = '-reuse-instance -forward-search @tex @line @pdf'
 
-filetype plugin indent on
 
 let g:tex_flavor='latex'
 " let g:vimtex_view_method='zathura'
