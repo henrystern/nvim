@@ -161,6 +161,8 @@ colorscheme dracula
 
 set completeopt=menu,menuone,noselect
 
+nnoremap <leader>bf :Neoformat<cr>
+
 "DAP mappings
 nnoremap <leader>db :lua require'dap'.toggle_breakpoint()<cr>
 nnoremap <leader>ds :lua require'dap'.continue()<cr>
@@ -280,7 +282,6 @@ vim.api.nvim_create_autocmd('User', {
     bufmap('n', '<leader>de', '<cmd>lua vim.diagnostic.open_float()<cr>')
     bufmap('n', '<leader>d[', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
     bufmap('n', '<leader>d]', '<cmd>lua vim.diagnostic.goto_next()<cr>')
-	bufmap('n', '<leader>f', '<cmd> vim.lsp.buf.formatting()<cr>')
   end
 })
 
