@@ -1,3 +1,6 @@
+lua require('impatient')
+
+inoremap ii <esc>
 set number relativenumber
 set visualbell
 set cursorline
@@ -26,7 +29,6 @@ set mouse=a
 
 map <Space> <Leader>
 
-inoremap ii <esc>
 inoremap <C-a> <esc>0i
 inoremap <C-e> <esc>$a
 inoremap <C-d> <delete>
@@ -80,6 +82,7 @@ nnoremap <silent> <leader>ru :UltiSnipsEdit!<cr>
 
 call plug#begin(stdpath('data') . '/plugged')
 
+Plug 'lewis6991/impatient.nvim'
 " Plug 'dstein64/vim-startuptime'
 
 Plug 'lervag/vimtex', { 'for': ['tex']}
@@ -101,6 +104,12 @@ Plug 'tpope/vim-repeat'
 " TODO: setup vim-repeat for custom mappings "
 Plug 'sbdchd/neoformat'
 
+"Dap
+Plug 'mfussenegger/nvim-dap'
+Plug 'rcarriga/nvim-dap-ui'
+Plug 'folke/trouble.nvim'
+
+"LSP
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -114,6 +123,7 @@ Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 Plug 'honza/vim-snippets'
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'p00f/nvim-ts-rainbow'
 
 call plug#end()
 
@@ -149,6 +159,17 @@ inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 colorscheme dracula
 
 set completeopt=menu,menuone,noselect
+
+"DAP mappings
+nnoremap <leader>db :lua require'dap'.toggle_breakpoint()<cr>
+nnoremap <leader>ds :lua require'dap'.continue()<cr>
+nnoremap <leader>dn :lua require'dap'.step_over()<cr>
+nnoremap <leader>de :lua require'dap'.step_into()<cr>
+
+nnoremap <leader>dx <cmd>TroubleToggle<cr> 
+nnoremap <leader>df <cmd>TroubleToggle quickfix<cr> 
+
+nnoremap <leader>du <cmd>require("dapui").toggle()<cr> 
 
 lua << EOF
 
@@ -501,5 +522,19 @@ cmp.setup.cmdline(':', {
         { name = 'cmdline' }
     })
 })
+
+require("trouble").setup {
+}
+
+require("nvim-treesitter.configs").setup {
+  highlight = {
+  },
+  rainbow = {
+    enable = true,
+    extended_mode = true, 
+  }
+}
+
+require("dapui").setup()
 
 EOF
