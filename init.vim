@@ -62,8 +62,9 @@ vnoremap dj dh
 
 vmap <leader>/ gc
 
-nnoremap   <silent>   <leader>t    :FloatermNew<CR>
-tnoremap   <silent>   <leader>t    <C-\><C-n>:FloatermNew<CR>
+let g:floaterm_width = 0.8
+let g:floaterm_height = 0.8
+nnoremap   <silent>   <leader>!    :FloatermNew<CR>
 tnoremap   <silent>   `    <C-\><C-n>:FloatermNext<CR>
 nnoremap   <silent>   <C-t>   :FloatermToggle<CR>
 tnoremap   <silent>   <C-t>   <C-\><C-n>:FloatermToggle<CR>
