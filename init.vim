@@ -43,6 +43,7 @@ nnoremap <c-w>h <c-w>j
 nnoremap <c-w>j <c-w>h
 nnoremap <silent> <leader>dl :set relativenumber!<CR>
 nnoremap <silent> <Tab> :bn<CR>
+nnoremap <silent> <leader><Tab> :tabnext<CR>
 nnoremap <silent> <leader>w :w<CR>
 nnoremap <silent> <leader>q :q<CR>
 nnoremap <silent> <leader>c :bd<CR>
