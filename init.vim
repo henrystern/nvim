@@ -85,7 +85,7 @@ nnoremap <silent> <leader>ru :UltiSnipsEdit!<cr>
 call plug#begin(stdpath('data') . '/plugged')
 
 Plug 'lewis6991/impatient.nvim'
-" Plug 'dstein64/vim-startuptime'
+Plug 'dstein64/vim-startuptime'
 
 Plug 'lervag/vimtex', { 'for': ['tex']}
 Plug 'tpope/vim-surround' "<C-s>x and <C-ss>x in insert mode
@@ -102,7 +102,7 @@ Plug 'preservim/vim-markdown', { 'for': ['markdown'] }
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'folke/which-key.nvim'
-Plug 'tpope/vim-repeat'
+" Plug 'tpope/vim-repeat'
 " TODO: setup vim-repeat for custom mappings "
 Plug 'sbdchd/neoformat'
 
@@ -344,6 +344,12 @@ require'lspconfig'.vimls.setup{
 require'lspconfig'.texlab.setup{
     capabilities = capabilities,
 }
+
+
+require'lspconfig'.r_language_server.setup{
+    capabilities = capabilities,
+}
+
 
 require("cmp_nvim_ultisnips").setup{}
 
