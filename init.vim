@@ -129,6 +129,13 @@ Plug 'sirver/ultisnips'
 Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 Plug 'honza/vim-snippets'
 
+"lint
+Plug 'mfussenegger/nvim-lint'
+
+"lsp and dap installer
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
+
 "TS
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'p00f/nvim-ts-rainbow'
@@ -189,6 +196,9 @@ nnoremap <leader>f <cmd>HopChar1<cr>
 lua << EOF
 
 -- plugins
+
+require("mason").setup()
+require("mason-lspconfig").setup()
 
 require("which-key").setup {
 }
