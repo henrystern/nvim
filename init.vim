@@ -391,7 +391,7 @@ cmp.setup({
     {name = 'path'},
     {name = 'nvim_lsp', keyword_length = 3},
     {name = 'buffer', keyword_length = 3},
-    {name = 'ultisnips', keyword_length = 2},
+    {name = 'ultisnips', keyword_length = 1},
 	{name = 'calc'},
   },
   window = {
