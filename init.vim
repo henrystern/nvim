@@ -11,7 +11,6 @@ set incsearch
 set background=dark
 set autoindent
 set backspace=indent,eol,start
-set spell
 syntax enable
 set guifont=MesloLGS_NF:h11:cDEFAULT
 set encoding=UTF-8
@@ -168,7 +167,7 @@ let g:vimtex_compiler_latexmk = {
         \ ],
         \}
 
-nnoremap <leader>ds :setlocal spell! spelllang=en_ca<CR>
+nnoremap <leader>dss :setlocal spell! spelllang=en_ca<CR>
 
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 
@@ -201,7 +200,7 @@ lua << EOF
 require("mason").setup()
 require("mason-lspconfig").setup()
 
-require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
+require('dap-python').setup()
 
 require("which-key").setup {
 }
@@ -229,7 +228,7 @@ wk.register({
 		["e"] = { "open float" },
 		[ "[" ] = { "go to prev" },
 		["]"] = { "go to next" },
-		["s"] = { "toggle spell check" },
+		["s"] = { ["s"] = { "toggle spellcheck" }, },
 	},
 	b = {
 		name = "buffer",
