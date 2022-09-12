@@ -110,6 +110,7 @@ Plug 'sbdchd/neoformat'
 Plug 'preservim/vim-markdown', { 'for': ['markdown'] }
 Plug 'jalvesaq/Nvim-R', {'for': ['r']}
 Plug 'lervag/vimtex', { 'for': ['tex']}
+Plug 'mfussenegger/nvim-dap-python', { 'for': ['python']}
 
 "Dap
 Plug 'mfussenegger/nvim-dap'
@@ -199,6 +200,8 @@ lua << EOF
 
 require("mason").setup()
 require("mason-lspconfig").setup()
+
+require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
 
 require("which-key").setup {
 }
