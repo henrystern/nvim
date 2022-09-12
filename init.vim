@@ -84,10 +84,11 @@ nnoremap <silent> <leader>ru :UltiSnipsEdit!<cr>
 
 call plug#begin(stdpath('data') . '/plugged')
 
+" startup plugins
 Plug 'lewis6991/impatient.nvim'
 Plug 'dstein64/vim-startuptime'
 
-Plug 'lervag/vimtex', { 'for': ['tex']}
+"general plugins
 Plug 'tpope/vim-surround' "<C-s>x and <C-ss>x in insert mode
 Plug 'Mofiqul/dracula.nvim'
 Plug 'nvim-lualine/lualine.nvim'
@@ -98,13 +99,17 @@ Plug 'voldikss/vim-floaterm'
 Plug 'phaazon/hop.nvim'
 Plug 'godlygeek/tabular'
 Plug 'junegunn/goyo.vim'
-Plug 'preservim/vim-markdown', { 'for': ['markdown'] }
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'folke/which-key.nvim'
 " Plug 'tpope/vim-repeat'
 " TODO: setup vim-repeat for custom mappings "
 Plug 'sbdchd/neoformat'
+
+"Language specific plugins
+Plug 'preservim/vim-markdown', { 'for': ['markdown'] }
+Plug 'jalvesaq/Nvim-R', {'for': ['r']}
+Plug 'lervag/vimtex', { 'for': ['tex']}
 
 "Dap
 Plug 'mfussenegger/nvim-dap'
@@ -124,6 +129,7 @@ Plug 'sirver/ultisnips'
 Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 Plug 'honza/vim-snippets'
 
+"TS
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'p00f/nvim-ts-rainbow'
 
