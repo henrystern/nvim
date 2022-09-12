@@ -175,6 +175,11 @@ nnoremap <leader>df <cmd>TroubleToggle quickfix<cr>
 
 nnoremap <leader>du <cmd>require("dapui").toggle()<cr> 
 
+"hop mappings
+nnoremap <leader>T <cmd>HopWord<cr>
+nnoremap <leader>t <cmd>HopPattern<cr>
+nnoremap <leader>f <cmd>HopChar1<cr>
+
 lua << EOF
 
 -- plugins
@@ -199,22 +204,6 @@ wk.register({
 	l = {
 		name = "vimtex",
 		["l"] = { "start compiling" },
-	},
-	f = {
-		name = "f-hop",
-		["2"] = {"Bigram Hop"},
-	},
-	F = { 
-		name = "F-hop",
-		["2"] = {"Bigram Hop"},
-	},
-	t = { 
-		name = "t-hop",
-		["2"] = {"Bigram Hop"},
-	},
-	T = { 
-		name = "T-hop",
-		["2"] = {"Bigram Hop"},
 	},
 	d = {
 		name = "diagnostics",
@@ -252,14 +241,6 @@ require("bufferline").setup{
 require'hop'.setup({
 	keys = 'arstneiodhgm'
 	})
-vim.api.nvim_set_keymap('', '<leader>f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = false })<cr>", {})
-vim.api.nvim_set_keymap('', '<leader>F', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = false })<cr>", {})
-vim.api.nvim_set_keymap('', '<leader>t', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = false, hint_offset = -1 })<cr>", {})
-vim.api.nvim_set_keymap('', '<leader>T', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = false, hint_offset = 1 })<cr>", {})
-vim.api.nvim_set_keymap('', '<leader>f2', "<cmd>lua require'hop'.hint_char2({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = false })<cr>", {})
-vim.api.nvim_set_keymap('', '<leader>F2', "<cmd>lua require'hop'.hint_char2({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = false })<cr>", {})
-vim.api.nvim_set_keymap('', '<leader>t2', "<cmd>lua require'hop'.hint_char2({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = false, hint_offset = -1 })<cr>", {})
-vim.api.nvim_set_keymap('', '<leader>T2', "<cmd>lua require'hop'.hint_char2({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = false, hint_offset = 1 })<cr>", {})
 
 vim.api.nvim_create_autocmd('User', {
   pattern = 'LspAttached',
