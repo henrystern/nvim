@@ -183,7 +183,7 @@ nnoremap <leader>ds :lua require'dap'.continue()<cr>
 nnoremap <leader>dn :lua require'dap'.step_over()<cr>
 nnoremap <leader>de :lua require'dap'.step_into()<cr>
 
-nnoremap <leader>dx <cmd>TroubleToggle<cr> 
+nnoremap <leader>dx <cmd>TroubleToggle document_diagnostics<cr> 
 nnoremap <leader>df <cmd>TroubleToggle quickfix<cr> 
 
 nnoremap <leader>du <cmd>require("dapui").toggle()<cr> 
@@ -219,10 +219,6 @@ wk.register({
 	q = { "quit nvim" },
 	h = { "toggle highlighting"},
 	["/"] = { "toggle comment"},
-	l = {
-		name = "vimtex",
-		["l"] = { "start compiling" },
-	},
 	d = {
 		name = "diagnostics",
 		["e"] = { "open float" },
