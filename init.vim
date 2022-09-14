@@ -179,14 +179,16 @@ nnoremap <leader>bf :Neoformat<cr>
 
 "DAP mappings
 nnoremap <leader>db :lua require'dap'.toggle_breakpoint()<cr>
-nnoremap <leader>ds :lua require'dap'.continue()<cr>
-nnoremap <leader>dn :lua require'dap'.step_over()<cr>
-nnoremap <leader>de :lua require'dap'.step_into()<cr>
+nnoremap <silent> <F5> <Cmd>lua require'dap'.continue()<CR>
+nnoremap <silent> <F9> <Cmd>lua require'dap'.step_back()<CR>
+nnoremap <silent> <F10> <Cmd>lua require'dap'.step_over()<CR>
+nnoremap <silent> <F11> <Cmd>lua require'dap'.step_into()<CR>
+nnoremap <silent> <F12> <Cmd>lua require'dap'.step_out()<CR>
 
 nnoremap <leader>dx <cmd>TroubleToggle document_diagnostics<cr> 
 nnoremap <leader>df <cmd>TroubleToggle quickfix<cr> 
 
-nnoremap <leader>du <cmd>require("dapui").toggle()<cr> 
+nnoremap <leader>du <cmd>lua require("dapui").toggle()<cr> 
 
 "hop mappings
 nnoremap <leader>T <cmd>HopWord<cr>
@@ -200,7 +202,7 @@ lua << EOF
 require("mason").setup()
 require("mason-lspconfig").setup()
 
-require('dap-python').setup()
+require('dap-python').setup('~\\AppData\\Local\\nvim-data\\mason\\packages\\debugpy\\venv\\Scripts\\pythonw.exe')
 
 require("which-key").setup {
 }
@@ -271,6 +273,7 @@ vim.api.nvim_create_autocmd('User', {
     bufmap('n', '<leader>bi', '<cmd>lua vim.lsp.buf.implementation()<cr>')
     bufmap('n', '<leader>bo', '<cmd>lua vim.lsp.buf.type_definition()<cr>')
     bufmap('n', '<leader>br', '<cmd>lua vim.lsp.buf.references()<cr>')
+
     bufmap('n', '<leader>b<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<cr>')
     bufmap('n', '<leader>b<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>')
     bufmap('n', '<leader>b<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>')
@@ -514,7 +517,7 @@ cmp.setup({
 cmp.setup.cmdline('/', {
     completion = { autocomplete = false },
     sources = {
-        { name = 'buffer', opts = { keyword_pattern = [=[[^[:blank:]].*]=] } }
+        { name = 'buffer', option = { keyword_pattern = [=[[^[:blank:]].*]=] } }
     }
 })
 
@@ -542,3 +545,4 @@ require("nvim-treesitter.configs").setup {
 require("dapui").setup()
 
 EOF
+
