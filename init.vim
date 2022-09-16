@@ -187,11 +187,12 @@ nnoremap <leader>bf :Neoformat<cr>
 
 "DAP mappings
 nnoremap <leader>db :lua require'dap'.toggle_breakpoint()<cr>
-nnoremap <F5> <Cmd>lua require'dap'.continue()<CR>1
-nnoremap <F9> <Cmd>lua require'dap'.step_back()<CR>
-nnoremap <F10> <Cmd>lua require'dap'.step_over()<CR>
-nnoremap <F11> <Cmd>lua require'dap'.step_into()<CR>
-nnoremap <F12> <Cmd>lua require'dap'.step_out()<CR>
+nnoremap <F5> :lua require'dap'.continue()<CR>
+nnoremap <F6> :lua require'dap'.run_to_cursor()<CR>
+nnoremap <F9> :lua require'dap'.step_back()<CR>
+nnoremap <F10> :lua require'dap'.step_over()<CR>
+nnoremap <F11> :lua require'dap'.step_into()<CR>
+nnoremap <F12> :lua require'dap'.step_out()<CR>
 
 nnoremap <leader>dx <cmd>TroubleToggle document_diagnostics<cr> 
 nnoremap <leader>df <cmd>TroubleToggle quickfix<cr> 
@@ -202,6 +203,8 @@ nnoremap <leader>du <cmd>lua require("dapui").toggle()<cr>
 nnoremap <leader>f <cmd>HopWord<cr>
 nnoremap <leader>T <cmd>HopPattern<cr>
 nnoremap <leader>t <cmd>HopChar1<cr>
+
+au BufWritePost lua require('lint').try_lint()
 
 lua << EOF
 
