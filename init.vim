@@ -35,6 +35,9 @@ if !exists("g:os")
     endif
 endif
 
+" path to nvim pynvim env
+let g:python3_host_prog = "~/.envs/.neovim/bin/python3.10"
+
 map <Space> <Leader>
 
 inoremap <C-a> <esc>0i
