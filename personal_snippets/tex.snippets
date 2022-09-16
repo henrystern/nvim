@@ -17,6 +17,8 @@ snippet template "Basic template" b
 \usepackage{times}
 \usepackage{parskip}
 
+\usepackage[margin=1in]{geometry}
+
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{textcomp}
@@ -86,6 +88,18 @@ endsnippet
 snippet item "Itemize" b
 \begin{itemize}
 	\item $0
+\end{itemize}
+endsnippet
+
+snippet ivsg "IFRS vs GAAP comparison" bA
+Under IFRS:
+\begin{itemize}
+	\item $1
+\end{itemize}
+
+While, under US GAAP:
+\begin{itemize}
+	\item $2
 \end{itemize}
 endsnippet
 
