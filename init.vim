@@ -105,6 +105,9 @@ Plug 'folke/which-key.nvim'
 " TODO: setup vim-repeat for custom mappings "
 Plug 'sbdchd/neoformat'
 
+"trying out plugins
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+
 "Language specific plugins
 Plug 'preservim/vim-markdown', { 'for': ['markdown'] }
 Plug 'jalvesaq/Nvim-R', {'for': ['r']}
