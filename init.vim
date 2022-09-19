@@ -184,7 +184,7 @@ nnoremap <leader>bf :Neoformat<cr>
 
 "DAP mappings
 nnoremap <leader>db :lua require'dap'.toggle_breakpoint()<cr>
-nnoremap <F5> :lua require'dap'.continue()<CR>
+nnoremap <F5> :lua require'dap'.continue()<CR>1
 nnoremap <F6> :lua require'dap'.run_to_cursor()<CR>
 nnoremap <F9> :lua require'dap'.step_back()<CR>
 nnoremap <F10> :lua require'dap'.step_over()<CR>
@@ -214,7 +214,7 @@ if vim.g.os == "Linux" then
 	require('dap-python').setup('~/.local/share/nvim/mason/packages/debugpy/venv/bin/python')
 end
 if vim.g.os == "Windows" then
-	require('dap-python').setup('~/AppData/nvim-data/mason/packages/debugpy/venv/Scripts/python.exe')
+	require('dap-python').setup('~/AppData/local/nvim-data/mason/packages/debugpy/venv/Scripts/python.exe')
 end
 
 require("which-key").setup {
