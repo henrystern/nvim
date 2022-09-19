@@ -1,8 +1,21 @@
-" path to nvim pynvim env
-let g:python3_host_prog = "/usr/bin/python3"
-
-
 lua require('impatient')
+
+" detect os
+if !exists("g:os")
+    if has("win64") || has("win32") || has("win16")
+        let g:os = "Windows"
+    else
+        let g:os = substitute(system('uname'), '\n', '', '')
+    endif
+endif
+
+
+if os == "Windows"
+	let g:python3_host_prog = "C:\\Users\\SLAW\\AppData\\Local\\Programs\\Python\\Python310\\python.exe"
+endif
+if os == "Linux"
+	let g:python3_host_prog = "/usr/bin/python3"
+endif
 
 inoremap ii <esc>
 set number relativenumber
@@ -29,15 +42,6 @@ setglobal history=1000
 set nrformats-=octal
 
 set mouse=a
-
-" detect os
-if !exists("g:os")
-    if has("win64") || has("win32") || has("win16")
-        let g:os = "Windows"
-    else
-        let g:os = substitute(system('uname'), '\n', '', '')
-    endif
-endif
 
 map <Space> <Leader>
 
