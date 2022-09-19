@@ -1,3 +1,7 @@
+" path to nvim pynvim env
+let g:python3_host_prog = "/usr/bin/python3"
+
+
 lua require('impatient')
 
 inoremap ii <esc>
@@ -26,6 +30,15 @@ set nrformats-=octal
 
 set mouse=a
 
+" detect os
+if !exists("g:os")
+    if has("win64") || has("win32") || has("win16")
+        let g:os = "Windows"
+    else
+        let g:os = substitute(system('uname'), '\n', '', '')
+    endif
+endif
+
 map <Space> <Leader>
 
 inoremap <C-a> <esc>0i
@@ -40,14 +53,12 @@ nnoremap dh dj
 nnoremap dj dh
 nnoremap <c-w>h <c-w>j
 nnoremap <c-w>j <c-w>h
-nnoremap <silent> <leader>dl :set relativenumber!<CR>
 nnoremap <silent> <Tab> :bn<CR>
 nnoremap <silent> <leader><Tab> :tabnext<CR>
 nnoremap <silent> <leader>w :w<CR>
 nnoremap <silent> <leader>q :q<CR>
 nnoremap <silent> <leader>c :bd<CR>
 nnoremap <silent> <leader>e :NvimTreeToggle<CR>
-nnoremap <silent> <leader>n :NvimTreeFocus<CR>
 nnoremap <silent><expr> <Leader>h (&hls && v:hlsearch ? ':nohls' : ':set hls')."\n"
 set timeoutlen=500
 
@@ -55,9 +66,6 @@ nmap <silent> <leader>/ gcc
 
 vnoremap h j
 vnoremap j h
-vnoremap dh dj
-vnoremap dj dh
-
 
 vmap <leader>/ gc
 
@@ -85,7 +93,7 @@ call plug#begin(stdpath('data') . '/plugged')
 
 " startup plugins
 Plug 'lewis6991/impatient.nvim'
-Plug 'dstein64/vim-startuptime'
+"Plug 'dstein64/vim-startuptime'
 
 "general plugins
 Plug 'tpope/vim-surround' "<C-s>x and <C-ss>x in insert mode
@@ -126,7 +134,6 @@ Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-calc'
 Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'sirver/ultisnips'
 Plug 'quangnguyen30192/cmp-nvim-ultisnips'
@@ -147,13 +154,15 @@ call plug#end()
 
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "personal_snippets"] "use :UltiSnipsEdit! to choose which snippet file to edit
 
-let g:vimtex_view_general_viewer = 'SumatraPDF'
-let g:vimtex_view_general_options
-  \ = '-reuse-instance -forward-search @tex @line @pdf'
-
+if os == "Windows"
+	let g:vimtex_view_general_viewer = 'SumatraPDF'
+	let g:vimtex_view_general_options = '-reuse-instance -forward-search @tex @line @pdf'
+endif
+if os == "Linux"
+	let g:vimtex_view_method='zathura'
+endif
 
 let g:tex_flavor='latex'
-" let g:vimtex_view_method='zathura'
 let g:vimtex_quickfix_mode=0
 set conceallevel=1
 let g:tex_conceal='abdmg'
@@ -170,7 +179,7 @@ let g:vimtex_compiler_latexmk = {
         \ ],
         \}
 
-nnoremap <leader>dss :setlocal spell! spelllang=en_ca<CR>
+nnoremap <leader>ds :setlocal spell! spelllang=en_ca<CR>
 
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 
@@ -178,23 +187,32 @@ colorscheme dracula
 
 set completeopt=menu,menuone,noselect
 
+"format settings
 nnoremap <leader>bf :Neoformat<cr>
 
 "DAP mappings
 nnoremap <leader>db :lua require'dap'.toggle_breakpoint()<cr>
-nnoremap <leader>ds :lua require'dap'.continue()<cr>
-nnoremap <leader>dn :lua require'dap'.step_over()<cr>
-nnoremap <leader>de :lua require'dap'.step_into()<cr>
+nnoremap <F5> :lua require'dap'.continue()<CR>
+nnoremap <F6> :lua require'dap'.run_to_cursor()<CR>
+nnoremap <F9> :lua require'dap'.step_back()<CR>
+nnoremap <F10> :lua require'dap'.step_over()<CR>
+nnoremap <F11> :lua require'dap'.step_into()<CR>
+nnoremap <F12> :lua require'dap'.step_out()<CR>
 
 nnoremap <leader>dx <cmd>TroubleToggle document_diagnostics<cr> 
 nnoremap <leader>df <cmd>TroubleToggle quickfix<cr> 
 
-nnoremap <leader>du <cmd>require("dapui").toggle()<cr> 
+nnoremap <leader>du <cmd>lua require("dapui").toggle()<cr> 
 
 "hop mappings
-nnoremap <leader>T <cmd>HopWord<cr>
-nnoremap <leader>t <cmd>HopPattern<cr>
-nnoremap <leader>f <cmd>HopChar1<cr>
+nnoremap <leader>f <cmd>HopWord<cr>
+nnoremap <leader>T <cmd>HopPattern<cr>
+nnoremap <leader>t <cmd>HopChar1<cr>
+onoremap <leader>f <cmd>HopWord<cr>
+onoremap <leader>T <cmd>HopPattern<cr>
+onoremap <leader>t <cmd>HopChar1<cr>
+
+au BufWritePost lua require('lint').try_lint()
 
 lua << EOF
 
@@ -203,7 +221,12 @@ lua << EOF
 require("mason").setup()
 require("mason-lspconfig").setup()
 
-require('dap-python').setup()
+if vim.g.os == "Linux" then
+	require('dap-python').setup('~/.local/share/nvim/mason/packages/debugpy/venv/bin/python')
+end
+if vim.g.os == "Windows" then
+	require('dap-python').setup('~/AppData/nvim-data/mason/packages/debugpy/venv/Scripts/python.exe')
+end
 
 require("which-key").setup {
 }
@@ -227,7 +250,7 @@ wk.register({
 		["e"] = { "open float" },
 		[ "[" ] = { "go to prev" },
 		["]"] = { "go to next" },
-		["s"] = { ["s"] = { "toggle spellcheck" }, },
+		["s"] = { "toggle spellcheck" },
 	},
 	b = {
 		name = "buffer",
@@ -274,6 +297,7 @@ vim.api.nvim_create_autocmd('User', {
     bufmap('n', '<leader>bi', '<cmd>lua vim.lsp.buf.implementation()<cr>')
     bufmap('n', '<leader>bo', '<cmd>lua vim.lsp.buf.type_definition()<cr>')
     bufmap('n', '<leader>br', '<cmd>lua vim.lsp.buf.references()<cr>')
+
     bufmap('n', '<leader>b<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<cr>')
     bufmap('n', '<leader>b<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>')
     bufmap('n', '<leader>b<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>')
@@ -373,7 +397,6 @@ require("cmp_nvim_ultisnips").setup{}
 vim.g.UltiSnipsExpandTrigger = '<Plug>(ultisnips_expand)'      
 vim.g.UltiSnipsJumpForwardTrigger = '<Plug>(ultisnips_jump_forward)'
 vim.g.UltiSnipsJumpBackwardTrigger = '<Plug>(ultisnips_jump_backward)'
-vim.g.UltiSnipsListSnippets = '<c-x><c-s>'
 vim.g.UltiSnipsRemoveSelectModeMappings = 0
 
 local t = function(str)
@@ -517,7 +540,7 @@ cmp.setup({
 cmp.setup.cmdline('/', {
     completion = { autocomplete = false },
     sources = {
-        { name = 'buffer', opts = { keyword_pattern = [=[[^[:blank:]].*]=] } }
+        { name = 'buffer', option = { keyword_pattern = [=[[^[:blank:]].*]=] } }
     }
 })
 
@@ -545,3 +568,4 @@ require("nvim-treesitter.configs").setup {
 require("dapui").setup()
 
 EOF
+
