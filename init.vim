@@ -1,3 +1,7 @@
+" path to nvim pynvim env
+let g:python3_host_prog = "/usr/bin/python3"
+
+
 lua require('impatient')
 
 inoremap ii <esc>
@@ -109,6 +113,9 @@ Plug 'folke/which-key.nvim'
 " TODO: setup vim-repeat for custom mappings "
 Plug 'sbdchd/neoformat'
 
+"trying out plugins
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+
 "Language specific plugins
 Plug 'preservim/vim-markdown', { 'for': ['markdown'] }
 Plug 'jalvesaq/Nvim-R', {'for': ['r']}
@@ -180,6 +187,7 @@ colorscheme dracula
 
 set completeopt=menu,menuone,noselect
 
+"format settings
 nnoremap <leader>bf :Neoformat<cr>
 
 "DAP mappings
@@ -200,6 +208,9 @@ nnoremap <leader>du <cmd>lua require("dapui").toggle()<cr>
 nnoremap <leader>f <cmd>HopWord<cr>
 nnoremap <leader>T <cmd>HopPattern<cr>
 nnoremap <leader>t <cmd>HopChar1<cr>
+onoremap <leader>f <cmd>HopWord<cr>
+onoremap <leader>T <cmd>HopPattern<cr>
+onoremap <leader>t <cmd>HopChar1<cr>
 
 au BufWritePost lua require('lint').try_lint()
 
