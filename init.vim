@@ -110,6 +110,7 @@ Plug 'voldikss/vim-floaterm'
 Plug 'phaazon/hop.nvim'
 Plug 'godlygeek/tabular'
 Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'folke/which-key.nvim'
@@ -122,6 +123,7 @@ Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
 "Language specific plugins
 Plug 'preservim/vim-markdown', { 'for': ['markdown'] }
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
 Plug 'jalvesaq/Nvim-R', {'for': ['r']}
 Plug 'lervag/vimtex', { 'for': ['tex']}
 Plug 'mfussenegger/nvim-dap-python', { 'for': ['python']}
@@ -182,6 +184,13 @@ let g:vimtex_compiler_latexmk = {
 		\   '-aux-directory=' . stdpath('data') . '/.latex_aux_files',
         \ ],
         \}
+
+" set markdown-preview browser
+let g:mkdp_browser = 'firefox'
+
+" goyo limelight integration
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
 
 nnoremap <leader>ds :setlocal spell! spelllang=en_ca<CR>
 
