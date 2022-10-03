@@ -1,3 +1,5 @@
+" This is early testing for a WPM plugin
+"
 "
 "testing typing speed
 "

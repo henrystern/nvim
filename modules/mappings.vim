@@ -65,5 +65,3 @@ nnoremap <leader>t <cmd>HopChar1<cr>
 onoremap <leader>f <cmd>HopWord<cr>
 onoremap <leader>T <cmd>HopPattern<cr>
 onoremap <leader>t <cmd>HopChar1<cr>
-
-
