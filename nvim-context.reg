@@ -1,20 +1,19 @@
 Windows Registry Editor Version 5.00
 
+; Directory
 [HKEY_CLASSES_ROOT\Directory\shell\Open in Nvim]
 "Icon"="C:\\Program Files\\Neovim\\bin\\nvim-qt.exe"
-
 [HKEY_CLASSES_ROOT\Directory\shell\Open in Nvim\command]
-@="wt -w 1 nt nvim \"%1\""
+@="wt -w 1 nt nvim \"%V\""
 
+; Directory background
 [HKEY_CLASSES_ROOT\Directory\Background\shell\Open in Nvim]
 "Icon"="C:\\Program Files\\Neovim\\bin\\nvim-qt.exe"
-
 [HKEY_CLASSES_ROOT\Directory\Background\shell\Open in Nvim\command]
-@="wt -w 1 nt nvim ."
+@="wt -w 1 nt nvim \"%V\""
 
-
+; Files
 [HKEY_CLASSES_ROOT\*\shell\Edit with Nvim]
 "Icon"="C:\\Program Files\\Neovim\\bin\\nvim-qt.exe"
-
 [HKEY_CLASSES_ROOT\*\shell\Edit with Nvim\command]
 @="wt -w 1 nt nvim \"%1\""
