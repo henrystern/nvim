@@ -28,7 +28,7 @@ nnoremap <silent><expr> <Leader>h (&hls && v:hlsearch ? ':nohls' : ':set hls')."
 nnoremap <silent> <leader>rr :source $MYVIMRC<cr>
 nnoremap <silent> <leader>re :edit $MYVIMRC<cr>
 nnoremap <leader>ds :setlocal spell! spelllang=en_ca<CR>
-inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
+inoremap <c-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 
 " plugin specific
 nnoremap <silent> <leader>e :NvimTreeToggle<CR>
