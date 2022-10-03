@@ -1,5 +1,7 @@
 Windows Registry Editor Version 5.00
 
+; this script will create context menu items for Nvim
+
 ; Directory
 [HKEY_CLASSES_ROOT\Directory\shell\Open in Nvim]
 "Icon"="C:\\Program Files\\Neovim\\bin\\nvim-qt.exe"
