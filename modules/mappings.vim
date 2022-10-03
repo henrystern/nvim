@@ -20,6 +20,7 @@ vnoremap j h
 
 nnoremap <silent> <Tab> :bn<CR>
 nnoremap <silent> <leader><Tab> :tabnext<CR>
+nnoremap <silent> <leader>n <c-w><c-w>
 nnoremap <silent> <leader>w :w<CR>
 nnoremap <silent> <leader>q :q<CR>
 nnoremap <silent> <leader>c :bd<CR>
@@ -39,6 +40,7 @@ nnoremap   <silent>   <leader>!    :FloatermNew<CR>
 tnoremap   <silent>   `    <C-\><C-n>:FloatermNext<CR>
 nnoremap   <silent>   <C-t>   :FloatermToggle<CR>
 tnoremap   <silent>   <C-t>   <C-\><C-n>:FloatermToggle<CR>
+let g:floaterm_title = '$1/$2'
 
 nnoremap <silent> <leader>ru :UltiSnipsEdit!<cr>
 
