@@ -1,4 +1,5 @@
 inoremap ii <esc>
+tnoremap ii <c-\><c-n>
 map <Space> <Leader>
 
 inoremap <C-a> <esc>0i
