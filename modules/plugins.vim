@@ -21,6 +21,9 @@ Plug 'tpope/vim-fugitive'
 Plug 'folke/which-key.nvim'
 Plug 'sbdchd/neoformat'
 
+" Documentation help
+Plug 'rizzatti/dash.vim'
+
 "Language specific plugins
 Plug 'preservim/vim-markdown', { 'for': ['markdown'] }
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
@@ -59,6 +62,9 @@ Plug 'p00f/nvim-ts-rainbow'
 call plug#end()
 
 " Vimscript plugin settings
+
+"stop nvim-r assigning shortcut
+let R_assign_map = '__'
 
 " Colorscheme has to be called after plugin is loaded
 colorscheme dracula
