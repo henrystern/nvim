@@ -14,7 +14,7 @@ set tabstop=4 shiftwidth=4 smarttab expandtab autoindent
 set visualbell
 
 set confirm
-set spell
+set nospell
 
 set undofile
 setglobal history=1000

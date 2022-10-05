@@ -22,7 +22,7 @@ Plug 'folke/which-key.nvim'
 Plug 'sbdchd/neoformat'
 
 " Documentation help
-Plug 'rizzatti/dash.vim'
+" Plug 'rizzatti/dash.vim' "doesnt work on nvim
 
 "Language specific plugins
 Plug 'preservim/vim-markdown', { 'for': ['markdown'] }
@@ -63,9 +63,6 @@ call plug#end()
 
 " Vimscript plugin settings
 
-"stop nvim-r assigning shortcut
-let R_assign_map = '__'
-
 " Colorscheme has to be called after plugin is loaded
 colorscheme dracula
 
@@ -73,33 +70,6 @@ let g:floaterm_width = 0.8
 let g:floaterm_height = 0.8
 
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "personal_snippets"] 
-
-if os == "Windows"
-	let g:vimtex_view_general_viewer = 'SumatraPDF'
-	let g:vimtex_view_general_options = '-reuse-instance -forward-search @tex @line @pdf'
-elseif os == "Linux"
-	let g:vimtex_view_method='zathura'
-endif
-
-let g:tex_flavor='latex'
-let g:vimtex_quickfix_mode=0
-set conceallevel=1
-let g:tex_conceal='abdmg'
-
-let g:vimtex_compiler_latexmk = {
-        \ 'build_dir' : '',
-        \ 'callback' : 1,
-        \ 'continuous' : 1,
-        \ 'executable' : 'latexmk',
-        \ 'hooks' : [],
-        \ 'options' : [
-        \   '-synctex=1',
-		\   '-aux-directory=' . stdpath('data') . '/.latex_aux_files',
-        \ ],
-        \}
-
-" set markdown-preview browser
-let g:mkdp_browser = 'firefox'
 
 " goyo limelight integration
 autocmd! User GoyoEnter Limelight
