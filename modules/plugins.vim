@@ -22,7 +22,7 @@ Plug 'folke/which-key.nvim'
 Plug 'sbdchd/neoformat'
 
 " Documentation help
-Plug 'rizzatti/dash.vim'
+" Plug 'rizzatti/dash.vim'
 
 "Language specific plugins
 Plug 'preservim/vim-markdown', { 'for': ['markdown'] }
