@@ -16,10 +16,10 @@ exec 'source' stdpath("config") . '/modules/settings.vim'
 " vim mappings
 exec 'source' stdpath("config") . '/modules/mappings.vim'
 
-" plugin configuration
+" vim plug and vimscript plugin configuration
 exec 'source' stdpath("config") . '/modules/plugins.vim'
 
-" plugin setup
+" lua plugin setup
 exec 'source' stdpath("config") . '/modules/setup.lua'
 
 " for testing

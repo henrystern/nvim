@@ -50,6 +50,13 @@ require('lualine').setup {
 
 require("nvim-tree").setup{
 	sync_root_with_cwd = true,
+    view = {
+        mappings = {
+            list = {
+                { key = "<C-[>", action = "dir_up" },
+            },
+        },
+    },
 }
 
 vim.opt.termguicolors = true
