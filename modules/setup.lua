@@ -207,6 +207,7 @@ cmp.setup({
 		{ name = 'buffer', keyword_length = 3 },
 		{ name = 'ultisnips', keyword_length = 1 },
 		{ name = 'calc' },
+        -- { name = 'omni' }
 	},
 	window = {
 		documentation = cmp.config.window.bordered()
