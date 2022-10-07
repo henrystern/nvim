@@ -7,4 +7,8 @@ let R_objbr_opendf = 0        " Don't expand dataframe in obj browser
 let R_assign = 2              " 2 underscores inserts the assn. operator
 nmap , <Plug>RDSendLine       " Comma sends current line in normal mode
 vmap , <Plug>RESendSelection  " Comma sends current selection in visual mode
-let R_csv_app = 'terminal:vd'
+if os == "Linux"
+    let R_csv_app = 'terminal:vd'
+else
+    let R_csv_app = 'wsl:vd'
+endif

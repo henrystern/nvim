@@ -1,7 +1,6 @@
 if os == "Windows"
 	let g:python3_host_prog = "~\\AppData\\Local\\Programs\\Python\\Python310\\python.exe"
-endif
-if os == "Linux"
+else
 	let g:python3_host_prog = "/usr/bin/python3"
 endif
 
