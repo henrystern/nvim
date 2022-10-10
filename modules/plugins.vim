@@ -30,6 +30,7 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
 Plug 'jalvesaq/Nvim-R', {'for': ['r']}
 Plug 'lervag/vimtex', { 'for': ['tex']}
 Plug 'mfussenegger/nvim-dap-python', { 'for': ['python']}
+Plug 'chrisbra/csv.vim', { 'for': ['csv']}
 
 "Dap
 Plug 'mfussenegger/nvim-dap'
@@ -42,6 +43,7 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-calc'
+" Plug 'hrsh7th/cmp-omni'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'sirver/ultisnips'
