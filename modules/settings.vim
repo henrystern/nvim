@@ -28,3 +28,12 @@ set nrformats-=octal
 set mouse=a
 set timeoutlen=500
 set completeopt=menu,menuone,noselect
+
+" highlight on yank
+augroup yank_highlight
+  autocmd!
+  if exists('##TextYankPost')
+    autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank()
+  endif
+augroup END
+
