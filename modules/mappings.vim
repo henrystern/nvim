@@ -10,14 +10,14 @@ nnoremap o o<esc>
 nnoremap O O<esc>
 
 " for Colemak
-nnoremap h j
-nnoremap j h
-nnoremap dh dj
-nnoremap dj dh
-nnoremap <c-w>h <c-w>j
-nnoremap <c-w>j <c-w>h
-vnoremap h j
-vnoremap j h
+" nnoremap h j
+" nnoremap j h
+" nnoremap dh dj
+" nnoremap dj dh
+" nnoremap <c-w>h <c-w>j
+" nnoremap <c-w>j <c-w>h
+" vnoremap h j
+" vnoremap j h
 
 nnoremap <silent> <Tab> :bn<CR>
 nnoremap <silent> <leader><Tab> :tabnext<CR>
