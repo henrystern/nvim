@@ -21,9 +21,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'folke/which-key.nvim'
 Plug 'sbdchd/neoformat'
 
-" Documentation help
-" Plug 'rizzatti/dash.vim' "doesnt work on nvim
-
 "Language specific plugins
 Plug 'preservim/vim-markdown', { 'for': ['markdown'] }
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
