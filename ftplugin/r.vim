@@ -11,11 +11,11 @@ vmap , <Plug>RESendSelection  " Comma sends current selection in visual mode
 
 let R_csv_delim = ','
 
-let R_app = "radian"
-let R_cmd = "R"
-let R_hl_term = 0
-let R_args = []  
-let R_bracketed_paste = 1
+" let R_app = "radian"
+" let R_cmd = "R"
+" let R_hl_term = 0
+" let R_args = []  
+" let R_bracketed_paste = 1
 
 if os == "Linux"
     let R_csv_app = 'terminal:vd'
