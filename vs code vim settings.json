@@ -1,5 +1,5 @@
 {
-     "_comment_": "this is the settings.json for vs code's vim extension, copy it to ~\AppData\Roaming\Code\User\settings.json to apply these mappings",
+     "_comment_": "this is the settings.json for vs code's vim extension, copy it to ~\\AppData\\Roaming\\Code\\User\\settings.json to apply these mappings",
     "workbench.colorTheme": "Aylin Syntax",
     "editor.fontFamily": "MesloLGS NF",
     "git.autofetch": true,
