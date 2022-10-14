@@ -357,12 +357,15 @@ require("nvim-treesitter.configs").setup {
 require("dapui").setup()
 
 require("zen-mode").setup {
-    backdrop = .6,
-    width = .8,
-    height = .8,
-    options = {
-        number = false,
-        relativenumber = false
-    }
+    window = {
+        backdrop = .9,
+        width = .8,
+        height = 1,
+        options = {
+            number = false,
+            relativenumber = false,
+            signcolumn = false
+        },
+    },
 }
 
