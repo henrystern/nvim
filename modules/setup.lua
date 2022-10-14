@@ -364,7 +364,6 @@ require("zen-mode").setup {
         options = {
             number = false,
             relativenumber = false,
-            signcolumn = false
         },
     },
 }
