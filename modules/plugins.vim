@@ -14,8 +14,7 @@ Plug 'kyazdani42/nvim-tree.lua'
 Plug 'voldikss/vim-floaterm'
 Plug 'phaazon/hop.nvim'
 Plug 'godlygeek/tabular'
-Plug 'junegunn/goyo.vim'
-Plug 'junegunn/limelight.vim'
+Plug 'folke/zen-mode.nvim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'folke/which-key.nvim'
@@ -74,6 +73,3 @@ let g:floaterm_height = 0.8
 
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "personal_snippets"] 
 
-" goyo limelight integration
-autocmd! User GoyoEnter Limelight
-autocmd! User GoyoLeave Limelight!
