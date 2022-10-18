@@ -23,4 +23,4 @@ exec 'source' stdpath("config") . '/modules/plugins.vim'
 exec 'source' stdpath("config") . '/modules/setup.lua'
 
 " for testing
-exec 'source' stdpath("config") . '/modules/test.vim'
+exec 'source' stdpath("config") . '/modules/typingspeed.lua'

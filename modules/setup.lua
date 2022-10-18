@@ -40,12 +40,19 @@ wk.register({
 },
 	{ prefix = '<leader>' })
 
+local function typing_speed()
+    return last_typing_speed .. " wpm"
+end
+
 require('lualine').setup {
 	options = {
 		icons_enabled = true,
 		theme = 'dracula-nvim',
 	},
-	...
+
+    sections = {
+        lualine_c = { typing_speed, 'filename' }
+    }
 }
 
 require("nvim-tree").setup{
@@ -358,7 +365,7 @@ require("dapui").setup()
 
 require("zen-mode").setup {
     window = {
-        backdrop = .9,
+        backdrop = 1,
         width = .8,
         height = 1,
         options = {
