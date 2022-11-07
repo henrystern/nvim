@@ -1,0 +1,15 @@
+snippet "(^ *)\* {2}" "Increase list indent" rA
+`!p snip.rv = match.group(1)`  * 
+endsnippet
+
+snippet "(^ *) {2}\*" "Decrease list indent" r
+`!p snip.rv = match.group(1)`* 
+endsnippet
+
+snippet "(^ *)1\. {2}" "Increase enum indent" rA
+`!p snip.rv = match.group(1)`  1. 
+endsnippet
+
+snippet "(^ *) {2}1\." "Decrease enum indent" r
+`!p snip.rv = match.group(1)`1. 
+endsnippet
