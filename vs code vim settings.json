@@ -1,83 +1,64 @@
 {
-     "_comment_": "this is the settings.json for vs code's vim extension, copy it to ~\\AppData\\Roaming\\Code\\User\\settings.json to apply these mappings",
-    "workbench.colorTheme": "Aylin Syntax",
-    "editor.fontFamily": "MesloLGS NF",
-    "git.autofetch": true,
-    "git.enableSmartCommit": true,
-    "git.confirmSync": false,
-    "[html]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "vim.normalModeKeyBindings": [
-    
-    ],
-    "vim.normalModeKeyBindingsNonRecursive": [
-        {
-            "before": ["<leader>", "h"],
-            "commands": [":nohl"]
-        },
-        {
-            "before": ["<Tab>"],
-            "commands": [":bn"]
-        },
-        {
-            "before": ["<leader>", "w"],
-            "commands": [":w"]
-        },
-        {
-            "before": ["<leader>", "q"],
-            "commands": [":q"]
-        },
-        {
-            "before": ["<leader>", "c"],
-            "commands": [":bd"]
-        },
-        {
-            "before": ["o"],
-            "after": ["o", "<ESC>"]
-        },
-        {
-            "before": ["O"],
-            "after": ["O", "<ESC>"]
-        },
-        {
-            "before": ["h"],
-            "after": ["j"]
-        },
-        {
-            "before": ["j"],
-            "after": ["h"]
-        },
-        {
-            "before": ["d", "h"],
-            "after": ["d", "j"]
-        },
-        {
-            "before": ["d", "j"],
-            "after": ["d", "h"]
-        },
-    ],
-    "vim.insertModeKeyBindings": [
-        {
-            "before": ["i","i"],
-            "after": ["<ESC>"]
-        }
-    ],
-    "vim.insertModeKeyBindingsNonRecursive": [
-    
-    ],
-    "vim.leader": "<space>",
-    "vim.visualModeKeyBindingsNonRecursive": [
-        {
-            "before": ["h"],
-            "after": ["j"]
-        },
-        {
-            "before": ["j"],
-            "after": ["h"]
-        },  
-    ],
-    "vim.hlsearch": true,
-    "vim.highlightedyank.enable": true,
-    "vim.easymotion": true
+    "_comment_": "this is the settings.json for vs code's vim extension, copy it to ~\\AppData\\Roaming\\Code\\User\\settings.json to apply these mappings",
+   "editor.fontFamily": "MesloLGS NF",
+   "git.autofetch": true,
+   "git.enableSmartCommit": true,
+   "git.confirmSync": false,
+   "[html]": {
+       "editor.defaultFormatter": "esbenp.prettier-vscode"
+   },
+   "vim.normalModeKeyBindings": [
+   
+   ],
+   "vim.normalModeKeyBindingsNonRecursive": [
+       {
+           "before": ["<leader>", "h"],
+           "commands": [":nohl"]
+       },
+       {
+           "before": ["<Tab>"],
+           "commands": [":bn"]
+       },
+       {
+           "before": ["<leader>", "w"],
+           "commands": [":w"]
+       },
+       {
+           "before": ["<leader>", "q"],
+           "commands": [":q"]
+       },
+       {
+           "before": ["<leader>", "c"],
+           "commands": [":bd"]
+       },
+       {
+           "before": ["o"],
+           "after": ["o", "<ESC>"]
+       },
+       {
+           "before": ["O"],
+           "after": ["O", "<ESC>"]
+       },
+   ],
+   "vim.insertModeKeyBindings": [
+       {
+           "before": ["i","i"],
+           "after": ["<ESC>"]
+       }
+   ],
+   "vim.insertModeKeyBindingsNonRecursive": [
+   
+   ],
+   "vim.leader": "<space>",
+   "vim.visualModeKeyBindingsNonRecursive": [
+   ],
+   "vim.hlsearch": true,
+   "vim.highlightedyank.enable": true,
+"vim.easymotion": true,
+"editor.minimap.enabled": false,
+"[python]": {
+    "editor.formatOnType": true
+},
+"vim.easymotionKeys": "arstneiogmdvkhxcqwfpbjluy",
+"workbench.colorTheme": "GitHub Dark",
 }
