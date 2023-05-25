@@ -16,7 +16,13 @@ vim.g.mapleader = " "
 --   command_mode = "c",
 
 -- Normal --
+-- Save and Exit
+keymap("n", "<leader>w", ":w<CR>", opts)
+keymap("n", "<leader>q", ":q<CR>", opts)
+keymap("n", "<leader>c", ":bd<CR>", opts)
+
 -- Better window navigation
+keymap("n", "<leader>n", "<C-w><C-w>", opts)
 keymap("n", "<C-h>", "<C-w>h", opts)
 keymap("n", "<C-j>", "<C-w>j", opts)
 keymap("n", "<C-k>", "<C-w>k", opts)
@@ -43,7 +49,7 @@ keymap("v", "p", 'P', opts)
 
 -- Insert --
 -- Press jk fast to enter
-keymap("i", "jk", "<ESC>", opts)
+keymap("i", "ii", "<ESC>", opts)
 
 -- Visual --
 -- Stay in indent mode
