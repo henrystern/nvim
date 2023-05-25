@@ -16,10 +16,12 @@ vim.g.mapleader = " "
 --   command_mode = "c",
 
 -- Normal --
+-- Edit Config
+keymap("n", "<leader>re", ":e $MYVIMRC <CR>", opts)
 -- Save and Exit
 keymap("n", "<leader>w", ":w<CR>", opts)
 keymap("n", "<leader>q", ":q<CR>", opts)
-keymap("n", "<leader>c", ":bd<CR>", opts)
+keymap("n", "<leader>c", ":bp<bar>sp<bar>bn<bar>bd<CR>", opts)
 
 -- Better window navigation
 keymap("n", "<leader>n", "<C-w><C-w>", opts)
@@ -35,6 +37,8 @@ keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
 -- Navigate buffers
+keymap("n", "<Tab>", ":bnext<CR>", opts)
+keymap("n", "<leader><Tab>", ":tabnext<CR>", opts)
 keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<S-h>", ":bprevious<CR>", opts)
 
@@ -48,8 +52,11 @@ keymap("n", "<S-q>", "<cmd>Bdelete!<CR>", opts)
 keymap("v", "p", 'P', opts)
 
 -- Insert --
--- Press jk fast to enter
+-- Press ii fast to escape to normal
 keymap("i", "ii", "<ESC>", opts)
+-- Correct spelling errors
+keymap("i", "<c-l>", "<c-g>u<Esc>[s1z=`]i<c-g>u", opts)
+keymap("i", "<c-u>", "<Esc>[s1zg`]i", opts)
 
 -- Visual --
 -- Stay in indent mode
@@ -68,9 +75,11 @@ keymap("n", "<leader>fp", ":Telescope projects<CR>", opts)
 keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
 
 -- Git
-keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", opts)
+-- keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", opts)
 
 -- Comment
+keymap("n", "<c-/>", "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>", opts)
+keymap("x", "<c-/>", "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>", opts)
 keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>", opts)
 keymap("x", "<leader>/", "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>", opts)
 

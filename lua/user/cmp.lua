@@ -151,6 +151,7 @@ function M.config()
       { name = "luasnip" },
       { name = "buffer" },
       { name = "path" },
+      { name = "otter" }
     },
     confirm_opts = {
       behavior = cmp.ConfirmBehavior.Replace,
