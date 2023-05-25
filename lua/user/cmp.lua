@@ -141,6 +141,7 @@ function M.config()
           buffer = "",
           path = "",
           emoji = "",
+          otter = "",
         })[entry.source.name]
         return vim_item
       end,
@@ -151,7 +152,7 @@ function M.config()
       { name = "luasnip" },
       { name = "buffer" },
       { name = "path" },
-      { name = "otter" }
+      { name = "otter" },
     },
     confirm_opts = {
       behavior = cmp.ConfirmBehavior.Replace,

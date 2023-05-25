@@ -16,9 +16,3 @@ let R_csv_delim = ','
 " let R_hl_term = 0
 " let R_args = []  
 " let R_bracketed_paste = 1
-
-if os == "Linux"
-    let R_csv_app = 'terminal:vd'
-else
-    let R_csv_app = 'terminal:wsl.exe -e vd' " visidata needs to be installed globally on wsl 
-endif
