@@ -1,5 +1,5 @@
 local M = {
-  "tpope/vim-surround",
+  "phaazon/hop.nvim",
   event = "VeryLazy",
 }
 
