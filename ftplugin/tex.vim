@@ -1,11 +1,11 @@
 setlocal spell spelllang=en_ca
 
-if has('win32')
+" if has('win32')
 	let g:vimtex_view_general_viewer = 'SumatraPDF'
 	let g:vimtex_view_general_options = '-reuse-instance -forward-search @tex @line @pdf'
-else
-	let g:vimtex_view_method='zathura'
-endif
+" else
+	" let g:vimtex_view_method='zathura'
+" endif
 
 let g:tex_flavor='latex'
 let g:vimtex_quickfix_mode=0

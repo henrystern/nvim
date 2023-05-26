@@ -6,6 +6,8 @@ let R_assign = 2              " 2 underscores inserts the assn. operator
 nmap , <Plug>RDSendLine       " Comma sends current line in normal mode
 vmap , <Plug>RESendSelection  " Comma sends current selection in visual mode
 
+let R_filetypes = ['r', 'rmd', 'rrst', 'rnoweb', 'quarto', 'rhelp']
+
 " let R_DEFAULT_PACKAGES = 'httpgd'
 " let R_after_start = [':hgd()', ':hgd_browse()']
 
