@@ -6,6 +6,7 @@ local M = {
 
 function M.config()
   closePreviewOnExit = true
+  require 'quarto'.setup()
 end
 
 return M
