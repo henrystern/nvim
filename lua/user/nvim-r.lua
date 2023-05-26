@@ -1,7 +1,7 @@
 local M = {
   "jalvesaq/Nvim-R",
   lazy = true,
-  ft = "r",
+  ft = {'r', 'rmd', 'rrst', 'rnoweb', 'quarto', 'rhelp'},
 }
 
 return M
