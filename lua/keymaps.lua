@@ -18,6 +18,8 @@ vim.g.mapleader = " "
 -- Normal --
 -- Edit Config
 keymap("n", "<leader>re", ":e $MYVIMRC <CR>", opts)
+keymap("n", "<leader>rs", ":lua require('luasnip.loaders').edit_snippet_files()<CR>", opts)
+
 -- Save and Exit
 keymap("n", "<leader>w", ":w<CR>", opts)
 keymap("n", "<leader>q", ":q<CR>", opts)
