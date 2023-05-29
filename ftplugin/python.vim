@@ -86,8 +86,8 @@ endfunction
 
 
 " The mappings for normal mode
-nmap <leader>pq :call KillPython()<CR>
-nmap <leader>pf :call StartPython()<CR>
+nmap <localleader>pq :call KillPython()<CR>
+nmap <localleader>pf :call StartPython()<CR>
 nmap , :call SendLineTermBuf()<CR>
 
 " The mappings for visual mode
