@@ -82,6 +82,7 @@ keymap("n", "<leader>ft", ":Telescope live_grep<CR>", opts)
 keymap("n", "<leader>fp", ":Telescope projects<CR>", opts)
 keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
 keymap("n", "<leader>fc", ":Telescope bibtex<CR>", opts)
+keymap("i", "@@", "<esc>:Telescope bibtex<CR>", opts)
 
 -- Hop
 keymap("n", "<leader>fw", ":HopWord<CR>", opts)
