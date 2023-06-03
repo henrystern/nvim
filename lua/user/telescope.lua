@@ -38,7 +38,7 @@ M.opts = {
       format = '',
       -- Format to use for citation label.
       -- Try to match the filetype by default, or use 'plain'
-      global_files = {'~/Sync/2. Education/5. Citations/zotero.bib'},
+      global_files = {'~/Sync/3. Misc/Citations/references.bib'},
       -- Path to global bibliographies (placed outside of the project)
       search_keys = { 'author', 'year', 'title' },
       -- Define the search keys to use in the picker

@@ -50,12 +50,20 @@ keymap("n", "<leader>h", "<cmd>nohlsearch<CR>", opts)
 -- Close buffers
 keymap("n", "<S-q>", "<cmd>Bdelete!<CR>", opts)
 
--- Better paste
+-- Better paste and yank
 keymap("v", "p", 'P', opts)
+keymap("v", "y", "ygv<esc>", opts)
+
+-- Move highlighted text
+vim.keymap.set("v", "J", ":m '>+1<CR>gv==kgvo<esc>=kgvo", { desc = "move highlighted text down" })
+vim.keymap.set("v", "K", ":m '<-2<CR>gv==jgvo<esc>=jgvo", { desc = "move highlighted text up" })
 
 -- Insert --
 -- Press ii fast to escape to normal
 keymap("i", "ii", "<ESC>", opts)
+
+-- C-BS delete word
+vim.keymap.set("i", "<C-BS>", "<Esc>cvb", { })
 
 -- Correct spelling errors
 keymap("i", "<C-l>", "<c-g>u<Esc>[s1z=`]i<c-g>u", opts)
