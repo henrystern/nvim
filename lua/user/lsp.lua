@@ -7,6 +7,8 @@ local M = {
       "hrsh7th/cmp-nvim-lsp",
       commit = "0e6b2ed705ddcff9738ec4ea838141654f12eeef",
     },
+    { "williamboman/mason-lspconfig.nvim" },
+    { "williamboman/mason.nvim" },
   },
 }
 
@@ -36,6 +38,7 @@ function M.config()
   end
 
   local lspconfig = require "lspconfig"
+  local util = require("lspconfig.util")
   local on_attach = function(client, bufnr)
     if client.name == "tsserver" then
       client.server_capabilities.documentFormattingProvider = false
@@ -48,6 +51,7 @@ function M.config()
     lsp_keymaps(bufnr)
     require("illuminate").on_attach(client)
   end
+
 
   for _, server in pairs(require("utils").servers) do
     Opts = {
@@ -62,7 +66,16 @@ function M.config()
       Opts = vim.tbl_deep_extend("force", conf_opts, Opts)
     end
 
-    lspconfig[server].setup(Opts)
+    if server == 'marksman' then
+      lspconfig.marksman.setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
+        filetypes = { 'markdown', 'quarto' },
+        root_dir = util.root_pattern(".git", ".marksman.toml", "_quarto.yml"),
+      }
+    else
+      lspconfig[server].setup(Opts)
+    end
   end
 
   local signs = {

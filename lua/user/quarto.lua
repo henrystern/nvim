@@ -5,8 +5,28 @@ local M = {
 }
 
 function M.config()
-  closePreviewOnExit = true
-  require 'quarto'.setup()
+  require'quarto'.setup{
+    debug = false,
+    closePreviewOnExit = true,
+    lspFeatures = {
+      enabled = true,
+      languages = { 'javascript', 'r', 'python', 'julia', 'bash' },
+      chunks = 'curly', -- 'curly' or 'all'
+      diagnostics = {
+        enabled = true,
+        triggers = { "BufWritePost" }
+      },
+      completion = {
+        enabled = true,
+      },
+    },
+    keymap = {
+      hover = 'K',
+      definition = 'gd',
+      rename = '<leader>lr',
+      references = 'gr',
+    }
+  }
   local wk = require "which-key"
   wk.register(
     {

@@ -66,6 +66,10 @@
     "prefix": ["pyc"],
     "body": ["```{python} ", "$1", "```"]
   },
+  "ojscode": {
+    "prefix": ["ojs"],
+    "body": ["```{ojs} ", "$1", "```"]
+  },
   "rcode": {
     "prefix": ["rco"],
     "body": ["```{r} ", "$1", "```"]
@@ -343,7 +347,7 @@
   "yaml header": {
     "body": ["---", "title: $1", "format: $2", "---"],
     "description": "Add minimal yaml header",
-    "prefix": "yml"
+    "prefix": "yaml"
   },
   "wrap figure": {
     "body": [

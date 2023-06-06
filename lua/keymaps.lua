@@ -58,8 +58,8 @@ keymap("v", "p", 'P', opts)
 keymap("i", "ii", "<ESC>", opts)
 
 -- Correct spelling errors
-keymap("i", "<C-l>", "<c-g>u<Esc>[s1z=`]i<c-g>u", opts)
-keymap("i", "<C-u>", "<Esc>[s1zg`]i", opts)
+keymap("i", "<C-l>", "<c-g>u<Esc>m][s1z=`]a<c-g>u", opts)
+keymap("i", "<C-u>", "<Esc>m][s1zg`]a", opts)
 
 -- Add undo breakpoints
 keymap("i", ",", ",<C-g>u", opts)
