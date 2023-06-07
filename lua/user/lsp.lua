@@ -35,6 +35,8 @@ function M.config()
     keymap(bufnr, "n", "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
     keymap(bufnr, "n", "<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
     keymap(bufnr, "n", "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
+    keymap(bufnr, "n", "<leader>le", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
+    keymap(bufnr, "n", "<leader>lo", "<cmd>SymbolsOutline<CR>", opts)
   end
 
   local lspconfig = require "lspconfig"
@@ -67,11 +69,17 @@ function M.config()
     end
 
     if server == 'marksman' then
-      lspconfig.marksman.setup {
+      lspconfig[server].setup {
         on_attach = on_attach,
         capabilities = capabilities,
         filetypes = { 'markdown', 'quarto' },
         root_dir = util.root_pattern(".git", ".marksman.toml", "_quarto.yml"),
+      }
+    elseif server == 'tsserver' then
+      lspconfig[server].setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
+        filetypes = { 'ojs', "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
       }
     else
       lspconfig[server].setup(Opts)

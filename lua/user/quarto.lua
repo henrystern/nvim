@@ -10,7 +10,7 @@ function M.config()
     closePreviewOnExit = true,
     lspFeatures = {
       enabled = true,
-      languages = { 'javascript', 'r', 'python', 'julia', 'bash' },
+      languages = { 'javascript', 'r', 'python', 'julia', 'bash', 'ojs' },
       chunks = 'curly', -- 'curly' or 'all'
       diagnostics = {
         enabled = true,
@@ -28,27 +28,44 @@ function M.config()
     }
   }
   local wk = require "which-key"
-  wk.register(
-    {
-      q = {
-        name = 'quarto',
-        a = { ":QuartoActivate<cr>", 'activate' },
-        p = { ":lua require'quarto'.quartoPreview()<cr>", 'preview' },
-        q = { ":lua require'quarto'.quartoClosePreview()<cr>", 'close' },
-        h = { ":QuartoHelp ", 'help' },
-        r = { name = 'run',
-          r = { ':QuartoSendAbove<cr>', 'to cursor' },
-          a = { ':QuartoSendAll<cr>', 'all' },
-        },
-        e = { ":lua require'otter'.export()<cr>", 'export' },
-        E = { ":lua require'otter'.export(true)<cr>", 'export overwrite' },
+  wk.register({
+    q = {
+      name = 'quarto',
+      a = { ":QuartoActivate<cr>", 'activate' },
+      p = { ":lua require'quarto'.quartoPreview()<cr>", 'preview' },
+      q = { ":lua require'quarto'.quartoClosePreview()<cr>", 'close' },
+      h = { ":QuartoHelp ", 'help' },
+      r = { name = 'run',
+        r = { ':QuartoSendAbove<cr>', 'to cursor' },
+        a = { ':QuartoSendAll<cr>', 'all' },
       },
-    }, { mode = 'n', prefix = '<localleader>' }
-  )
+      E = { ":lua require'otter'.export()<cr>", 'export' },
+    },
+  }, { mode = 'n', prefix = '<localleader>' })
   wk.register({
     ['<m-->'] = { ' <- ', "assign" },
     ['<m-m>'] = { ' |>', "pipe" },
   }, { mode = 'i' })
+  wk.register({
+    t = {
+      name = 'treesitter',
+      t = { vim.treesitter.inspect_tree, 'show tree' },
+      c = { ':=vim.treesitter.get_captures_at_cursor()<cr>', 'show capture' },
+      n = { ':=vim.treesitter.get_node():type()<cr>', 'show node' },
+    },
+    s = {
+      name = "spellcheck",
+      s = { "<cmd>Telescope spell_suggest<cr>", "spelling" },
+      ['/'] = { '<cmd>setlocal spell!<cr>', 'spellcheck' },
+      n = { ']s', 'next' },
+      p = { '[s', 'previous' },
+      g = { 'zg', 'good' },
+      r = { 'zg', 'rigth' },
+      w = { 'zw', 'wrong' },
+      b = { 'zw', 'bad' },
+      ['?'] = { '<cmd>Telescope spell_suggest<cr>', 'suggest' },
+    },
+  }, { mode = 'n', prefix = '<leader>' })
 end
 
 return M
