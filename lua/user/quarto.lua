@@ -66,6 +66,9 @@ function M.config()
       ['?'] = { '<cmd>Telescope spell_suggest<cr>', 'suggest' },
     },
   }, { mode = 'n', prefix = '<leader>' })
+
+  local ls = require "luasnip"
+  ls.filetype_extend("quarto", {"markdown"})
 end
 
 return M
