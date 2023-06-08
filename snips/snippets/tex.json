@@ -417,5 +417,14 @@
         "body": "\\underline{$1} $0",
         "description": "Underline",
         "prefix": "und"
+    },
+    "txt": {
+        "prefix": "txt",
+        "body": "\\text{$1} $0",
+        "description": "plaintext in math",
+        "luasnip": {
+          "autotrigger": true,
+          "wordtrig": true
+        }
     }
 }
