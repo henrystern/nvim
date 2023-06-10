@@ -28,6 +28,11 @@ M.opts = {
       },
     },
   },
+  pickers = {
+    colorscheme = {
+      enable_preview = true
+    }
+  },
   load_extensions = { "bibtex" },
   extensions = {
     bibtex = {
