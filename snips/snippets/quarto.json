@@ -54,21 +54,9 @@
       "::::"
     ]
   },
-  "eq": {
-    "prefix": ["eq"],
-    "body": ["\\$\\$", "$1", "\\$\\$ {#eq-${2: label}}"]
-  },
-  "Insert Block Equation": {
-    "prefix": "$$",
-    "body": ["\\$$", "${0}", "\\$$"]
-  },
   "pycode": {
     "prefix": ["pyc"],
     "body": ["```{python} ", "$1", "```"]
-  },
-  "ojscode": {
-    "prefix": ["ojs"],
-    "body": ["```{ojs} ", "$1", "```"]
   },
   "rcode": {
     "prefix": ["rco"],
@@ -153,10 +141,6 @@
       "  tbl-prefix: Table",
       "  eq-prefix: Eq."
     ]
-  },
-  "img": {
-    "prefix": ["img"],
-    "body": ["![](./img/$1)"]
   },
   "fig": {
     "prefix": ["fig"],
@@ -298,14 +282,6 @@
     "prefix": ["alert"],
     "body": ["[$0]{.alert}"]
   },
-  "br": {
-    "prefix": ["br"],
-    "body": ["<br/>"]
-  },
-  "todo": {
-    "prefix": ["todo"],
-    "body": ["* [ ] ${1:task} -- due:${2:today} ${3: project:}"]
-  },
   "importmarkdown": {
     "prefix": ["importmd"],
     "body": ["from IPython.display import display, Markdown"]
@@ -313,26 +289,6 @@
   "pymarkdown": {
     "prefix": ["pymd"],
     "body": ["display(Markdown(\"\"\"", "{$1}", "\"\"\".format($1 = $1)))", ""]
-  },
-  "begin": {
-    "body": "\\begin{${1:something}}\n\t$0\n\\end{$1}",
-    "description": "begin{} / end{}",
-    "prefix": "begin"
-  },
-  "eqalign": {
-    "body": "\\begin{align}\n\t$0\n\\end{align}",
-    "description": "Align",
-    "prefix": "eqalign"
-  },
-  "notation": {
-    "body": "$1 &= \\text{$2} \\\\\\",
-    "description": "notation of variables in an equation",
-    "prefix": "notation"
-  },
-  "blindtext": {
-    "body": "\\blindtext",
-    "description": "add blindtext in LaTex",
-    "prefix": "blind"
   },
   "bibliography": {
     "body": "bibliography: references.bib",
@@ -347,18 +303,7 @@
   "yaml header": {
     "body": ["---", "title: $1", "format: $2", "---"],
     "description": "Add minimal yaml header",
-    "prefix": "yaml"
-  },
-  "wrap figure": {
-    "body": [
-      "\\begin{wrapfigure}{r}{${1:width}\\textwidth}",
-      "   \\includegraphics[width=${1:width}\\textwidth]{./img/${2:path}}",
-      "   \\caption{${3:cap}}",
-      "   \\label{fig-${4:label}}",
-      "\\end{wrapfigure}"
-    ],
-    "description": "Add wrap figure with a caption and a label",
-    "prefix": "wrap"
+    "prefix": "yml"
   },
   "ref a wrap figure": {
     "body": "Fig. \\ref{fig-$1}",
@@ -366,3 +311,4 @@
     "prefix": "@wrap"
   }
 }
+
