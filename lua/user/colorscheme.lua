@@ -1,4 +1,5 @@
-local default_scheme = "tokyonight"
+local default_theme = "tokyonight"
+local default_subtheme = "tokyonight"
 local default_bg = "dark"
 
 local M = { 
@@ -11,15 +12,22 @@ local M = {
   {
     "folke/tokyonight.nvim",
     lazy = false,
+    priority = 1000,
     name = "tokyonight",
+  },
+  { 
+    'projekt0n/github-nvim-theme',
+    lazy = false,
+    priority = 1000,
+    name = "github",
   }
 }
 
 for _, v in pairs(M) do
-	if v.name == default_scheme then
+	if v.name == default_theme then
 		v.config = function()
       vim.opt.background = default_bg
-      local status_ok, _ = pcall(vim.cmd.colorscheme, v.name)
+      local status_ok, _ = pcall(vim.cmd.colorscheme, default_subtheme)
       if not status_ok then
         return
       end
