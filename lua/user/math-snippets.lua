@@ -1,6 +1,7 @@
 local M = {
   "iurimateus/luasnip-latex-snippets.nvim",
-  ft = {"markdown", "rmarkdown", "quarto"},
+  -- dir = vim.fn.stdpath("config") .. "/snips/luasnip-latex-snippets.nvim/",
+  ft = {"markdown", "rmarkdown", "quarto", "tex"},
   dependencies = { "L3MON4D3/LuaSnip", "nvim-treesitter/nvim-treesitter" },
 }
 

@@ -47,6 +47,7 @@ function M.config()
   local luasnip = require "luasnip"
   require("luasnip/loaders/from_vscode").lazy_load()
   require("luasnip.loaders.from_vscode").lazy_load({ paths = { vim.fn.stdpath("config") .. "/snips" } })
+  require("luasnip.loaders.from_lua").load({ paths = { vim.fn.stdpath("config") .. "/snips/luasnippets" } })
 
   local check_backspace = function()
     local col = vim.fn.col "." - 1
