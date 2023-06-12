@@ -47,12 +47,6 @@ function M.config()
     ['<m-m>'] = { ' |>', "pipe" },
   }, { mode = 'i' })
   wk.register({
-    t = {
-      name = 'treesitter',
-      t = { vim.treesitter.inspect_tree, 'show tree' },
-      c = { ':=vim.treesitter.get_captures_at_cursor()<cr>', 'show capture' },
-      n = { ':=vim.treesitter.get_node():type()<cr>', 'show node' },
-    },
     s = {
       name = "spellcheck",
       s = { "<cmd>Telescope spell_suggest<cr>", "spelling" },
@@ -60,7 +54,7 @@ function M.config()
       n = { ']s', 'next' },
       p = { '[s', 'previous' },
       g = { 'zg', 'good' },
-      r = { 'zg', 'rigth' },
+      r = { 'zg', 'right' },
       w = { 'zw', 'wrong' },
       b = { 'zw', 'bad' },
       ['?'] = { '<cmd>Telescope spell_suggest<cr>', 'suggest' },
