@@ -69,6 +69,7 @@ keymap("i", "<C-u>", "<Esc>m][s1zg`]a", opts)
 keymap("i", ",", ",<C-g>u", opts)
 keymap("i", ".", ".<C-g>u", opts)
 keymap("i", ";", ";<C-g>u", opts)
+keymap("i", "\\", "\\<C-g>u", opts) -- for latex undo
 
 -- Visual --
 -- Stay in indent mode

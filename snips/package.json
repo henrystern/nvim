@@ -13,8 +13,6 @@
       },
       {
         "language": [
-          "quarto",
-          "rmd",
           "tex"
         ],
         "path": "./snippets/tex.json"
