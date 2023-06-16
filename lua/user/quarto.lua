@@ -57,6 +57,7 @@ function M.config()
       r = { 'zg', 'right' },
       w = { 'zw', 'wrong' },
       b = { 'zw', 'bad' },
+      l = { '<cmd>Telescope symbols<cr>', 'Latex symbols' },
       ['?'] = { '<cmd>Telescope spell_suggest<cr>', 'suggest' },
     },
   }, { mode = 'n', prefix = '<leader>' })

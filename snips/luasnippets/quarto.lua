@@ -41,13 +41,16 @@ return {
     ]],
     d(1, utils.get_visual)
   )),
+  s_w_math("part", fmta("\\frac{\\partial <>}{\\partial <>} ", { i(1, "f"), i(2, "x") })),
   s_w_no_math("mk", fmta("$<>$", d(1, utils.get_visual))),
   s_math("std", fmta("_{<>}^{<>} ", { i(1), i(2) })),
   s_math("td", fmta("^{<>} ", { i(1) })),
   s_math("sd", fmta("_{<>} ", { i(1) })),
+  s_math("rt", fmta("\\sqrt[<>]{<>} ", { i(1, "2"), i(2) })),
   s_math("gr", fmta("{<>} ", { i(1) })),
   s_math("cb", t("^3 ")),
   s_math("sr", t("^2 ")),
+  s_math("sq", fmta("\\sqrt{<>} ", { i(1) })),
   s_math("EE", t("\\exists ")),
   s_math("AA", t("\\forall ")),
   s_math("xnn", t("x_{n} ")),
@@ -72,6 +75,7 @@ return {
   s_math("**", t("\\cdot ")),
   s_math("!=", t("\\neq ")),
   s_math("~=", t("\\approx ")),
+  s_math("===", t("\\equiv ")),
   s_math("compl", t("^{c} ")),
   s_math("=>", t("\\implies ")),
   s_math("=<", t("\\impliedby ")),
@@ -82,7 +86,8 @@ return {
   s_math("tt", fmta("\\text{<>} ", { i(1) })),
   s_r_math("(%a)bar", fmta("\\overline{<>} ", { f(utils.get_capture) })),
   s_r_math("(%a)hat", fmta("\\hat{<>} ", { f(utils.get_capture) })),
-  s_r_math("}%s*/", t("} \\over ")),
+  s_r_math("\\quad   ", t("\\qquad ")),
+  s_r_math("^(.*[^%s].*)   ", fmta("<> \\quad ", { f(utils.get_capture) })),
   s_r_math(".*%)/", fmta("<>{<>} ", {
     f(function(_, snip)
       local match = snip.trigger
@@ -104,17 +109,45 @@ return {
       end
 
       local rv =
-        string.format("%s\\frac{%s}", stripped:sub(1, i - 1), stripped:sub(i + 1, #stripped - 1))
+          string.format("%s\\frac{%s}", stripped:sub(1, i - 1), stripped:sub(i + 1, #stripped - 1))
 
       return rv
     end),
     i(1)
   })),
-  s_r_math("(\\?[%w]+\\?^%w)/", fmta("\\frac{<>}{<>} ",{f(utils.get_capture),i(1)})),
-  s_r_math("(\\?[%w]+\\?_%w)/", fmta("\\frac{<>}{<>} ",{f(utils.get_capture),i(1)})),
-  s_r_math("(\\?[%w]+\\?^{%w*})/", fmta("\\frac{<>}{<>} ",{f(utils.get_capture),i(1)})),
-  s_r_math("(\\?[%w]+\\?_{%w*})/", fmta("\\frac{<>}{<>} ",{f(utils.get_capture),i(1)})),
-  s_r_math("(\\?%w+)/", fmta("\\frac{<>}{<>} ",{f(utils.get_capture),i(1)})),
+  s_r_math(".*%}/", fmta("<>{<>} ", {
+    f(function(_, snip)
+      local match = snip.trigger
+      local stripped = match:sub(1, #match - 1)
+
+      i = #stripped
+      local depth = 0
+      while true do
+        if stripped:sub(i, i) == "}" then
+          depth = depth + 1
+        end
+        if stripped:sub(i, i) == "{" then
+          depth = depth - 1
+        end
+        if depth == 0 then
+          break
+        end
+        i = i - 1
+      end
+
+      local rv =
+          string.format("%s\\frac{%s}", stripped:sub(1, i - 1), stripped:sub(i + 1, #stripped - 1))
+
+      return rv
+    end),
+    i(1)
+  })),
+  s_r_math("(\\?[%w]+\\?^%w)/", fmta("\\frac{<>}{<>} ", { f(utils.get_capture), i(1) })),
+  s_r_math("(\\?[%w]+\\?_%w)/", fmta("\\frac{<>}{<>} ", { f(utils.get_capture), i(1) })),
+  s_r_math("(\\?[%w]+\\?^{%w*})/", fmta("\\frac{<>}{<>} ", { f(utils.get_capture), i(1) })),
+  s_r_math("(\\?[%w]+\\?_{%w*})/", fmta("\\frac{<>}{<>} ", { f(utils.get_capture), i(1) })),
+  s_r_math("(\\?%w+)/", fmta("\\frac{<>}{<>} ", { f(utils.get_capture), i(1) })),
+  s_w_math("pmat", fmta("\\begin{pmatrix} <> \\end{pmatrix} ", { i(1) })),
   s_w_math("bmat", fmta("\\begin{bmatrix} <> \\end{bmatrix} ", { i(1) })),
   s_w_math("lr(", fmta("\\left( <> \\right) ", d(1, utils.get_visual))),
   s_w_math("lr{", fmta("\\left\\{ <> \\right\\} ", d(1, utils.get_visual))),
@@ -131,34 +164,38 @@ return {
   s_w_math_noslash("csc", t("\\csc ")),
   s_w_math_noslash("sec", t("\\sec ")),
   s_w_math_noslash("cot", t("\\cot ")),
+  s_w_math_noslash("binom", fmta("\\binom{<>}{<>} ", { i(1), i(2) })),
   s_w_math_noslash("ln", t("\\ln ")),
   s_w_math_noslash("log", t("\\log ")),
   s_w_math_noslash("exp", t("\\exp ")),
   s_w_math_noslash("star", t("\\star ")),
   s_w_math_noslash("perp", t("\\perp ")),
-  s_w_math_noslash("int", t("\\int ")),
+  s_w_math_noslash("int", fmta("\\int_{<>}^{<>} ", { i(1), i(2) })),
   s_w_math_noslash("arcsin", t("\\arcsin ")),
   s_w_math_noslash("arctan", t("\\arctan ")),
   s_w_math_noslash("arcsec", t("\\arcsec ")),
   s_w_math_noslash("lim", fmta("\\lim_{<> \\to <>} ", { i(1, "n"), i(2, "\\infty") })),
   s_w_math_noslash("sum", fmta("\\sum_{n=<>}^{<>} <>", { i(1, "0"), i(2, "\\infty"), i(0) })),
+  s_w_math_noslash("prod", fmta("\\prod_{n=<>}^{<>} <>", { i(1, "0"), i(2, "\\infty"), i(0) })),
   s_wr_math_noslash("([aA]lpha)", fmta("\\<> ", { f(utils.get_capture) })),
   s_wr_math_noslash("([bB]eta)", fmta("\\<> ", { f(utils.get_capture) })),
-  s_wr_math_noslash("([cC]hi)", fmta("\\<> ", { f(utils.get_capture) })),
+  s_wr_math_noslash("([gG]amma)", fmta("\\<> ", { f(utils.get_capture) })),
   s_wr_math_noslash("([dD]elta)", fmta("\\<> ", { f(utils.get_capture) })),
   s_wr_math_noslash("([eE]psilon)", fmta("\\<> ", { f(utils.get_capture) })),
-  s_wr_math_noslash("([gG]amma)", fmta("\\<> ", { f(utils.get_capture) })),
+  s_wr_math_noslash("([zZ]eta)", fmta("\\<> ", { f(utils.get_capture) })),
+  s_wr_math_noslash("([eE]ta)", fmta("\\<> ", { f(utils.get_capture) })),
+  s_wr_math_noslash("([tT]heta)", fmta("\\<> ", { f(utils.get_capture) })),
   s_wr_math_noslash("([iI]ota)", fmta("\\<> ", { f(utils.get_capture) })),
   s_wr_math_noslash("([kK]appa)", fmta("\\<> ", { f(utils.get_capture) })),
   s_wr_math_noslash("([lL]ambda)", fmta("\\<> ", { f(utils.get_capture) })),
   s_wr_math_noslash("([mM]u)", fmta("\\<> ", { f(utils.get_capture) })),
   s_wr_math_noslash("([nN]u)", fmta("\\<> ", { f(utils.get_capture) })),
-  s_wr_math_noslash("([oO]mega)", fmta("\\<> ", { f(utils.get_capture) })),
-  s_wr_math_noslash("([pP]hi)", fmta("\\<> ", { f(utils.get_capture) })),
+  s_wr_math_noslash("([pP]i) ?", fmta("\\<> ", { f(utils.get_capture) })), -- question mark due to whichkey opening on i
   s_wr_math_noslash("([rR]ho)", fmta("\\<> ", { f(utils.get_capture) })),
   s_wr_math_noslash("([sS]igma)", fmta("\\<> ", { f(utils.get_capture) })),
   s_wr_math_noslash("([tT]au)", fmta("\\<> ", { f(utils.get_capture) })),
-  s_wr_math_noslash("([tT]heta)", fmta("\\<> ", { f(utils.get_capture) })),
-  s_wr_math_noslash("([zZ]eta)", fmta("\\<> ", { f(utils.get_capture) })),
-  s_wr_math_noslash("([eE]ta)", fmta("\\<> ", { f(utils.get_capture) })),
+  s_wr_math_noslash("([pP]hi) ?", fmta("\\<> ", { f(utils.get_capture) })),
+  s_wr_math_noslash("([cC]hi) ?", fmta("\\<> ", { f(utils.get_capture) })),
+  s_wr_math_noslash("([pP]si) ?", fmta("\\<> ", { f(utils.get_capture) })),
+  s_wr_math_noslash("([oO]mega)", fmta("\\<> ", { f(utils.get_capture) })),
 }
