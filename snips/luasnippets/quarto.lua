@@ -46,17 +46,15 @@ return {
   s_math("std", fmta("_{<>}^{<>} ", { i(1), i(2) })),
   s_math("td", fmta("^{<>} ", { i(1) })),
   s_math("sd", fmta("_{<>} ", { i(1) })),
-  s_math("rt", fmta("\\sqrt[<>]{<>} ", { i(1, "2"), i(2) })),
-  s_math("gr", fmta("{<>} ", { i(1) })),
+  s_math_noslash("rt", fmta("\\sqrt[<>]{<>} ", { i(1, "2"), i(2) })),
+  s_math("gr", fmta("{<>}", { i(1) })),
   s_math("cb", t("^3 ")),
   s_math("sr", t("^2 ")),
-  s_math("sq", fmta("\\sqrt{<>} ", { i(1) })),
+  s_math_noslash("sq", fmta("\\sqrt{<>} ", { i(1) })),
   s_math("EE", t("\\exists ")),
   s_math("AA", t("\\forall ")),
   s_math("xnn", t("x_{n} ")),
   s_math("ynn", t("y_{n} ")),
-  s_math("xii", t("x_{i} ")),
-  s_math("yii", t("y_{i} ")),
   s_math("xjj", t("x_{j} ")),
   s_math("yjj", t("y_{j} ")),
   s_math("RR", t("\\mathbb{R} ")),
@@ -66,7 +64,7 @@ return {
   s_math("UU", t("\\cup ")),
   s_math("notin", t("\\not\\in ")),
   s_math("cc", t("\\subset ")),
-  s_math("<->", t("\\leftrightarrow i")),
+  s_math("<->", t("\\leftrightarrow ")),
   s_math("...", t("\\ldots ")),
   s_math("!>", t("\\mapsto ")),
   s_math("//", fmta("\\frac{<>}{<>} ", { i(1), i(2) })),
@@ -88,60 +86,9 @@ return {
   s_r_math("(%a)hat", fmta("\\hat{<>} ", { f(utils.get_capture) })),
   s_r_math("\\quad   ", t("\\qquad ")),
   s_r_math("^(.*[^%s].*)   ", fmta("<> \\quad ", { f(utils.get_capture) })),
-  s_r_math(".*%)/", fmta("<>{<>} ", {
-    f(function(_, snip)
-      local match = snip.trigger
-      local stripped = match:sub(1, #match - 1)
-
-      i = #stripped
-      local depth = 0
-      while true do
-        if stripped:sub(i, i) == ")" then
-          depth = depth + 1
-        end
-        if stripped:sub(i, i) == "(" then
-          depth = depth - 1
-        end
-        if depth == 0 then
-          break
-        end
-        i = i - 1
-      end
-
-      local rv =
-          string.format("%s\\frac{%s}", stripped:sub(1, i - 1), stripped:sub(i + 1, #stripped - 1))
-
-      return rv
-    end),
-    i(1)
-  })),
-  s_r_math(".*%}/", fmta("<>{<>} ", {
-    f(function(_, snip)
-      local match = snip.trigger
-      local stripped = match:sub(1, #match - 1)
-
-      i = #stripped
-      local depth = 0
-      while true do
-        if stripped:sub(i, i) == "}" then
-          depth = depth + 1
-        end
-        if stripped:sub(i, i) == "{" then
-          depth = depth - 1
-        end
-        if depth == 0 then
-          break
-        end
-        i = i - 1
-      end
-
-      local rv =
-          string.format("%s\\frac{%s}", stripped:sub(1, i - 1), stripped:sub(i + 1, #stripped - 1))
-
-      return rv
-    end),
-    i(1)
-  })),
+  s_r_math(".*%)/", fmta("<>{<>} ", { f(utils.match_group), i(1) })),
+  s_r_math(".*%}/", fmta("<>{<>} ", { f(utils.match_group, {}, { user_args = { { "{", "}" } } }), i(1) })),
+  s_r_math(".*%]/", fmta("<>{<>} ", { f(utils.match_group, {}, { user_args = { { "[", "]" } } }), i(1) })),
   s_r_math("(\\?[%w]+\\?^%w)/", fmta("\\frac{<>}{<>} ", { f(utils.get_capture), i(1) })),
   s_r_math("(\\?[%w]+\\?_%w)/", fmta("\\frac{<>}{<>} ", { f(utils.get_capture), i(1) })),
   s_r_math("(\\?[%w]+\\?^{%w*})/", fmta("\\frac{<>}{<>} ", { f(utils.get_capture), i(1) })),
@@ -175,8 +122,8 @@ return {
   s_w_math_noslash("arctan", t("\\arctan ")),
   s_w_math_noslash("arcsec", t("\\arcsec ")),
   s_w_math_noslash("lim", fmta("\\lim_{<> \\to <>} ", { i(1, "n"), i(2, "\\infty") })),
-  s_w_math_noslash("sum", fmta("\\sum_{n=<>}^{<>} <>", { i(1, "0"), i(2, "\\infty"), i(0) })),
-  s_w_math_noslash("prod", fmta("\\prod_{n=<>}^{<>} <>", { i(1, "0"), i(2, "\\infty"), i(0) })),
+  s_w_math_noslash("sum", fmta("\\sum_{<>}^{<>} <>", { i(1, "n=0"), i(2, "\\infty"), i(0) })),
+  s_w_math_noslash("prod", fmta("\\prod_{<>}^{<>} <>", { i(1, "n=0"), i(2, "\\infty"), i(0) })),
   s_wr_math_noslash("([aA]lpha)", fmta("\\<> ", { f(utils.get_capture) })),
   s_wr_math_noslash("([bB]eta)", fmta("\\<> ", { f(utils.get_capture) })),
   s_wr_math_noslash("([gG]amma)", fmta("\\<> ", { f(utils.get_capture) })),
