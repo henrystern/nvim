@@ -18,6 +18,26 @@ local MATH_NODES = {
 
 local utils = {}
 
+-- I wrote this horrible function and then realised I could just change the trigger to a closing parenthesis
+-- function utils.delete_autopair(_, snip)
+--   -- delete the matching parenthesis created by the autopairs plugin and create an insert node instead
+--   local _, col = unpack(vim.api.nvim_win_get_cursor(0))
+--   local line = vim.api.nvim_get_current_line()
+--   if col == #line then
+--     col = col
+--   elseif col == #line - 1 then
+--     col = col - 1
+--   else
+--     col = col - 2
+--   end
+--   local char_0 = line:sub(col-1, col-1)
+--   local char_1 = line:sub(col, col)
+--   if char_0 == char_1 then
+--     vim.cmd("normal " .. col .. "|x") -- go to column and delete char_1
+--   end
+--   return sn(nil, i(1))
+-- end
+
 function utils.pipe(fns)
   return function(...)
     for _, fn in ipairs(fns) do
