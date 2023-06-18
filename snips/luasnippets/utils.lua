@@ -88,27 +88,6 @@ function utils.get_capture(_, snip, num)
   return snip.captures[num]
 end
 
-function utils.not_math(check_parent)
-  local node = get_node_at_cursor()
-  while node do
-    if node:type() == "text_mode" then
-      if check_parent then
-        -- For \text{}
-        local parent = node:parent()
-        if parent and MATH_NODES[parent:type()] then
-          return false
-        end
-      end
-
-      return true
-    elseif MATH_NODES[node:type()] then
-      return false
-    end
-    node = node:parent()
-  end
-  return true
-end
-
 function utils.is_math()
   local node = get_node_at_cursor()
   while node do
@@ -120,6 +99,10 @@ function utils.is_math()
     node = node:parent()
   end
   return false
+end
+
+function utils.not_math()
+  return not utils.is_math()
 end
 
 function utils.no_backslash()
