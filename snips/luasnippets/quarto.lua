@@ -1,47 +1,19 @@
-local ls = require("luasnip")
-local s = ls.snippet
-local sn = ls.snippet_node
-local t = ls.text_node
-local i = ls.insert_node
-local d = ls.dynamic_node
-local f = ls.function_node
-local c = ls.choice_node
-local fmta = require("luasnip.extras.fmt").fmta
-local conds = require("luasnip.extras.expand_conditions")
-local rep = require("luasnip.extras").rep
-
-local utils = require("luasnip.utils") -- ~\AppData\Local\Programs\Neovim\bin\lua\luasnip\utils.lua
-
--- using the ultisnips settings flags
-local s_bw = ls.extend_decorator.apply(s, {}, { condition = conds.line_begin })
-local s_w_no_math = ls.extend_decorator.apply(s, {}, { condition = utils.not_math })
-local s_bw_no_math = ls.extend_decorator.apply(s, {}, { condition = utils.pipe(conds.line_begin, utils.not_math)})
-local s_bwr_no_math = ls.extend_decorator.apply(s, {regTrig=true}, { condition = utils.pipe(conds.line_begin, utils.not_math)})
-local s_math = ls.extend_decorator.apply(s, { wordTrig = false }, { condition = utils.is_math })
-local s_r_math = ls.extend_decorator.apply(s, { wordTrig = false, regTrig = true }, { condition = utils.is_math })
-local s_math_noslash = ls.extend_decorator.apply(s, { wordTrig = false },
-  { condition = utils.pipe({ utils.is_math, utils.no_backslash }) })
-local s_r_math_noslash = ls.extend_decorator.apply(s, { wordTrig = false, regTrig = true },
-  { condition = utils.pipe({ utils.is_math, utils.no_backslash }) })
-local s_bw_math = ls.extend_decorator.apply(s, {},
-  { condition = utils.pipe({ conds.line_begin, utils.is_math }) })
-local s_w_math = ls.extend_decorator.apply(s, {}, { condition = utils.is_math })
-local s_w_math_noslash = ls.extend_decorator.apply(s, {},
-  { condition = utils.pipe({ utils.is_math, utils.no_backslash }) })
+local math_utils = require("luasnip-md-utils.math-utils")
+local md = require("luasnip-md-utils.nodes")
 
 return {
   -- regular
 }, {
   -- autosnippets
-  s_bw("begin{", fmta(
+  md.bw("beg}", fmta(
     [[
       \begin{<>}
         <>
-      \end{<>
+      \end{<>}
     ]],
     { i(1), i(2), rep(1) }
   )),
-  s_bw_no_math(".div", fmta(
+  md.bw_no_math(".div", fmta(
     [[
       ::: {<>}
       <>
@@ -50,10 +22,10 @@ return {
     ]],
     {
       i(1),
-      d(2, utils.get_visual)
+      dl(2, l.LS_SELECT_RAW)
     }
   )),
-  s_bw_no_math(".call", fmta(
+  md.bw_no_math(".call", fmta(
     [[
       ::: {.callout-<>}
       <>
@@ -62,10 +34,10 @@ return {
     ]],
     {
       i(1, "note"),
-      d(2, utils.get_visual)
+      dl(2, l.LS_SELECT_RAW)
     }
   )),
-  s_bwr_no_math("#(%w*)-", fmta(
+  md.bwr_no_math("#(%w*)-", fmta(
     [[
       ::: {#<>-<>}
       <>
@@ -73,12 +45,12 @@ return {
 
     ]],
     {
-      f(utils.get_capture),
+      l(l.CAPTURE1),
       i(1),
-      d(2, utils.get_visual)
+      dl(2, l.LS_SELECT_RAW)
     }
   )),
-  s_bwr_no_math("%.(%S*) ", fmta(
+  md.bwr_no_math("%.(%S*) ", fmta(
     [[
       ::: {.<>}
       <>
@@ -86,140 +58,135 @@ return {
 
     ]],
     {
-      f(utils.get_capture),
-      d(1, utils.get_visual)
+      l(l.CAPTURE1:gsub("%.", " %.")),
+      dl(1, l.LS_SELECT_RAW)
     }
   )),
-  s_w_no_math("dm", fmta(
+  md.w_no_math("dm", fmta(
     [[
       $$
         <>
       $$
 
     ]],
-    d(1, utils.get_visual)
+    dl(1, l.LS_SELECT_RAW)
   )),
-  s_w_math("part", fmta("\\frac{\\partial <>}{\\partial <>} ", { i(1, "f"), i(2, "x") })),
-  s_w_no_math("mk", fmta("$<>$", d(1, utils.get_visual))),
-  s_math("part", fmta("\\frac{\\partial <>}{\\partial <>}", { i(1, "f"), i(2, "x") })),
-  s_math("std", fmta("_{<>}^{<>}", { i(1), i(2) })),
-  s_math("td", fmta("^{<>}", { i(1) })),
-  s_math("sd", fmta("_{<>}", { i(1) })),
-  s_w_math_noslash("rt", fmta("\\sqrt[<>]{<>}", { i(1, "2"), i(2) })),
-  s_math("gr", fmta("{<>}", { i(1) })),
-  s_math("cb", t("^3")),
-  s_math("sr", t("^2")),
-  s_math_noslash("sq", fmta("\\sqrt{<>}", { i(1) })),
-  s_math("EE", t("\\exists ")),
-  s_math("AA", t("\\forall ")),
-  s_math("xnn", t("x_{n}")),
-  s_math("ynn", t("y_{n}")),
-  s_math("xjj", t("x_{j}")),
-  s_math("yjj", t("y_{j}")),
-  s_math("RR", t("\\mathbb{R}")),
-  s_math("QQ", t("\\mathbb{Q}")),
-  s_math("ZZ", t("\\mathbb{Z}")),
-  s_math("NN", t("\\mathbb{N}")),
-  s_math("nee", t("\\not\\in ")),
-  s_math("ee", t("\\in ")),
-  s_math("UU", t("\\cup ")),
-  s_math("cc", t("\\subset ")),
-  s_math("<->", t("\\leftrightarrow ")),
-  s_math("...", t("\\ldots ")),
-  s_math("!>", t("\\mapsto ")),
-  s_math("//", fmta("\\frac{<>}{<>}", { i(1), i(2) })),
-  s_math("->", t("\\to ")),
-  s_math("xx", t("\\times ")),
-  s_math("**", t("\\cdot ")),
-  s_math("!=", t("\\neq ")),
-  s_math("~=", t("\\approx ")),
-  s_math("===", t("\\equiv ")),
-  s_math("compl", t("^{c}")),
-  s_math("=>", t("\\implies ")),
-  s_math("=<", t("\\impliedby ")),
-  s_math("<=", t("\\le ")),
-  s_math(">=", t("\\ge ")),
-  s_math("invs", t("^{-1}")),
-  s_math("__", fmta("_{<>}", i(1))),
-  s_math("tt", fmta("\\text{<>}", { d(1, utils.get_visual) })),
-  s_r_math("(%a)bar", fmta("\\overline{<>}", { f(utils.get_capture) })),
-  s_r_math("(%a)hat", fmta("\\hat{<>}", { f(utils.get_capture) })),
-  s_r_math("\\quad   ", t("\\qquad ")),
-  s_r_math(".*%)/", fmta("<>{<>}", { f(utils.match_group), i(1) })),
-  s_r_math(".*%}/", fmta("<>{<>}", { f(utils.match_group, {}, { user_args = { { "{", "}" } } }), i(1) })),
-  s_r_math(".*%]/", fmta("<>{<>}", { f(utils.match_group, {}, { user_args = { { "[", "]" } } }), i(1) })),
-  s_r_math("^(.*[^%s].*)   ", fmta("<> \\quad ", { f(utils.get_capture) })),
-  s_r_math("(\\?[%w]+\\?^%w)/", fmta("\\frac{<>}{<>}", { f(utils.get_capture), i(1) })),
-  s_r_math("(\\?[%w]+\\?_%w)/", fmta("\\frac{<>}{<>}", { f(utils.get_capture), i(1) })),
-  s_r_math("(\\?[%w]+\\?^{%w*})/", fmta("\\frac{<>}{<>}", { f(utils.get_capture), i(1) })),
-  s_r_math("(\\?[%w]+\\?_{%w*})/", fmta("\\frac{<>}{<>}", { f(utils.get_capture), i(1) })),
-  s_r_math("(\\?%w+)/", fmta("\\frac{<>}{<>}", { f(utils.get_capture), i(1) })),
-  s_math("mat ", fmta("\\begin{matrix} <> \\end{matrix}", { i(1) })),
-  s_math("mat)", fmta("\\begin{pmatrix} <> \\end{pmatrix}", { i(1) })),
-  s_math("mat]", fmta("\\begin{bmatrix} <> \\end{bmatrix}", { i(1) })),
-  s_math("mat}", fmta("\\begin{Bmatrix} <> \\end{Bmatrix}", { i(1) })),
-  s_math("lr ", fmta("\\left( <> \\right)", { d(1, utils.get_visual) })),
-  s_math("lr)", fmta("\\left( <> \\right)", { d(1, utils.get_visual) })),
-  s_math("lr]", fmta("\\left[ <> \\right]", d(1, utils.get_visual))),
-  s_math("lr}", fmta("\\left\\{ <> \\right\\}", d(1, utils.get_visual))),
-  s_math("lr|", fmta("\\left| <> \\right|", d(1, utils.get_visual))),
-  s_math_noslash("iff", t("\\iff ")),
-  s_math_noslash("hat", fmta("\\hat{<>}", { d(1, utils.get_visual) })),
-  s_math_noslash("bar", fmta("\\overline{<>}", { d(1, utils.get_visual) })),
-  s_math_noslash("abs", fmta("\\abs{<>}", { d(1, utils.get_visual) })),
-  s_math_noslash("inf", t("\\infty ")),
-  s_math_noslash("sin", t("\\sin ")),
-  s_math_noslash("cos", t("\\cos ")),
-  s_math_noslash("tan", t("\\tan ")),
-  s_math_noslash("csc", t("\\csc ")),
-  s_math_noslash("sec", t("\\sec ")),
-  s_math_noslash("cot", t("\\cot ")),
-  s_math_noslash("binom", fmta("\\binom{<>}{<>}", { i(1), i(2) })),
-  s_math_noslash("ln", t("\\ln ")),
-  s_math_noslash("log", t("\\log ")),
-  s_math_noslash("exp", t("\\exp ")),
-  s_math_noslash("star", t("\\star ")),
-  s_math_noslash("perp", t("\\perp ")),
-  s_math_noslash("int", fmta("\\int_{<>}^{<>}", { i(1), i(2) })),
-  s_math_noslash("arcsin", t("\\arcsin ")),
-  s_math_noslash("arctan", t("\\arctan ")),
-  s_math_noslash("arcsec", t("\\arcsec ")),
-  s_math_noslash("lim", fmta("\\lim_{<> \\to <>}", { i(1, "n"), i(2, "\\infty") })),
-  s_math_noslash("sum", fmta("\\sum_{<>}^{<>}<>", { i(1, "n=0"), i(2, "\\infty"), i(0) })),
-  s_math_noslash("prod", fmta("\\prod_{<>}^{<>}<>", { i(1, "n=0"), i(2, "\\infty"), i(0) })),
-  s_math_noslash(";a", t("\\alpha ")),
-  s_math_noslash(";A", t("\\Alpha ")),
-  s_math_noslash(";b", t("\\beta ")),
-  s_math_noslash(";B", t("\\beta ")),
-  s_math_noslash(";d", t("\\delta ")),
-  s_math_noslash(";D", t("\\Delta ")),
-  s_math_noslash(";e", t("\\epsilon ")),
-  s_math_noslash(";E", t("\\varepsilon ")),
-  s_math_noslash(";t", t("\\theta ")),
-  s_math_noslash(";T", t("\\Theta ")),
-  s_math_noslash(";l", t("\\lambda ")),
-  s_math_noslash(";L", t("\\Lambda ")),
-  s_math_noslash(";s", t("\\sigma ")),
-  s_math_noslash(";S", t("\\Sigma ")),
-  s_r_math_noslash("([aA]lpha)", fmta("\\<> ", { f(utils.get_capture) })),
-  s_r_math_noslash("([bB]eta)", fmta("\\<> ", { f(utils.get_capture) })),
-  s_r_math_noslash("([gG]amma)", fmta("\\<> ", { f(utils.get_capture) })),
-  s_r_math_noslash("([dD]elta)", fmta("\\<> ", { f(utils.get_capture) })),
-  s_r_math_noslash("([eE]psilon)", fmta("\\<> ", { f(utils.get_capture) })),
-  s_r_math_noslash("([zZ]eta)", fmta("\\<> ", { f(utils.get_capture) })),
-  s_r_math_noslash("([eE]ta)", fmta("\\<> ", { f(utils.get_capture) })),
-  s_r_math_noslash("([tT]heta)", fmta("\\<> ", { f(utils.get_capture) })),
-  s_r_math_noslash("([iI]ota)", fmta("\\<> ", { f(utils.get_capture) })),
-  s_r_math_noslash("([kK]appa)", fmta("\\<> ", { f(utils.get_capture) })),
-  s_r_math_noslash("([lL]ambda)", fmta("\\<> ", { f(utils.get_capture) })),
-  s_r_math_noslash("([mM]u)", fmta("\\<> ", { f(utils.get_capture) })),
-  s_r_math_noslash("([nN]u)", fmta("\\<> ", { f(utils.get_capture) })),
-  s_r_math_noslash("([pP]i)", fmta("\\<> ", { f(utils.get_capture) })),
-  s_r_math_noslash("([rR]ho)", fmta("\\<> ", { f(utils.get_capture) })),
-  s_r_math_noslash("([sS]igma)", fmta("\\<> ", { f(utils.get_capture) })),
-  s_r_math_noslash("([tT]au)", fmta("\\<> ", { f(utils.get_capture) })),
-  s_r_math_noslash("([pP]hi)", fmta("\\<> ", { f(utils.get_capture) })),
-  s_r_math_noslash("([cC]hi)", fmta("\\<> ", { f(utils.get_capture) })),
-  s_r_math_noslash("([pP]si)", fmta("\\<> ", { f(utils.get_capture) })),
-  s_r_math_noslash("([oO]mega)", fmta("\\<> ", { f(utils.get_capture) })),
+  md.w_no_math("mk", fmta("$<>$", dl(1, l.LS_SELECT_RAW))),
+  md.math(";a", t("\\alpha ")),
+  md.math(";A", t("\\Alpha ")),
+  md.math(";b", t("\\beta ")),
+  md.math(";B", t("\\beta ")),
+  md.math(";d", t("\\delta ")),
+  md.math(";D", t("\\Delta ")),
+  md.math(";e", t("\\epsilon ")),
+  md.math(";E", t("\\varepsilon ")),
+  md.math(";t", t("\\theta ")),
+  md.math(";T", t("\\Theta ")),
+  md.math(";l", t("\\lambda ")),
+  md.math(";L", t("\\Lambda ")),
+  md.math(";s", t("\\sigma ")),
+  md.math(";S", t("\\Sigma ")),
+  md.math("std", fmta("_{<>}^{<>}", { i(1), i(2) })),
+  md.math("td", fmta("^{<>}", { i(1) })),
+  md.math("sd", fmta("_{<>}", { i(1) })),
+  md.math("gr", fmta("{<>}", { i(1) })),
+  md.math("cb", t("^3")),
+  md.math("sr", t("^2")),
+  md.math("EE", t("\\exists ")),
+  md.math("AA", t("\\forall ")),
+  md.math("xnn", t("x_{n}")),
+  md.math("ynn", t("y_{n}")),
+  md.math("xjj", t("x_{j}")),
+  md.math("yjj", t("y_{j}")),
+  md.math("RR", t("\\mathbb{R}")),
+  md.math("QQ", t("\\mathbb{Q}")),
+  md.math("ZZ", t("\\mathbb{Z}")),
+  md.math("NN", t("\\mathbb{N}")),
+  md.math("nee", t("\\not\\in ")),
+  md.math("ee", t("\\in ")),
+  md.math("UU", t("\\cup ")),
+  md.math("cc", t("\\subset ")),
+  md.math("<->", t("\\leftrightarrow ")),
+  md.math("...", t("\\ldots ")),
+  md.math("!>", t("\\mapsto ")),
+  md.math("//", fmta("\\frac{<>}{<>}", { i(1), i(2) })),
+  md.math("->", t("\\to ")),
+  md.math("xx", t("\\times ")),
+  md.math("**", t("\\cdot ")),
+  md.math("!=", t("\\neq ")),
+  md.math("~=", t("\\approx ")),
+  md.math("===", t("\\equiv ")),
+  md.math("compl", t("^{c}")),
+  md.math("=>", t("\\implies ")),
+  md.math("=<", t("\\impliedby ")),
+  md.math("<=", t("\\le ")),
+  md.math(">=", t("\\ge ")),
+  md.math("inv", t("^{-1}")),
+  md.math("__", fmta("_{<>}", i(1))),
+  md.math("tt", fmta("\\text{<>}", { dl(1, l.LS_SELECT_RAW) })),
+  md.math("mat ", fmta("\\begin{matrix} <> \\end{matrix}", { i(1) })),
+  md.math("mat)", fmta("\\begin{pmatrix} <> \\end{pmatrix}", { i(1) })),
+  md.math("mat]", fmta("\\begin{bmatrix} <> \\end{bmatrix}", { i(1) })),
+  md.math("mat}", fmta("\\begin{Bmatrix} <> \\end{Bmatrix}", { i(1) })),
+  md.math("lr ", fmta("\\left( <> \\right)", { dl(1, l.LS_SELECT_RAW) })),
+  md.math("lr)", fmta("\\left( <> \\right)", { dl(1, l.LS_SELECT_RAW) })),
+  md.math("lr]", fmta("\\left[ <> \\right]", dl(1, l.LS_SELECT_RAW))),
+  md.math("lr}", fmta("\\left\\{ <> \\right\\}", dl(1, l.LS_SELECT_RAW))),
+  md.math("lr|", fmta("\\left| <> \\right|", dl(1, l.LS_SELECT_RAW))),
+  md.r_math("(%a)bar", fmta("\\overline{<>}", { l(l.CAPTURE1) })),
+  md.r_math("(%a)hat", fmta("\\hat{<>}", { l(l.CAPTURE1) })),
+  md.r_math("\\quad   ", t("\\qquad ")),
+  md.r_math(".*%)/", fmta("<>{<>}", { f(math_utils.match_group), i(1) })),
+  md.r_math(".*%}/", fmta("<>{<>}", { f(math_utils.match_group, {}, { user_args = { { "{", "}" } } }), i(1) })),
+  md.r_math(".*%]/", fmta("<>{<>}", { f(math_utils.match_group, {}, { user_args = { { "[", "]" } } }), i(1) })),
+  md.r_math("^(.*[^%s].*)   ", fmta("<> \\quad ", { l(l.CAPTURE1) })),
+  md.math_noslash("sq", fmta("\\sqrt{<>}", { i(1) })),
+  md.math_noslash("iff", t("\\iff ")),
+  md.math_noslash("hat", fmta("\\hat{<>}", { dl(1, l.LS_SELECT_RAW) })),
+  md.math_noslash("bar", fmta("\\overline{<>}", { dl(1, l.LS_SELECT_RAW) })),
+  md.math_noslash("abs", fmta("\\abs{<>}", { dl(1, l.LS_SELECT_RAW) })),
+  md.math_noslash("inf", t("\\infty ")),
+  md.math_noslash("sin", t("\\sin ")),
+  md.math_noslash("cos", t("\\cos ")),
+  md.math_noslash("tan", t("\\tan ")),
+  md.math_noslash("csc", t("\\csc ")),
+  md.math_noslash("sec", t("\\sec ")),
+  md.math_noslash("cot", t("\\cot ")),
+  md.math_noslash("binom", fmta("\\binom{<>}{<>}", { i(1), i(2) })),
+  md.math_noslash("ln", t("\\ln ")),
+  md.math_noslash("log", t("\\log ")),
+  md.math_noslash("exp", t("\\exp ")),
+  md.math_noslash("star", t("\\star ")),
+  md.math_noslash("perp", t("\\perp ")),
+  md.math_noslash("int", fmta("\\int_{<>}^{<>}", { i(1), i(2) })),
+  md.math_noslash("arcsin", t("\\arcsin ")),
+  md.math_noslash("arctan", t("\\arctan ")),
+  md.math_noslash("arcsec", t("\\arcsec ")),
+  md.math_noslash("lim", fmta("\\lim_{<> \\to <>}", { i(1, "n"), i(2, "\\infty") })),
+  md.math_noslash("sum", fmta("\\sum_{<>}^{<>}<>", { i(1, "n=0"), i(2, "\\infty"), i(0) })),
+  md.math_noslash("prod", fmta("\\prod_{<>}^{<>}<>", { i(1, "n=0"), i(2, "\\infty"), i(0) })),
+  md.math_noslash("part", fmta("\\frac{\\partial <>}{\\partial <>}", { i(1, "f"), i(2, "x") })),
+  md.w_math_noslash("rt", fmta("\\sqrt[<>]{<>}", { i(1, "2"), i(2) })),
+  md.r_math_noslash("([aA]lpha)", fmta("\\<> ", { l(l.CAPTURE1) })),
+  md.r_math_noslash("([bB]eta)", fmta("\\<> ", { l(l.CAPTURE1) })),
+  md.r_math_noslash("([gG]amma)", fmta("\\<> ", { l(l.CAPTURE1) })),
+  md.r_math_noslash("([dD]elta)", fmta("\\<> ", { l(l.CAPTURE1) })),
+  md.r_math_noslash("([eE]psilon)", fmta("\\<> ", { l(l.CAPTURE1) })),
+  md.r_math_noslash("([zZ]eta)", fmta("\\<> ", { l(l.CAPTURE1) })),
+  md.r_math_noslash("([tT]heta)", fmta("\\<> ", { l(l.CAPTURE1) })),
+  md.r_math_noslash("^([eE]ta)", fmta("\\<> ", { l(l.CAPTURE1) })),
+  md.r_math_noslash("([^bBhzZ\\])([eE]ta)", fmta("<>\\<> ", { l(l.CAPTURE1), l(l.CAPTURE2) })),
+  md.r_math_noslash("([iI]ota)", fmta("\\<> ", { l(l.CAPTURE1) })),
+  md.r_math_noslash("([kK]appa)", fmta("\\<> ", { l(l.CAPTURE1) })),
+  md.r_math_noslash("([lL]ambda)", fmta("\\<> ", { l(l.CAPTURE1) })),
+  md.r_math_noslash("([mM]u)", fmta("\\<> ", { l(l.CAPTURE1) })),
+  md.r_math_noslash("([nN]u)", fmta("\\<> ", { l(l.CAPTURE1) })),
+  md.r_math_noslash("([pP]i)", fmta("\\<> ", { l(l.CAPTURE1) })),
+  md.r_math_noslash("([rR]ho)", fmta("\\<> ", { l(l.CAPTURE1) })),
+  md.r_math_noslash("([sS]igma)", fmta("\\<> ", { l(l.CAPTURE1) })),
+  md.r_math_noslash("([tT]au)", fmta("\\<> ", { l(l.CAPTURE1) })),
+  md.r_math_noslash("([pP]hi)", fmta("\\<> ", { l(l.CAPTURE1) })),
+  md.r_math_noslash("([cC]hi)", fmta("\\<> ", { l(l.CAPTURE1) })),
+  md.r_math_noslash("([pP]si)", fmta("\\<> ", { l(l.CAPTURE1) })),
+  md.r_math_noslash("([oO]mega)", fmta("\\<> ", { l(l.CAPTURE1) })),
 }

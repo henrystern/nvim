@@ -1,0 +1,12 @@
+{
+    "diagnostics.globals": [
+        "vim",
+        "fmta",
+        "l",
+        "i",
+        "rep",
+        "dl",
+        "t",
+        "f"
+    ]
+}
