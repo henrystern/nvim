@@ -136,9 +136,26 @@ return {
   md.r_math("(%a)bar", fmta("\\overline{<>}", { l(l.CAPTURE1) })),
   md.r_math("(%a)hat", fmta("\\hat{<>}", { l(l.CAPTURE1) })),
   md.r_math("\\quad   ", t("\\qquad ")),
-  md.r_math(".*%)/", fmta("<>{<>}", { f(math_utils.match_group), i(1) })),
-  md.r_math(".*%}/", fmta("<>{<>}", { f(math_utils.match_group, {}, { user_args = { { "{", "}" } } }), i(1) })),
-  md.r_math(".*%]/", fmta("<>{<>}", { f(math_utils.match_group, {}, { user_args = { { "[", "]" } } }), i(1) })),
+  md.r_math(".*%)/", fmta("<>{<>}", {
+    f(function(_, snip)
+      local before, group = unpack(math_utils.match_group(_, snip))
+      return string.format("%s\\frac{%s}", before, group)
+    end, {}), i(1) })),
+  md.r_math(".*%}/", fmta("<>{<>}", {
+    f(function(_, snip)
+      local before, group = unpack(math_utils.match_group(_, snip, { "{", "}" }))
+      return string.format("%s\\frac{%s}", before, group)
+    end, {}), i(1) })),
+  md.r_math(".*%]/", fmta("<>{<>}", {
+    f(function(_, snip)
+      local before, group = unpack(math_utils.match_group(_, snip, { "[", "]" }))
+      return string.format("%s\\frac{%s}", before, group)
+    end, {}), i(1) })),
+  md.r_math("(\\?[%w]+\\?^%w)/", fmta("\\frac{<>}{<>} ", { l(l.CAPTURE1), i(1) })),
+  md.r_math("(\\?[%w]+\\?_%w)/", fmta("\\frac{<>}{<>} ", { l(l.CAPTURE1), i(1) })),
+  md.r_math("(\\?[%w]+\\?^{%w*})/", fmta("\\frac{<>}{<>} ", { l(l.CAPTURE1), i(1) })),
+  md.r_math("(\\?[%w]+\\?_{%w*})/", fmta("\\frac{<>}{<>} ", { l(l.CAPTURE1), i(1) })),
+  md.r_math("(\\?%w+)/", fmta("\\frac{<>}{<>} ", { l(l.CAPTURE1), i(1) })),
   md.r_math("^(.*[^%s].*)   ", fmta("<> \\quad ", { l(l.CAPTURE1) })),
   md.math_noslash("sq", fmta("\\sqrt{<>}", { i(1) })),
   md.math_noslash("iff", t("\\iff ")),
