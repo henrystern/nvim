@@ -26,34 +26,6 @@
       "::::"
     ]
   },
-  "fig3": {
-    "prefix": ["fig3"],
-    "body": [
-      ":::: {#fig-${1:label} layout=\"[[1, 1], [1]]\"}",
-      "",
-      "![${2:subcap1}](${3:figure}){#fig-$2}",
-      "",
-      "![${4:subcap1}](${5:figure}){#fig-$4}",
-      "",
-      "![${6:subcap1}](${7:figure}){#fig-$6}",
-      "",
-      "${8:caption}",
-      "::::"
-    ]
-  },
-  "fig2": {
-    "prefix": ["fig2"],
-    "body": [
-      ":::: {#fig-${1:label} layout=\"[1,1]\"}",
-      "",
-      "![${2:subcap1}](${3:figure}){#fig-$2}",
-      "",
-      "![${4:subcap1}](${5:figure}){#fig-$4}",
-      "",
-      "${6:caption}",
-      "::::"
-    ]
-  },
   "pycode": {
     "prefix": ["pyc"],
     "body": ["```{python} ", "$1", "```"]
@@ -69,46 +41,6 @@
   "code": {
     "prefix": ["code"],
     "body": ["```{$1} ", "$2", "```", "$0"]
-  },
-  "pyfig2": {
-    "prefix": ["pyfig2"],
-    "body": [
-      "```{python} ",
-      "#| label: fig-$1",
-      "#| fig-cap: \"$2\"",
-      "#| fig-subcap: ",
-      "#|    - \"$3\"",
-      "#|    - \"$4\"",
-      "#| layout-ncol: 2",
-      "",
-      "import numpy as np",
-      "import matplotlib.pyplot as plt",
-      "plt.style.use(['science', 'ieee'])",
-      "$5",
-      "plt.legend()",
-      "plt.show()",
-      "",
-      "$6",
-      "plt.legend()",
-      "plt.show()",
-      "```"
-    ]
-  },
-  "pyfig1": {
-    "prefix": ["pyfig1"],
-    "body": [
-      "```{python}",
-      "#| label: fig-$1",
-      "#| fig-cap: \"$2\"",
-      "",
-      "import numpy as np",
-      "import matplotlib.pyplot as plt",
-      "",
-      "plt.style.use(['science', 'ieee'])",
-      "$3",
-      "plt.show()",
-      "```"
-    ]
   },
   "div": {
     "prefix": ["div"],
@@ -129,18 +61,6 @@
   "secref": {
     "prefix": ["secref"],
     "body": ["@sec-$1"]
-  },
-  "crossref": {
-    "prefix": ["crossref"],
-    "body": [
-      "crossref:",
-      "  fig-title: Figure",
-      "  tbl-title: Table",
-      "  title-delim: .",
-      "  fig-prefix: Figure",
-      "  tbl-prefix: Table",
-      "  eq-prefix: Eq."
-    ]
   },
   "fig": {
     "prefix": ["fig"],
@@ -196,23 +116,6 @@
     "prefix": ["noninc"],
     "body": ["::: {.nonincremental}", "-$1", ":::"]
   },
-  "pause": {
-    "prefix": ["pause"],
-    "body": [". . ."]
-  },
-  "2col": {
-    "prefix": ["2col"],
-    "body": [
-      "::: {.columns}",
-      "::: {.column width=50%}",
-      "$1",
-      ":::",
-      "::: {.column width=50%}",
-      "$2",
-      ":::",
-      ":::"
-    ]
-  },
   "cols": {
     "prefix": ["cols"],
     "body": [
@@ -234,13 +137,9 @@
     "prefix": ["valign"],
     "body": ["layout-valign=\"$0\""]
   },
-  "col2": {
-    "prefix": ["col2"],
-    "body": ["::: {layout-ncol=2}", "$0", ":::"]
-  },
-  "col3": {
-    "prefix": ["col3"],
-    "body": ["::: {layout-ncol=3}", "$0", ":::"]
+  "callout": {
+    "prefix": ["call"],
+    "body": ["::: {.callout-$1}", "$0", ":::"]
   },
   "absolute": {
     "prefix": ["absolute"],
