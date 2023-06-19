@@ -11,7 +11,24 @@ return {
         <>
       \end{<>}
     ]],
-    { i(1), i(2), rep(1) }
+    { i(1), dl(1, l.LS_SELECT_RAW), rep(1) }
+  )),
+  md.bw("ali}", fmta(
+    [[
+      \begin{align}
+        <>
+      \end{align}
+    ]],
+    dl(1, l.LS_SELECT_RAW)
+  )),
+  md.w_no_math("#dm", fmta(
+    [[
+      $$
+        <>
+      $$ {#eq-<>}
+
+    ]],
+      { dl(1, l.LS_SELECT_RAW), i(2, "noref") }
   )),
   md.w_no_math("dm", fmta(
     [[
@@ -74,6 +91,8 @@ return {
   md.math(">=", t("\\ge ")),
   md.math("inv", t("^{-1}")),
   md.math("__", fmta("_{<>}", i(1))),
+  md.math("}utt", fmta("\\underbrace{\\text{<>}}{<>}", { i(1), dl(2, l.LS_SELECT_RAW) })),
+  md.math("utt", fmta("\\underset{\\text{<>}}{<>}", { i(1), dl(2, l.LS_SELECT_RAW) })),
   md.math("tt", fmta("\\text{<>}", { dl(1, l.LS_SELECT_RAW) })),
   md.math("mat ", fmta("\\begin{matrix} <> \\end{matrix}", { i(1) })),
   md.math("mat)", fmta("\\begin{pmatrix} <> \\end{pmatrix}", { i(1) })),
@@ -84,6 +103,7 @@ return {
   md.math("lr]", fmta("\\left[ <> \\right]", dl(1, l.LS_SELECT_RAW))),
   md.math("lr}", fmta("\\left\\{ <> \\right\\}", dl(1, l.LS_SELECT_RAW))),
   md.math("lr|", fmta("\\left| <> \\right|", dl(1, l.LS_SELECT_RAW))),
+  md.w_math("nd", t("&")),
   md.r_math("(%a)bar", fmta("\\overline{<>}", { l(l.CAPTURE1) })),
   md.r_math("(%a)hat", fmta("\\hat{<>}", { l(l.CAPTURE1) })),
   md.r_math("\\quad   ", t("\\qquad ")),
