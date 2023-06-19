@@ -56,7 +56,7 @@ keymap("v", "y", "ygv<esc>", opts)
 
 -- Insert --
 -- Press ii fast to escape to normal
-keymap("i", "ii", "<ESC>", opts)
+-- keymap("i", "ii", "<ESC>", opts)
 
 -- C-BS delete word
 vim.keymap.set("i", "<C-BS>", "<Esc>cvb", { })
