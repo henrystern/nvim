@@ -69,8 +69,6 @@ function M.config()
       n = { ':=vim.treesitter.get_node():type()<cr>', 'show node' },
     }
   }, { mode = 'n', prefix = '<leader>' })
-  local ls = require "luasnip"
-  ls.filetype_extend("quarto", {"markdown"})
 end
 
 return M

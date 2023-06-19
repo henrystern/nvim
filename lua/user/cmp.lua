@@ -50,8 +50,14 @@ function M.config()
     update_events = 'TextChanged,TextChangedI',
     store_selection_keys = "<Tab>",
   })
-  require("luasnip/loaders/from_vscode").lazy_load()
-  require("luasnip.loaders.from_vscode").lazy_load({ paths = { vim.fn.stdpath("config") .. "/snips" } })
+  luasnip.filetype_extend("quarto", {"md-math"})
+  luasnip.filetype_extend("markdown", {"md-math"})
+  luasnip.filetype_extend("rmarkdown", {"md-math"})
+  luasnip.filetype_extend("tex", {"md-math"})
+  
+  -- friendly-snippets
+  require("luasnip/loaders/from_vscode").lazy_load({exclude = {"quarto"}})
+  -- custom snippets
   require("luasnip.loaders.from_lua").load({ paths = { vim.fn.stdpath("config") .. "/snips/luasnippets" } })
 
   local check_backspace = function()
