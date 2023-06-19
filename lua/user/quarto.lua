@@ -61,7 +61,14 @@ function M.config()
       ['?'] = { '<cmd>Telescope spell_suggest<cr>', 'suggest' },
     },
   }, { mode = 'n', prefix = '<leader>' })
-
+  wk.register({
+    t = {
+      name = 'treesitter',
+      t = { vim.treesitter.inspect_tree, 'show tree' },
+      c = { ':=vim.treesitter.get_captures_at_cursor()<cr>', 'show capture' },
+      n = { ':=vim.treesitter.get_node():type()<cr>', 'show node' },
+    }
+  }, { mode = 'n', prefix = '<leader>' })
   local ls = require "luasnip"
   ls.filetype_extend("quarto", {"markdown"})
 end
