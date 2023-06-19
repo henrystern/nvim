@@ -33,6 +33,14 @@ return {
   s_w_math("lr", fmta("\\left( <> \\right) ", d(1, utils.get_visual))),
 }, {
   -- autosnippets
+  s_bw("begin{", fmta(
+    [[
+      \begin{<>}
+        <>
+      \end{<>
+    ]],
+    { i(1), i(2), rep(1) }
+  )),
   s_w_no_math("dm", fmta(
     [[
       $$
@@ -153,6 +161,13 @@ return {
   s_w_math("lr{", fmta("\\left\\{ <> \\right\\} ", d(1, utils.get_visual))),
   s_w_math("lr[", fmta("\\left[ <> \\right] ", d(1, utils.get_visual))),
   s_w_math("lr|", fmta("\\left| <> \\right| ", d(1, utils.get_visual))),
+  s_bw_math("ali ", fmta(
+    [[
+      \begin{align}
+        <> &= <> \\
+        <> &= <> \\
+      \end{align}
+    ]], { i(1), i(2), i(3), i(4) })),
   s_w_math_noslash("iff", t("\\iff ")),
   s_w_math_noslash("hat", fmta("\\hat{<>} ", { d(1, utils.get_visual) })),
   s_w_math_noslash("bar", fmta("\\overline{<>} ", { d(1, utils.get_visual) })),

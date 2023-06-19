@@ -234,10 +234,6 @@
     "prefix": ["valign"],
     "body": ["layout-valign=\"$0\""]
   },
-  "callout": {
-    "prefix": ["call"],
-    "body": ["::: {.callout-$1}", "$0", ":::"]
-  },
   "col2": {
     "prefix": ["col2"],
     "body": ["::: {layout-ncol=2}", "$0", ":::"]
