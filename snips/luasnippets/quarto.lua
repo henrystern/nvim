@@ -13,9 +13,10 @@ local rep = require("luasnip.extras").rep
 local utils = require("luasnip.utils") -- ~\AppData\Local\Programs\Neovim\bin\lua\luasnip\utils.lua
 
 -- using the ultisnips settings flags
+local s_bw = ls.extend_decorator.apply(s, {}, { condition = conds.line_begin })
 local s_w_no_math = ls.extend_decorator.apply(s, {}, { condition = utils.not_math })
-local s_bw_no_math = ls.extend_decorator.apply(s, {}, { condition = conds.line_begin })
-local s_bwr_no_math = ls.extend_decorator.apply(s, {regTrig=true}, { condition = conds.line_begin })
+local s_bw_no_math = ls.extend_decorator.apply(s, {}, { condition = utils.pipe(conds.line_begin, utils.not_math)})
+local s_bwr_no_math = ls.extend_decorator.apply(s, {regTrig=true}, { condition = utils.pipe(conds.line_begin, utils.not_math)})
 local s_math = ls.extend_decorator.apply(s, { wordTrig = false }, { condition = utils.is_math })
 local s_r_math = ls.extend_decorator.apply(s, { wordTrig = false, regTrig = true }, { condition = utils.is_math })
 local s_math_noslash = ls.extend_decorator.apply(s, { wordTrig = false },
@@ -39,6 +40,7 @@ return {
       \end{<>
     ]],
     { i(1), i(2), rep(1) }
+  )),
   s_bw_no_math(".div", fmta(
     [[
       ::: {<>}
@@ -212,13 +214,12 @@ return {
   s_r_math_noslash("([lL]ambda)", fmta("\\<> ", { f(utils.get_capture) })),
   s_r_math_noslash("([mM]u)", fmta("\\<> ", { f(utils.get_capture) })),
   s_r_math_noslash("([nN]u)", fmta("\\<> ", { f(utils.get_capture) })),
-  -- question mark is only because I use ii to escape insert mode causing which-key to interupt luasnip.
-  s_r_math_noslash("([pP]i) ?", fmta("\\<> ", { f(utils.get_capture) })),
+  s_r_math_noslash("([pP]i)", fmta("\\<> ", { f(utils.get_capture) })),
   s_r_math_noslash("([rR]ho)", fmta("\\<> ", { f(utils.get_capture) })),
   s_r_math_noslash("([sS]igma)", fmta("\\<> ", { f(utils.get_capture) })),
   s_r_math_noslash("([tT]au)", fmta("\\<> ", { f(utils.get_capture) })),
-  s_r_math_noslash("([pP]hi) ?", fmta("\\<> ", { f(utils.get_capture) })),
-  s_r_math_noslash("([cC]hi) ?", fmta("\\<> ", { f(utils.get_capture) })),
-  s_r_math_noslash("([pP]si) ?", fmta("\\<> ", { f(utils.get_capture) })),
+  s_r_math_noslash("([pP]hi)", fmta("\\<> ", { f(utils.get_capture) })),
+  s_r_math_noslash("([cC]hi)", fmta("\\<> ", { f(utils.get_capture) })),
+  s_r_math_noslash("([pP]si)", fmta("\\<> ", { f(utils.get_capture) })),
   s_r_math_noslash("([oO]mega)", fmta("\\<> ", { f(utils.get_capture) })),
 }
