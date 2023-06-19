@@ -13,8 +13,9 @@ local rep = require("luasnip.extras").rep
 local utils = require("luasnip.utils") -- ~\AppData\Local\Programs\Neovim\bin\lua\luasnip\utils.lua
 
 -- using the ultisnips settings flags
-local s_bw = ls.extend_decorator.apply(s, {}, { condition = conds.line_begin })
 local s_w_no_math = ls.extend_decorator.apply(s, {}, { condition = utils.not_math })
+local s_bw_no_math = ls.extend_decorator.apply(s, {}, { condition = conds.line_begin })
+local s_bwr_no_math = ls.extend_decorator.apply(s, {regTrig=true}, { condition = conds.line_begin })
 local s_math = ls.extend_decorator.apply(s, { wordTrig = false }, { condition = utils.is_math })
 local s_r_math = ls.extend_decorator.apply(s, { wordTrig = false, regTrig = true }, { condition = utils.is_math })
 local s_math_noslash = ls.extend_decorator.apply(s, { wordTrig = false },
@@ -31,11 +32,61 @@ return {
   -- regular
 }, {
   -- autosnippets
+  s_bw_no_math(".div", fmta(
+    [[
+      ::: {<>}
+      <>
+      :::
+
+    ]],
+    {
+      i(1),
+      d(2, utils.get_visual)
+    }
+  )),
+  s_bw_no_math(".call", fmta(
+    [[
+      ::: {.callout-<>}
+      <>
+      :::
+
+    ]],
+    {
+      i(1, "note"),
+      d(2, utils.get_visual)
+    }
+  )),
+  s_bwr_no_math("#(%w*)-", fmta(
+    [[
+      ::: {#<>-<>}
+      <>
+      :::
+
+    ]],
+    {
+      f(utils.get_capture),
+      i(1),
+      d(2, utils.get_visual)
+    }
+  )),
+  s_bwr_no_math("%.(%S*) ", fmta(
+    [[
+      ::: {.<>}
+      <>
+      :::
+
+    ]],
+    {
+      f(utils.get_capture),
+      d(1, utils.get_visual)
+    }
+  )),
   s_w_no_math("dm", fmta(
     [[
       $$
         <>
       $$
+
     ]],
     d(1, utils.get_visual)
   )),
