@@ -13,7 +13,6 @@ local rep = require("luasnip.extras").rep
 local utils = require("luasnip.utils") -- ~\AppData\Local\Programs\Neovim\bin\lua\luasnip\utils.lua
 
 -- using the ultisnips settings flags
--- put regTrig next to trig in snippet definition but lua doesn't have a complete regex library
 local s_bw = ls.extend_decorator.apply(s, {}, { condition = conds.line_begin })
 local s_w_no_math = ls.extend_decorator.apply(s, {}, { condition = utils.not_math })
 local s_math = ls.extend_decorator.apply(s, { wordTrig = false }, { condition = utils.is_math })
@@ -40,12 +39,12 @@ return {
     ]],
     d(1, utils.get_visual)
   )),
-  s_math("part", fmta("\\frac{\\partial <>}{\\partial <>}", { i(1, "f"), i(2, "x") })),
   s_w_no_math("mk", fmta("$<>$", d(1, utils.get_visual))),
+  s_math("part", fmta("\\frac{\\partial <>}{\\partial <>}", { i(1, "f"), i(2, "x") })),
   s_math("std", fmta("_{<>}^{<>}", { i(1), i(2) })),
   s_math("td", fmta("^{<>}", { i(1) })),
   s_math("sd", fmta("_{<>}", { i(1) })),
-  s_math_noslash("rt", fmta("\\sqrt[<>]{<>}", { i(1, "2"), i(2) })),
+  s_w_math_noslash("rt", fmta("\\sqrt[<>]{<>}", { i(1, "2"), i(2) })),
   s_math("gr", fmta("{<>}", { i(1) })),
   s_math("cb", t("^3")),
   s_math("sr", t("^2")),
@@ -85,10 +84,10 @@ return {
   s_r_math("(%a)bar", fmta("\\overline{<>}", { f(utils.get_capture) })),
   s_r_math("(%a)hat", fmta("\\hat{<>}", { f(utils.get_capture) })),
   s_r_math("\\quad   ", t("\\qquad ")),
-  s_r_math("^(.*[^%s].*)   ", fmta("<> \\quad ", { f(utils.get_capture) })),
   s_r_math(".*%)/", fmta("<>{<>}", { f(utils.match_group), i(1) })),
   s_r_math(".*%}/", fmta("<>{<>}", { f(utils.match_group, {}, { user_args = { { "{", "}" } } }), i(1) })),
   s_r_math(".*%]/", fmta("<>{<>}", { f(utils.match_group, {}, { user_args = { { "[", "]" } } }), i(1) })),
+  s_r_math("^(.*[^%s].*)   ", fmta("<> \\quad ", { f(utils.get_capture) })),
   s_r_math("(\\?[%w]+\\?^%w)/", fmta("\\frac{<>}{<>}", { f(utils.get_capture), i(1) })),
   s_r_math("(\\?[%w]+\\?_%w)/", fmta("\\frac{<>}{<>}", { f(utils.get_capture), i(1) })),
   s_r_math("(\\?[%w]+\\?^{%w*})/", fmta("\\frac{<>}{<>}", { f(utils.get_capture), i(1) })),
@@ -154,7 +153,8 @@ return {
   s_r_math_noslash("([lL]ambda)", fmta("\\<> ", { f(utils.get_capture) })),
   s_r_math_noslash("([mM]u)", fmta("\\<> ", { f(utils.get_capture) })),
   s_r_math_noslash("([nN]u)", fmta("\\<> ", { f(utils.get_capture) })),
-  s_r_math_noslash("([pP]i) ?", fmta("\\<> ", { f(utils.get_capture) })), -- question mark due to whichkey opening on i
+  -- question mark is only because I use ii to escape insert mode causing which-key to interupt luasnip.
+  s_r_math_noslash("([pP]i) ?", fmta("\\<> ", { f(utils.get_capture) })),
   s_r_math_noslash("([rR]ho)", fmta("\\<> ", { f(utils.get_capture) })),
   s_r_math_noslash("([sS]igma)", fmta("\\<> ", { f(utils.get_capture) })),
   s_r_math_noslash("([tT]au)", fmta("\\<> ", { f(utils.get_capture) })),
