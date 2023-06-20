@@ -11,7 +11,7 @@ return {
         <>
       \end{<>}
     ]],
-    { i(1), dl(1, l.LS_SELECT_RAW), rep(1) }
+    { i(1), dl(2, l.LS_SELECT_RAW), rep(1) }
   )),
   md.bw("ali}", fmta(
     [[
@@ -91,7 +91,7 @@ return {
   md.math(">=", t("\\ge ")),
   md.math("inv", t("^{-1}")),
   md.math("__", fmta("_{<>}", i(1))),
-  md.math("}utt", fmta("\\underbrace{\\text{<>}}{<>}", { i(1), dl(2, l.LS_SELECT_RAW) })),
+  md.math("}utt", fmta("\\underbrace{<>}_{\\text{<>}}", { dl(1, l.LS_SELECT_RAW), i(2) })),
   md.math("utt", fmta("\\underset{\\text{<>}}{<>}", { i(1), dl(2, l.LS_SELECT_RAW) })),
   md.math("tt", fmta("\\text{<>}", { dl(1, l.LS_SELECT_RAW) })),
   md.math("mat ", fmta("\\begin{matrix} <> \\end{matrix}", { i(1) })),
@@ -151,8 +151,8 @@ return {
   md.math_noslash("arctan", t("\\arctan ")),
   md.math_noslash("arcsec", t("\\arcsec ")),
   md.math_noslash("lim", fmta("\\lim_{<> \\to <>}", { i(1, "n"), i(2, "\\infty") })),
-  md.math_noslash("sum", fmta("\\sum_{<>}^{<>}<>", { i(1, "n=0"), i(2, "\\infty"), i(0) })),
-  md.math_noslash("prod", fmta("\\prod_{<>}^{<>}<>", { i(1, "n=0"), i(2, "\\infty"), i(0) })),
+  md.math_noslash("sum", fmta("\\sum_{<>}^{<>}", { i(1, "n=0"), i(2, "\\infty") })),
+  md.math_noslash("prod", fmta("\\prod_{<>}^{<>}", { i(1, "n=0"), i(2, "\\infty") })),
   md.math_noslash("part", fmta("\\frac{\\partial <>}{\\partial <>}", { i(1, "f"), i(2, "x") })),
   md.w_math_noslash("rt", fmta("\\sqrt[<>]{<>}", { i(1, "2"), i(2) })),
   md.r_math_noslash("([aA]lpha)", fmta("\\<> ", { l(l.CAPTURE1) })),
