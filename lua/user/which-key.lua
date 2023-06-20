@@ -7,6 +7,11 @@ local M = {
 function M.config()
   local wk = require "which-key"
   wk.setup {}
+  -- normal mode
+  wk.register({
+    ['<M-j>'] = { "V:m'>+<cr>`<my`>mzgv`yo`z", 'move line down' },
+    ['<M-k>'] = { "V:m'<-2<cr>`>my`<mzgv`yo`z", 'move line up' },
+  }, { mode = 'n' })
   -- visual mode
   wk.register({
     ['<M-j>'] = { ":m'>+<cr>`<my`>mzgv`yo`z", 'move line down' },
