@@ -45,17 +45,63 @@ local M = {
 function M.config()
   local cmp = require "cmp"
   local luasnip = require "luasnip"
+
+  -- project extend snippets
+  local project_extends = {
+    -- ['pattern'] = 'snippets name',
+    ['CFA.*Notes'] = 'cfa',
+  
+  }
+  local default_filetype_load_function = require("luasnip.extras.filetype_functions").from_filetype_load
+  local function extended_filetype_load_function(bufnr)
+    -- this still repeats unnecessarily but not too bad
+    local filename = vim.api.nvim_buf_get_name(bufnr)
+    local extends = {}
+    for pattern, extension in pairs(project_extends) do
+      if filename:match(pattern) then
+        -- print("Luasnip Project:", extension)
+        table.insert(extends, extension)
+      end
+    end
+    return extends or {}
+  end
+  local function list_deep_extend(initial_list, ...)
+    local args = {...}
+    local result = vim.deepcopy(initial_list);
+
+    for _, values in ipairs(args) do
+      vim.list_extend(result, values);
+    end
+
+    return result;
+  end
+  local function resolve_filetypes(bufnr)
+    return list_deep_extend(
+      {},
+      -- file_extends has higher priority than default.
+      extended_filetype_load_function(bufnr),
+      default_filetype_load_function(bufnr)
+    );
+  end
+  
   luasnip.config.set_config({
+    history = true,
     enable_autosnippets = true,
     update_events = 'TextChanged,TextChangedI',
     store_selection_keys = "<Tab>",
+    ft_func = function()
+      return resolve_filetypes(vim.api.nvim_get_current_buf())
+    end,
+    load_ft_func = resolve_filetypes
   })
-  luasnip.filetype_extend("quarto", {"md-math"})
-  luasnip.filetype_extend("markdown", {"md-math"})
-  luasnip.filetype_extend("rmarkdown", {"md-math"})
-  
+
+  -- filetype extend snippets
+  luasnip.filetype_extend("quarto", { "md-math" })
+  luasnip.filetype_extend("markdown", { "md-math" })
+  luasnip.filetype_extend("rmarkdown", { "md-math" })
+
   -- friendly-snippets
-  require("luasnip/loaders/from_vscode").lazy_load({exclude = {"quarto"}})
+  require("luasnip/loaders/from_vscode").lazy_load({ exclude = { "quarto" } })
   -- custom snippets
   require("luasnip.loaders.from_lua").load({ paths = { vim.fn.stdpath("config") .. "/snips/luasnippets" } })
 
@@ -109,10 +155,8 @@ function M.config()
         c = cmp.mapping.close(),
       },
       ["<C-n>"] = cmp.mapping(function(fallback)
-        if luasnip.expandable() then
-          luasnip.expand()
-        elseif luasnip.expand_or_jumpable() then
-          luasnip.expand_or_jump()
+        if luasnip.jumpable() then
+          luasnip.jump()
         elseif check_backspace() then
           fallback()
         else
@@ -134,14 +178,14 @@ function M.config()
       }),
       -- Accept currently selected item. If none selected, `select` first item.
       -- Set `select` to `false` to only confirm explicitly selected items.
-      ["<CR>"] = cmp.mapping.confirm { select = false }, 
+      ["<CR>"] = cmp.mapping.confirm { select = false },
       ["<Tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
-        -- elseif luasnip.expandable() then
-        --   luasnip.expand()
-        -- elseif luasnip.expand_or_jumpable() then
-        --   luasnip.expand_or_jump()
+          elseif luasnip.expandable() then
+            luasnip.expand()
+          -- elseif luasnip.expand_or_jumpable() then
+          --   luasnip.expand_or_jump()
         elseif check_backspace() then
           fallback()
         else
@@ -154,8 +198,8 @@ function M.config()
       ["<S-Tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_prev_item()
-        -- elseif luasnip.jumpable(-1) then
-        --   luasnip.jump(-1)
+          -- elseif luasnip.jumpable(-1) then
+          --   luasnip.jump(-1)
         else
           fallback()
         end
