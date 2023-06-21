@@ -54,7 +54,7 @@ M.opts = {
       citation_max_auth = 2,
       -- Max number of authors to write in the formatted citation
       -- following authors will be replaced by "et al."
-      context = true,
+      -- context = true,
       -- Context awareness disabled by default
       context_fallback = true,
       -- Fallback to global/directory .bib files if context not found
