@@ -57,6 +57,7 @@ function M.config()
     -- this still repeats unnecessarily but not too bad
     local filename = vim.api.nvim_buf_get_name(bufnr)
     local extends = {}
+    -- print("check patterns")
     for pattern, extension in pairs(project_extends) do
       if filename:match(pattern) then
         -- print("Luasnip Project:", extension)
@@ -66,6 +67,7 @@ function M.config()
     return extends or {}
   end
   local function list_deep_extend(initial_list, ...)
+    -- print("deep extend")
     local args = {...}
     local result = vim.deepcopy(initial_list);
 
@@ -76,6 +78,7 @@ function M.config()
     return result;
   end
   local function resolve_filetypes(bufnr)
+    -- print("resolve_filetypes")
     return list_deep_extend(
       {},
       -- file_extends has higher priority than default.
@@ -90,6 +93,7 @@ function M.config()
     update_events = 'TextChanged,TextChangedI',
     store_selection_keys = "<Tab>",
     ft_func = function()
+      -- print("ft_func")
       return resolve_filetypes(vim.api.nvim_get_current_buf())
     end,
     load_ft_func = resolve_filetypes
@@ -155,8 +159,10 @@ function M.config()
         c = cmp.mapping.close(),
       },
       ["<C-n>"] = cmp.mapping(function(fallback)
-        if luasnip.jumpable() then
-          luasnip.jump()
+        if luasnip.expandable() then
+          luasnip.expand()
+        elseif luasnip.expand_or_jumpable() then
+          luasnip.expand_or_jump()
         elseif check_backspace() then
           fallback()
         else
@@ -166,7 +172,7 @@ function M.config()
         "i",
         "s",
       }),
-      ["<C-m>"] = cmp.mapping(function(fallback)
+      ["<M-n>"] = cmp.mapping(function(fallback)
         if luasnip.jumpable(-1) then
           luasnip.jump(-1)
         else
@@ -178,7 +184,7 @@ function M.config()
       }),
       -- Accept currently selected item. If none selected, `select` first item.
       -- Set `select` to `false` to only confirm explicitly selected items.
-      ["<CR>"] = cmp.mapping.confirm { select = false },
+      ["<CR>"] = cmp.mapping(cmp.mapping.confirm({ select = false })),
       ["<Tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
