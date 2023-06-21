@@ -87,7 +87,8 @@ keymap("n", "<leader>fr", ":Telescope oldfiles<CR>", opts)
 keymap("n", "<leader>ft", ":Telescope live_grep<CR>", opts)
 keymap("n", "<leader>fp", ":Telescope projects<CR>", opts)
 keymap("n", "<leader>fb", ":Telescope resume<CR>", opts)
-keymap("n", "<leader>fc", ":Telescope bibtex<CR>", opts)
+keymap("n", "<leader>fs", ":!open https://detexify.kirelabs.org/classify.html<CR>", opts)
+keymap("i", "<C-f>", "<esc>:Telescope symbols<CR>", opts)
 keymap("i", "@@", "<esc>:Telescope bibtex<CR>", opts)
 
 -- Hop
