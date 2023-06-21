@@ -92,8 +92,8 @@ keymap("i", "<C-f>", "<esc>:Telescope symbols<CR>", opts)
 keymap("i", "@@", "<esc>:Telescope bibtex<CR>", opts)
 
 -- Hop
-keymap("n", "<leader>fw", ":HopWord<CR>", opts)
-keymap("n", "<leader>fl", ":HopAnywhereCurrentLine<CR>", opts)
+-- keymap("n", "<leader>fw", ":HopWord<CR>", opts)
+-- keymap("n", "<leader>fl", ":HopAnywhereCurrentLine<CR>", opts)
 
 -- Git
 keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", opts)
