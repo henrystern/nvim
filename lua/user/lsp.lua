@@ -12,8 +12,9 @@ local M = {
   },
 }
 
-local cmp_nvim_lsp = require "cmp_nvim_lsp"
 function M.config()
+  local cmp_nvim_lsp = require "cmp_nvim_lsp"
+
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
   capabilities = cmp_nvim_lsp.default_capabilities(M.capabilities)
@@ -42,14 +43,6 @@ function M.config()
   local lspconfig = require "lspconfig"
   local util = require("lspconfig.util")
   local on_attach = function(client, bufnr)
-    if client.name == "tsserver" then
-      client.server_capabilities.documentFormattingProvider = false
-    end
-
-    if client.name == "sumneko_lua" then
-      client.server_capabilities.documentFormattingProvider = false
-    end
-
     lsp_keymaps(bufnr)
     require("illuminate").on_attach(client)
   end
