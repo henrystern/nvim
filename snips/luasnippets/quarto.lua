@@ -2,6 +2,15 @@ local md = require("luasnip-md-utils.nodes")
 
 return {
   -- regular
+  md.bw_no_math("yamlblog", fmta(
+    [[
+      ---
+      title: "<>"
+      date: <>
+      categories: [<>]
+      ---
+    ]], {i(1), i(2, "last-modified"), i(3)}
+  )),
 }, {
   md.bw_no_math(".div", fmta(
     [[
