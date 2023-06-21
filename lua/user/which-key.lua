@@ -11,7 +11,7 @@ function M.config()
   wk.register({
     ['<M-j>'] = { "V:m'>+<cr>`<my`>mzgv`yo`z", 'move line down' },
     ['<M-k>'] = { "V:m'<-2<cr>`>my`<mzgv`yo`z", 'move line up' },
-  }, { mode = 'v' })
+  }, { mode = 'n' })
   -- visual mode
   wk.register({
     ['<M-j>'] = { ":m'>+<cr>`<my`>mzgv`yo`z", 'move line down' },
