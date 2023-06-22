@@ -55,6 +55,7 @@ function M.config()
   local default_filetype_load_function = require("luasnip.extras.filetype_functions").from_filetype_load
   local function extended_filetype_load_function(bufnr)
     -- this still repeats unnecessarily but not too bad
+    --   I think the repetition is inherent to luasnip and not part of the extension
     local filename = vim.api.nvim_buf_get_name(bufnr)
     local extends = {}
     -- print("check patterns")
@@ -92,6 +93,7 @@ function M.config()
     enable_autosnippets = true,
     update_events = 'TextChanged,TextChangedI',
     store_selection_keys = "<Tab>",
+    -- ft_func is run on insert used to detect codeblocks
     ft_func = function()
       -- print("ft_func")
       return resolve_filetypes(vim.api.nvim_get_current_buf())
