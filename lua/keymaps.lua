@@ -23,7 +23,7 @@ keymap("n", "<leader>rs", ":lua require('luasnip.loaders').edit_snippet_files()<
 -- Save and Exit
 keymap("n", "<leader>w", ":w<CR>", opts)
 keymap("n", "<leader>q", ":q<CR>", opts)
-keymap("n", "<leader>c", ":bp<bar>sp<bar>bn<bar>bd<CR>", opts)
+keymap("n", "<leader>c", ":lua require('bufdelete').bufdelete(0)<CR>", opts)
 
 -- Better window navigation
 keymap("n", "<leader>n", "<C-w><C-w>", opts)

@@ -128,7 +128,7 @@ return {
   md.r_math("(\\?[%w]+\\?_{%w*})/", fmta("\\frac{<>}{<>} ", { l(l.CAPTURE1), i(1) })),
   md.r_math("(\\?%w+)/", fmta("\\frac{<>}{<>} ", { l(l.CAPTURE1), i(1) })),
   md.r_math("^(.*[^%s].*)   ", fmta("<> \\quad ", { l(l.CAPTURE1) })),
-  md.math_noslash("sq", fmta("\\sqrt{<>}", { i(1) })),
+  md.math_noslash("sq", fmta("\\sqrt[]{<>}", { i(1) })),
   md.math_noslash("iff", t("\\iff ")),
   md.math_noslash("hat", fmta("\\hat{<>}", { dl(1, l.LS_SELECT_RAW) })),
   md.math_noslash("bar", fmta("\\overline{<>}", { dl(1, l.LS_SELECT_RAW) })),
@@ -154,7 +154,7 @@ return {
   md.math_noslash("sum", fmta("\\sum_{<>}^{<>}", { i(1, "n=0"), i(2, "\\infty") })),
   md.math_noslash("prod", fmta("\\prod_{<>}^{<>}", { i(1, "n=0"), i(2, "\\infty") })),
   md.math_noslash("part", fmta("\\frac{\\partial <>}{\\partial <>}", { i(1, "f"), i(2, "x") })),
-  md.w_math_noslash("rt", fmta("\\sqrt[<>]{<>}", { i(1, "2"), i(2) })),
+  -- md.w_math_noslash("rt", fmta("\\sqrt[<>]{<>}", { i(1, "2"), i(2) })), -- rt is common in econ
   md.r_math_noslash("([aA]lpha)", fmta("\\<> ", { l(l.CAPTURE1) })),
   md.r_math_noslash("([bB]eta)", fmta("\\<> ", { l(l.CAPTURE1) })),
   md.r_math_noslash("([gG]amma)", fmta("\\<> ", { l(l.CAPTURE1) })),

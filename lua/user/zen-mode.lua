@@ -11,8 +11,14 @@ function M.config()
       backdrop = .4,
       width = 90,
     },
-    on_open = function() vim.o.background = "light" end,
-    on_close = function() vim.o.background = "dark" end,
+    on_open = function() 
+      vim.o.background = "light"
+      vim.g.mkdp_theme = "light"
+    end,
+    on_close = function() 
+      vim.o.background = "dark"
+      vim.g.mkdp_theme = "dark"
+    end,
   }
   vim.api.nvim_set_keymap("n", "<leader>sz", "<cmd>ZenMode<cr>", {silent = true})
 end
