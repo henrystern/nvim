@@ -2,6 +2,15 @@ local md = require("luasnip-md-utils.nodes")
 
 return {
   -- regular
+  md.bw_no_math("include-figure", fmta("![<>][./figures/<>]", { i(2), i(1) })),
+  md.bw_no_math("include-file", fmt("{{< include ./{} >}}", i(1))),
+  md.bw_no_math("include-header", fmta(
+    [[
+      include-in-header:
+        text: |
+          <>
+    ]], i(1, "\\usepackage{}")
+  )),
   md.bw_no_math("yamlblog", fmta(
     [[
       ---
@@ -12,6 +21,7 @@ return {
     ]], {i(1), i(2, "last-modified"), i(3)}
   )),
 }, {
+  -- autosnippets
   md.bw_no_math(".div", fmta(
     [[
       ::: {<>}
@@ -61,4 +71,52 @@ return {
       dl(1, l.LS_SELECT_RAW)
     }
   )),
+  md.bw_no_math("cbl", fmta(
+      [[
+        ```<>
+          <>
+        ```
+      ]], { i(1), i(2) }
+  )),
+  md.bw_no_math("xbl", fmta(
+      [[
+        ```{<>}
+          <>
+        ```
+      ]], { i(1), i(2) }
+  )),
+  md.bw_no_math("rbl", fmta(
+      [[
+        ```{r}
+          <>
+        ```
+      ]], { i(1) }
+  )),
+  md.w_no_math("rbl", fmta("`r <>`", { i(1) })),
+  md.bw_no_math("pbl", fmta(
+      [[
+        ```{python}
+          <>
+        ```
+      ]], { i(1) }
+  )),
+  md.w_no_math("pbl", fmta(
+      [[
+        ```{python} 
+        #| echo: false
+        from IPython.display import display, Markdown
+        display(Markdown("""
+        {<>}.
+        """.format(<> = <>)))
+        ```
+      ]], { i(1), rep(1), rep(1) }
+  )),
+  md.bw_no_math("jbl", fmta(
+      [[
+        ```{ojs}
+          <>
+        ```
+      ]], { i(1) }
+  )),
+  md.w_no_math("jbl", fmta("${<>}", { i(1) })),
 }

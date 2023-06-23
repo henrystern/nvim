@@ -5,7 +5,7 @@ return {
   -- regular
 }, {
   -- autosnippets
-  md.bw("beg}", fmta(
+  md.bw("beg", fmta(
     [[
       \begin{<>}
         <>
@@ -13,11 +13,27 @@ return {
     ]],
     { i(1), dl(2, l.LS_SELECT_RAW), rep(1) }
   )),
-  md.bw("ali}", fmta(
+  md.bw_math("ali", fmta(
     [[
       \begin{align}
         <>
       \end{align}
+    ]],
+    dl(1, l.LS_SELECT_RAW)
+  )),
+  md.w_math("case", fmta(
+    [[
+      \begin{cases}
+        <>
+      \end{cases}
+    ]],
+    dl(1, l.LS_SELECT_RAW)
+  )),
+  md.w_math("split", fmta(
+    [[
+      \begin{split}
+        <>
+      \end{split}
     ]],
     dl(1, l.LS_SELECT_RAW)
   )),
@@ -70,7 +86,9 @@ return {
   md.math("QQ", t("\\mathbb{Q}")),
   md.math("ZZ", t("\\mathbb{Z}")),
   md.math("NN", t("\\mathbb{N}")),
+  md.math("ddt", t("\\mathbb{N}")),
   md.math("nee", t("\\not\\in ")),
+  md.math("!ee", t("\\not\\in ")),
   md.math("ee", t("\\in ")),
   md.math("UU", t("\\cup ")),
   md.math("cc", t("\\subset ")),
@@ -103,10 +121,10 @@ return {
   md.math("lr]", fmta("\\left[ <> \\right]", dl(1, l.LS_SELECT_RAW))),
   md.math("lr}", fmta("\\left\\{ <> \\right\\}", dl(1, l.LS_SELECT_RAW))),
   md.math("lr|", fmta("\\left| <> \\right|", dl(1, l.LS_SELECT_RAW))),
+  md.math("\\quad   ", t("\\qquad ")),
   md.w_math("nd", t("&")),
   md.r_math("(%a)bar", fmta("\\overline{<>}", { l(l.CAPTURE1) })),
   md.r_math("(%a)hat", fmta("\\hat{<>}", { l(l.CAPTURE1) })),
-  md.r_math("\\quad   ", t("\\qquad ")),
   md.r_math(".*%)/", fmta("<>{<>}", {
     f(function(_, snip)
       local before, group = unpack(math_utils.match_group(_, snip))
