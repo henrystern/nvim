@@ -128,6 +128,7 @@ return {
   md.r_math("(.*%))vec", fmta("<>", { f(math_utils.format_group, {}, { user_args = { { "(", ")"}, "%s\\vec{%s}" }}) })),
   md.r_math("(.*%})vec", fmta("<>", { f(math_utils.format_group, {}, { user_args = { { "{", "}"}, "%s\\vec{%s}" }}) })),
   md.r_math("(.*%])vec", fmta("<>", { f(math_utils.format_group, {}, { user_args = { { "[", "]"}, "%s\\vec{%s}" }}) })),
+  md.r_math("(%a)(%d)", fmta("<>_{<>}", { l(l.CAPTURE1), l(l.CAPTURE2) })),
   md.r_math("(%a)bar", fmta("\\overline{<>}", { l(l.CAPTURE1) })),
   md.r_math("(%a)hat", fmta("\\hat{<>}", { l(l.CAPTURE1) })),
   md.r_math("(.*%))bar", fmta("<>", { f(math_utils.format_group, {}, { user_args = { { "(", ")"}, "%s\\overline{%s}" }}) })),
