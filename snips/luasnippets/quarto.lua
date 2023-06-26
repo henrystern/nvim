@@ -22,6 +22,12 @@ return {
   )),
 }, {
   -- autosnippets
+  md.bw_no_math("where:", fmta(
+    [[
+      | where:
+      |          <>
+    ]], dl(1, l.LS_SELECT_RAW)
+  )),
   md.bw_no_math(".div", fmta(
     [[
       ::: {<>}

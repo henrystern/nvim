@@ -72,7 +72,7 @@ return {
   md.math(";S", t("\\Sigma ")),
   md.math("std", fmta("_{<>}^{<>}", { i(1), i(2) })),
   md.math("td", fmta("^{<>}", { i(1) })),
-  md.math("sd", fmta("_{<>}", { i(1) })),
+  md.math("ss", fmta("_{<>}", { i(1) })),
   md.math("gr", fmta("{<>}", { i(1) })),
   md.math("cb", t("^3")),
   md.math("sr", t("^2")),
@@ -86,7 +86,6 @@ return {
   md.math("QQ", t("\\mathbb{Q}")),
   md.math("ZZ", t("\\mathbb{Z}")),
   md.math("NN", t("\\mathbb{N}")),
-  md.math("ddt", t("\\mathbb{N}")),
   md.math("nee", t("\\not\\in ")),
   md.math("!ee", t("\\not\\in ")),
   md.math("ee", t("\\in ")),
@@ -116,6 +115,7 @@ return {
   md.math("mat)", fmta("\\begin{pmatrix} <> \\end{pmatrix}", { i(1) })),
   md.math("mat]", fmta("\\begin{bmatrix} <> \\end{bmatrix}", { i(1) })),
   md.math("mat}", fmta("\\begin{Bmatrix} <> \\end{Bmatrix}", { i(1) })),
+  md.math("mat|", fmta("\\begin{vmatrix} <> \\end{vmatrix}", { i(1) })),
   md.math("lr ", fmta("\\left( <> \\right)", { dl(1, l.LS_SELECT_RAW) })),
   md.math("lr)", fmta("\\left( <> \\right)", { dl(1, l.LS_SELECT_RAW) })),
   md.math("lr]", fmta("\\left[ <> \\right]", dl(1, l.LS_SELECT_RAW))),
@@ -123,23 +123,23 @@ return {
   md.math("lr|", fmta("\\left| <> \\right|", dl(1, l.LS_SELECT_RAW))),
   md.math("\\quad   ", t("\\qquad ")),
   md.w_math("nd", t("&")),
+  md.r_math("d(%a)d(%a)", fmta("\\frac{d<>}{d<>}", { l(l.CAPTURE1), l(l.CAPTURE2) })),
+  md.r_math("(%a)vec", fmta("\\vec{<>}", { l(l.CAPTURE1) })),
+  md.r_math("(.*%))vec", fmta("<>", { f(math_utils.format_group, {}, { user_args = { { "(", ")"}, "%s\\vec{%s}" }}) })),
+  md.r_math("(.*%})vec", fmta("<>", { f(math_utils.format_group, {}, { user_args = { { "{", "}"}, "%s\\vec{%s}" }}) })),
+  md.r_math("(.*%])vec", fmta("<>", { f(math_utils.format_group, {}, { user_args = { { "[", "]"}, "%s\\vec{%s}" }}) })),
+  md.r_math("(%a)(%d)", fmta("<>_{<>}", { l(l.CAPTURE1), l(l.CAPTURE2) })),
   md.r_math("(%a)bar", fmta("\\overline{<>}", { l(l.CAPTURE1) })),
   md.r_math("(%a)hat", fmta("\\hat{<>}", { l(l.CAPTURE1) })),
-  md.r_math(".*%)/", fmta("<>{<>}", {
-    f(function(_, snip)
-      local before, group = unpack(math_utils.match_group(_, snip))
-      return string.format("%s\\frac{%s}", before, group)
-    end, {}), i(1) })),
-  md.r_math(".*%}/", fmta("<>{<>}", {
-    f(function(_, snip)
-      local before, group = unpack(math_utils.match_group(_, snip, { "{", "}" }))
-      return string.format("%s\\frac{%s}", before, group)
-    end, {}), i(1) })),
-  md.r_math(".*%]/", fmta("<>{<>}", {
-    f(function(_, snip)
-      local before, group = unpack(math_utils.match_group(_, snip, { "[", "]" }))
-      return string.format("%s\\frac{%s}", before, group)
-    end, {}), i(1) })),
+  md.r_math("(.*%))bar", fmta("<>", { f(math_utils.format_group, {}, { user_args = { { "(", ")"}, "%s\\overline{%s}" }}) })),
+  md.r_math("(.*%})bar", fmta("<>", { f(math_utils.format_group, {}, { user_args = { { "{", "}"}, "%s\\overline{%s}" }}) })),
+  md.r_math("(.*%])bar", fmta("<>", { f(math_utils.format_group, {}, { user_args = { { "[", "]"}, "%s\\overline{%s}" }}) })),
+  md.r_math("(.*%))hat", fmta("<>", { f(math_utils.format_group, {}, { user_args = { { "(", ")"}, "%s\\hat{%s}" }}) })),
+  md.r_math("(.*%})hat", fmta("<>", { f(math_utils.format_group, {}, { user_args = { { "{", "}"}, "%s\\hat{%s}" }}) })),
+  md.r_math("(.*%])hat", fmta("<>", { f(math_utils.format_group, {}, { user_args = { { "[", "]"}, "%s\\hat{%s}" }}) })),
+  md.r_math("(.*%))/", fmta("<>{<>}", { f(math_utils.format_group, {}, { user_args = { { "(", ")"}, "%s\\frac{%s}" }}), i(1) })),
+  md.r_math("(.*%})/", fmta("<>{<>}", { f(math_utils.format_group, {}, { user_args = { { "{", "}"}, "%s\\frac{%s}" }}), i(1) })),
+  md.r_math("(.*%])/", fmta("<>{<>}", { f(math_utils.format_group, {}, { user_args = { { "[", "]"}, "%s\\frac{%s}" }}), i(1) })),
   md.r_math("(\\?[%w]+\\?^%w)/", fmta("\\frac{<>}{<>} ", { l(l.CAPTURE1), i(1) })),
   md.r_math("(\\?[%w]+\\?_%w)/", fmta("\\frac{<>}{<>} ", { l(l.CAPTURE1), i(1) })),
   md.r_math("(\\?[%w]+\\?^{%w*})/", fmta("\\frac{<>}{<>} ", { l(l.CAPTURE1), i(1) })),
@@ -168,6 +168,7 @@ return {
   md.math_noslash("arcsin", t("\\arcsin ")),
   md.math_noslash("arctan", t("\\arctan ")),
   md.math_noslash("arcsec", t("\\arcsec ")),
+  md.math_noslash("nab", t("\\nabla ")),
   md.math_noslash("lim", fmta("\\lim_{<> \\to <>}", { i(1, "n"), i(2, "\\infty") })),
   md.math_noslash("sum", fmta("\\sum_{<>}^{<>}", { i(1, "n=0"), i(2, "\\infty") })),
   md.math_noslash("prod", fmta("\\prod_{<>}^{<>}", { i(1, "n=0"), i(2, "\\infty") })),

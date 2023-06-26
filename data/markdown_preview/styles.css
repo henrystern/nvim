@@ -1,4 +1,4 @@
-/* Exactly the same as the default but adds 50% padding so that the cursor always lines up. */
+/* Tokyo Night Theme */
 
 /*
  * github like style
@@ -6,36 +6,38 @@
  */
 
 :root {
-    --color-text-primary: #333;
-    --color-text-tertiary: #777;
-    --color-text-link: #4078c0;
-    --color-bg-primary: #fff;
-    --color-bg-secondary: #fafbfc;
-    --color-bg-tertiary: #f8f8f8;
-    --color-border-primary: #ddd;
-    --color-border-secondary: #eaecef;
-    --color-border-tertiary: #d1d5da;
-    --color-kbd-foreground: #444d56;
-    --color-markdown-blockquote-border: #dfe2e5;
-    --color-markdown-table-border: #dfe2e5;
-    --color-markdown-table-tr-border: #c6cbd1;
-    --color-markdown-code-bg: #1b1f230d;
+    --color-text-primary: #24292f;
+    --color-text-tertiary: #3760bf;
+    --color-text-link: #7890dd;
+    --color-bg-primary: #e1e2e7;
+    --color-bg-secondary: #e0dcca;
+    --color-bg-tertiary: #d6d1bd;
+    --color-bg-base: #1e1f29;
+    --color-border-primary: #e1e2e7;
+    --color-border-secondary: #e1e2e7;
+    --color-border-tertiary: #e1e2e7;
+    --color-kbd-foreground: #beb797;
+    --color-markdown-blockquote-border: #a9a076;
+    --color-markdown-table-border: #a9a076;
+    --color-markdown-table-tr-border: #a9a076;
+    --color-markdown-code-bg: #beb797;
 }
 [data-theme="dark"] {
-    --color-text-primary: #c9d1d9;
-    --color-text-tertiary: #8b949e;
-    --color-text-link: #58a6ff;
-    --color-bg-primary: #0d1117;
-    --color-bg-secondary: #0d1117;
-    --color-bg-tertiary: #161b22;
-    --color-border-primary: #30363d;
-    --color-border-secondary: #21262d;
-    --color-border-tertiary: #6e7681;
-    --color-kbd-foreground: #b1bac4;
-    --color-markdown-blockquote-border: #3b434b;
-    --color-markdown-table-border: #3b434b;
-    --color-markdown-table-tr-border: #272c32;
-    --color-markdown-code-bg: #f0f6fc26;
+    --color-text-primary: #c0caf5;
+    --color-text-tertiary: #a9b1d6;
+    --color-text-link: #7fa267;
+    --color-bg-primary: #24283b;
+    --color-bg-secondary: #1f2335;
+    --color-bg-tertiary: #292e42;
+    --color-bg-base: #1e1f29;
+    --color-border-primary: #24283b;
+    --color-border-secondary: #24283b;
+    --color-border-tertiary: #24283b;
+    --color-kbd-foreground: #414868;
+    --color-markdown-blockquote-border: #565f89;
+    --color-markdown-table-border: #565f89;
+    --color-markdown-table-tr-border: #565f89;
+    --color-markdown-code-bg: #414868;
 }
 
 .markdown-body ol ol,
@@ -50,7 +52,6 @@
   margin-bottom: 0;
 }
 .markdown-body {
-  font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 16px;
   color: var(--color-text-primary);
   line-height: 1.6;
@@ -316,27 +317,12 @@
 html,body,#__next,main {
   min-height: 100vh;
   margin: 0;
-}
-
-:root {
-  --foreground-color: #24292e;
-  --background-color: #f6f8fa;
-  --border-color: #d1d5da;
-}
-
-body {
-  --secondary-background-color: #f6f8fa;
-}
-
-[data-theme="dark"] {
-  --foreground-color: #c9d1d9;
-  --background-color: #0d1117;
-  --border-color: #30363d;
-  --secondary-background-color: #181a1b;
+  scrollbar-width: none;  /* Firefox */
+  font-family: Muli, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial;
 }
 
 main {
-  background-color: var(--secondary-background-color);
+  background-color: var(--color-bg-base);
 }
 
 #toggle-theme {
@@ -355,26 +341,27 @@ main {
 
 #page-ctn {
   margin: 0 auto;
-  max-width: 900px;
-  color: var(--foreground-color);
+  margin-left: .3rem;
+  max-width: 1000px;
+  color: var(--color-text-primary);
 }
 
 #page-header {
   display: flex;
   justify-content: space-between;
-  padding: 8px;
-  background-color: var(--background-color);
-  border-color: var(--border-color);
+  padding: 0px;
+  padding-left: 45px;
+  background-color: var(--color-bg-secondary);
+  border-color: var(--color-bg-secondary);
   border-style: solid;
   border-width: 1px 1px 0;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
   line-height: 24px;
-  font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 #page-header svg {
-  display: inline-block;
+  display: none;
   margin-right: 5px;
   overflow: hidden;
   fill: currentColor;
@@ -389,111 +376,3 @@ main {
   font-size: 14px;
   font-weight: 600;
 }
-
-/*
-
-github.com style (c) Vasily Polovnyov <vast@whiteants.net>
-
-*/
-:root {
-    --color-text-primary: #333;
-}
-[data-theme="dark"] {
-    --color-text-primary: #c9d1d9;
-}
-
-.hljs {
-  display: block;
-  overflow-x: auto;
-  padding: 0.5em;
-  color: var(--color-text-primary);
-  background: #f8f8f8;
-}
-
-.hljs-comment,
-.hljs-quote {
-  color: #998;
-  font-style: italic;
-}
-
-.hljs-keyword,
-.hljs-selector-tag,
-.hljs-subst {
-  color: var(--color-text-primary);
-  font-weight: bold;
-}
-
-.hljs-number,
-.hljs-literal,
-.hljs-variable,
-.hljs-template-variable,
-.hljs-tag .hljs-attr {
-  color: #008080;
-}
-
-.hljs-string,
-.hljs-doctag {
-  color: #d14;
-}
-
-.hljs-title,
-.hljs-section,
-.hljs-selector-id {
-  color: #900;
-  font-weight: bold;
-}
-
-.hljs-subst {
-  font-weight: normal;
-}
-
-.hljs-type,
-.hljs-class .hljs-title {
-  color: #458;
-  font-weight: bold;
-}
-
-.hljs-tag,
-.hljs-name,
-.hljs-attribute {
-  color: #000080;
-  font-weight: normal;
-}
-
-.hljs-regexp,
-.hljs-link {
-  color: #009926;
-}
-
-.hljs-symbol,
-.hljs-bullet {
-  color: #990073;
-}
-
-.hljs-built_in,
-.hljs-builtin-name {
-  color: #0086b3;
-}
-
-.hljs-meta {
-  color: #999;
-  font-weight: bold;
-}
-
-.hljs-deletion {
-  background: #fdd;
-}
-
-.hljs-addition {
-  background: #dfd;
-}
-
-.hljs-emphasis {
-  font-style: italic;
-}
-
-.hljs-strong {
-  font-weight: bold;
-}
-
-
