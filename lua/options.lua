@@ -44,4 +44,6 @@ vim.opt.formatoptions:remove { "c", "r", "o" }  -- This is a sequence of letters
 vim.opt.linebreak = true
 vim.opt.confirm = true
 vim.opt.spelllang = "en_ca"
+vim.opt.breakindent = true
+vim.opt.showbreak = ">  "
 vim.g.python3_host_prog = "~\\Envs\\nvim\\Scripts\\python.exe"
