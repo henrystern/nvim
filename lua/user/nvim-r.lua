@@ -9,10 +9,14 @@ local M = {
     vim.g.R_min_editor_width = 80
     vim.g.R_rconsole_width = 1000
     vim.g.R_rconsole_height = math.floor(vim.fn.winheight(0) / 3)
-    vim.g.R_objbr_place = 'RIGHT'
-    vim.g.R_objbr_w = math.floor(vim.fn.winwidth(0) / 3)
+    vim.g.R_after_start = {":winc j",
+                           ":vsplit",
+                           ":vertical resize " .. math.floor(vim.fn.winwidth(0) / 3),
+                           ":winc k"}
+    vim.g.R_objbr_place = 'script,right'
+    vim.g.R_objbr_w = math.floor(vim.fn.winwidth(0) / 4)
     vim.g.R_objbr_opendf = 0
-    vim.g.R_after_ob_open = {':split', ':resize ' .. math.floor(vim.fn.winheight(0) / 3), ":winc k"}
+    -- vim.g.R_after_ob_open = {':split', ':resize ' .. math.floor(vim.fn.winheight(0) / 3), ":winc k"}
     vim.g.R_assign = 0
     vim.g.R_rmdchunk = 0
     vim.g.R_csv_delim = ','
