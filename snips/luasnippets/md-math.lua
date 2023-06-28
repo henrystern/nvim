@@ -123,6 +123,7 @@ return {
   md.math("lr|", fmta("\\left| <> \\right|", dl(1, l.LS_SELECT_RAW))),
   md.math("\\quad   ", t("\\qquad ")),
   md.w_math("nd", t("&")),
+  md.r_math("dd(%a)", fmta("\\frac{d}{d<>}", { l(l.CAPTURE1) })),
   md.r_math("d(%a)d(%a)", fmta("\\frac{d<>}{d<>}", { l(l.CAPTURE1), l(l.CAPTURE2) })),
   md.r_math("(%a)vec", fmta("\\vec{<>}", { l(l.CAPTURE1) })),
   md.r_math("(.*%))vec", fmta("<>", { f(math_utils.format_group, {}, { user_args = { { "(", ")"}, "%s\\vec{%s}" }}) })),

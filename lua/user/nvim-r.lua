@@ -16,11 +16,13 @@ local M = {
     vim.g.R_objbr_place = 'script,right'
     vim.g.R_objbr_w = math.floor(vim.fn.winwidth(0) / 4)
     vim.g.R_objbr_opendf = 0
-    -- vim.g.R_after_ob_open = {':split', ':resize ' .. math.floor(vim.fn.winheight(0) / 3), ":winc k"}
     vim.g.R_assign = 0
     vim.g.R_rmdchunk = 0
     vim.g.R_csv_delim = ','
     vim.g.R_nvimpager = "tab" -- show docs in new tab
+    vim.api.nvim_set_keymap("n", "<C-J>", ":call SendLineToR('down')<CR>", {silent = true})
+    vim.api.nvim_set_keymap("i", "<C-J>", "<Esc>:call SendLineToR('stay')<CR>i", {silent = true})
+    vim.api.nvim_set_keymap("v", "<C-J>", ":call SendLineToR('stay')<CR><Esc>", {silent = true})
   end
 }
 
