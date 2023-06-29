@@ -51,7 +51,6 @@ return {
       $$
         <>
       $$ {#eq-<>}
-
     ]],
       { dl(1, l.LS_SELECT_RAW), i(2, "noref") }
   )),
@@ -60,7 +59,6 @@ return {
       $$
         <>
       $$
-
     ]],
     dl(1, l.LS_SELECT_RAW)
   )),
@@ -246,12 +244,12 @@ return {
   md.br_math("([lL]ambda)", fmta("\\<> ", { l(l.CAPTURE1) })),
   md.br_math("([mM]u)", fmta("\\<> ", { l(l.CAPTURE1) })),
   md.br_math("([nN]u)", fmta("\\<> ", { l(l.CAPTURE1) })),
-  md.br_math("([pP]i)", fmta("\\<> ", { l(l.CAPTURE1) })),
+  md.br_math("([pP]i) ", fmta("\\<> ", { l(l.CAPTURE1) })),
   md.br_math("([rR]ho)", fmta("\\<> ", { l(l.CAPTURE1) })),
   md.br_math("([sS]igma)", fmta("\\<> ", { l(l.CAPTURE1) })),
   md.br_math("([tT]au)", fmta("\\<> ", { l(l.CAPTURE1) })),
-  md.br_math("([pP]hi)", fmta("\\<> ", { l(l.CAPTURE1) })),
-  md.br_math("([cC]hi)", fmta("\\<> ", { l(l.CAPTURE1) })),
-  md.br_math("([pP]si)", fmta("\\<> ", { l(l.CAPTURE1) })),
+  md.br_math("([pP]hi) ", fmta("\\<> ", { l(l.CAPTURE1) })),
+  md.br_math("([cC]hi) ", fmta("\\<> ", { l(l.CAPTURE1) })),
+  md.br_math("([pP]si) ", fmta("\\<> ", { l(l.CAPTURE1) })),
   md.br_math("([oO]mega)", fmta("\\<> ", { l(l.CAPTURE1) })),
 }
