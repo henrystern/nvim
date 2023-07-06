@@ -1,18 +1,26 @@
 local math_utils = require("luasnip-md-utils.math-utils")
 local md = require("luasnip-md-utils.nodes")
+local conds = require("luasnip.extras.expand_conditions")
 
 return {
   -- regular
 }, {
   -- autosnippets
-  s("beg", fmta(
+  md.b_no_math("beg", fmta(
     [[
       \begin{<>}
         <>
       \end{<>}
     ]],
-    { i(1), dl(2, l.LS_SELECT_RAW), rep(1) },
-    { condition = conds.line_begin }
+    { i(1), dl(2, l.LS_SELECT_RAW), rep(1) }
+  )),
+  md.b_math("beg", fmta(
+    [[
+      \begin{<>}
+        <>
+      \end{<>}
+    ]],
+    { i(1), dl(2, l.LS_SELECT_RAW), rep(1) }
   )),
   md.b_math("ali", fmta(
     [[
