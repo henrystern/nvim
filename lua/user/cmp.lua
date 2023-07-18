@@ -35,6 +35,9 @@ local M = {
       "hrsh7th/cmp-nvim-lua",
       commit = "f3491638d123cfd2c8048aefaf66d246ff250ca6",
     },
+    {
+      "jmbuhr/cmp-pandoc-references",
+    },
   },
   event = {
     "InsertEnter",
@@ -239,6 +242,7 @@ function M.config()
       { name = "buffer" },
       { name = "path" },
       { name = "otter" },
+      { name = "pandoc_references" },
     },
     confirm_opts = {
       behavior = cmp.ConfirmBehavior.Replace,
