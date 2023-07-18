@@ -76,21 +76,21 @@ return {
   md.b_no_math("cbl", fmta(
       [[
         ```<>
-          <>
+        <>
         ```
       ]], { i(1), i(2) }
   )),
   md.b_no_math("xbl", fmta(
       [[
         ```{<>}
-          <>
+        <>
         ```
       ]], { i(1), i(2) }
   )),
   md.b_no_math("rbl", fmta(
       [[
         ```{r}
-          <>
+        <>
         ```
       ]], { i(1) }
   )),
@@ -98,7 +98,7 @@ return {
   md.b_no_math("pbl", fmta(
       [[
         ```{python}
-          <>
+        <>
         ```
       ]], { i(1) }
   )),
@@ -116,7 +116,7 @@ return {
   md.b_no_math("jbl", fmta(
       [[
         ```{ojs}
-          <>
+        <>
         ```
       ]], { i(1) }
   )),
