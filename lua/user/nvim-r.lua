@@ -20,9 +20,8 @@ local M = {
     vim.g.R_rmdchunk = 0
     vim.g.R_csv_delim = ','
     vim.g.R_nvimpager = "tab" -- show docs in new tab
-    vim.api.nvim_set_keymap("n", "<C-J>", ":call SendLineToR('down')<CR>", {silent = true})
-    vim.api.nvim_set_keymap("i", "<C-J>", "<Esc>:call SendLineToR('stay')<CR>i", {silent = true})
-    vim.api.nvim_set_keymap("v", "<C-J>", ":call SendLineToR('stay')<CR><Esc>", {silent = true})
+    vim.api.nvim_set_keymap("i", "<m-->", " <- ", {silent = true})
+    vim.api.nvim_set_keymap("i", "<m-m>", " |> ", {silent = true})
   end
 }
 

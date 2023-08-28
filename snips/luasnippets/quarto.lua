@@ -78,7 +78,7 @@ return {
         ```<>
         <>
         ```
-      ]], { i(1), i(2) }
+      ]], { i(1), dl(1, l.LS_SELECT_RAW) }
   )),
   md.b_no_math("xbl", fmta(
       [[
@@ -92,15 +92,15 @@ return {
         ```{r}
         <>
         ```
-      ]], { i(1) }
+      ]], { dl(1, l.LS_SELECT_RAW) }
   )),
-  md.no_math("rbl", fmta("`r <>`", { i(1) })),
+  md.no_math("rbl", fmta("`r <>`", { dl(1, l.LS_SELECT_RAW) })),
   md.b_no_math("pbl", fmta(
       [[
         ```{python}
         <>
         ```
-      ]], { i(1) }
+      ]], { dl(1, l.LS_SELECT_RAW) }
   )),
   md.no_math("pbl", fmta(
       [[
@@ -118,7 +118,7 @@ return {
         ```{ojs}
         <>
         ```
-      ]], { i(1) }
+      ]], { dl(1, l.LS_SELECT_RAW) }
   )),
-  md.no_math("jbl", fmta("${<>}", { i(1) })),
+  md.no_math("jbl", fmta("${<>}", { dl(1, l.LS_SELECT_RAW) })),
 }
