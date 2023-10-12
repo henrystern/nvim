@@ -10,6 +10,7 @@ M.servers = {
   "jsonls",
   "yamlls",
   "r_language_server",
+  "clangd",
   "marksman",
 }
 

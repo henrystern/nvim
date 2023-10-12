@@ -28,6 +28,7 @@ function M.config()
       formatting.black.with { extra_args = { "--line-length=79", "--fast" } },
       formatting.stylua,
       formatting.google_java_format,
+      null_ls.builtins.formatting.clang_format,
       diagnostics.flake8,
     },
   }
