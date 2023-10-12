@@ -1,5 +1,5 @@
-local default_theme = "tokyonight"
-local default_subtheme = "tokyonight"
+local default_theme = "oxocarbon"
+local default_subtheme = "oxocarbon"
 local default_bg = "dark"
 
 local M = { 
