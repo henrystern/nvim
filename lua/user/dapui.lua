@@ -1,6 +1,5 @@
 local M = {
   "rcarriga/nvim-dap-ui",
-  commit = "1cd4764221c91686dcf4d6b62d7a7b2d112e0b13",
   event = "VeryLazy",
   dependencies = {
     {
@@ -11,7 +10,10 @@ local M = {
 }
 
 function M.config()
-  require("dapui").setup {
+  local dap = require("dap")
+  local dapui = require("dapui")
+  
+  dapui.setup {
     expand_lines = true,
     icons = { expanded = "", collapsed = "", circular = "" },
     mappings = {
@@ -32,7 +34,7 @@ function M.config()
           { id = "watches", size = 0.25 },
         },
         size = 0.33,
-        position = "right",
+        position = "left",
       },
       {
         elements = {
@@ -53,7 +55,25 @@ function M.config()
     },
   }
 
-  vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DiagnosticSignError", linehl = "", numhl = "" })
+  dap.listeners.after.event_initialized["dapui_config"] = function()
+    dapui.open()
+  end
+  dap.listeners.before.event_terminated["dapui_config"] = function()
+    dapui.close()
+  end
+  dap.listeners.before.event_exited["dapui_config"] = function()
+    dapui.close()
+  end
+
+  vim.fn.sign_define(
+      "DapBreakpoint",
+      { text = "●", texthl = "", linehl = "debugBreakpoint", numhl = "debugBreakpoint" }
+  )
+  vim.fn.sign_define(
+      "DapBreakpointCondition",
+      { text = "◆", texthl = "", linehl = "debugBreakpoint", numhl = "debugBreakpoint" }
+  )
+  vim.fn.sign_define("DapStopped", { text = "▶", texthl = "", linehl = "debugPC", numhl = "debugPC" })
 end
 
 return M

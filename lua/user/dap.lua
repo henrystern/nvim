@@ -6,61 +6,43 @@ local M = {
 
 function M.config()
   local dap = require "dap"
-
-  local dap_ui_status_ok, dapui = pcall(require, "dapui")
-  if not dap_ui_status_ok then
-    return
-  end
-
-  dap.listeners.after.event_initialized["dapui_config"] = function()
-    dapui.open()
-  end
-
-  dap.listeners.before.event_terminated["dapui_config"] = function()
-    dapui.close()
-  end
-
-  dap.listeners.before.event_exited["dapui_config"] = function()
-    dapui.close()
-  end
-
-  dap.adapters.codelldb = {
-    type = "server",
-    port = "${port}",
-    executable = {
-      -- provide the absolute path for `codelldb` command if not using the one installed using `mason.nvim`
-      command = "codelldb",
-      args = { "--port", "${port}" },
-      -- On windows you may have to uncomment this:
-      -- detached = false,
-    },
+  
+  dap.configurations.cpp = {
+      {
+          name = "Build and Debug",
+          type = "codelldb",
+          request = "launch",
+          program = function ()
+              -- Compile and return exec name
+              local filetype = vim.bo.filetype
+              local filename = vim.fn.expand("%:p")
+              local basename = vim.fn.expand('%:p:r')
+              local makefile = os.execute("(ls | grep -i makefile)")
+              if makefile == "makefile" or makefile == "Makefile" then
+                  os.execute("make debug")
+              else
+                  if filetype == "c" then
+                      os.execute(string.format("gcc -g -o \"%s\" \"%s\"", basename, filename))
+                  else
+                      os.execute(string.format("g++ -g -o \"%s\" \"%s\"", basename, filename))
+                  end
+              end
+              return basename
+          end,
+          cwd = "${workspaceFolder}",
+          MIMode = "gdb",
+          miDebuggerPath = "/usr/bin/gdb",
+          setupCommands = {
+              {
+                  text = "-enable-pretty-printing",
+                  description = "enable pretty printing",
+                  ignoreFailures = false,
+              },
+          },
+      },
   }
-  dap.configurations.c = {
-    {
-      name = "Launch file",
-      type = "codelldb",
-      request = "launch",
-      program = function()
-        local path
-        vim.ui.input({ prompt = "Path to executable: ", default = vim.loop.cwd() .. "/build/" }, function(input)
-          path = input
-        end)
-        vim.cmd [[redraw]]
-        return path
-      end,
-      cwd = "${workspaceFolder}",
-      stopOnEntry = false,
-    },
-  }
+  dap.configurations.c = dap.configurations.cpp
+
 end
-
-M = {
-  "ravenxrz/DAPInstall.nvim",
-  commit = "8798b4c36d33723e7bba6ed6e2c202f84bb300de",
-  config = function()
-    require("dap_install").setup {}
-    require("dap_install").config("python", {})
-  end,
-}
 
 return M

@@ -20,6 +20,10 @@ function M.config()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
   capabilities = cmp_nvim_lsp.default_capabilities(M.capabilities)
 
+  -- fixes clangd formatting error
+  capabilities.offsetEncoding = { "utf-16" }
+  require("lspconfig").clangd.setup({ capabilities = capabilities })
+
   local function lsp_keymaps(bufnr)
     local opts = { noremap = true, silent = true }
     local keymap = vim.api.nvim_buf_set_keymap
