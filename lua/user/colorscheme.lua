@@ -1,5 +1,5 @@
-local default_theme = "oxocarbon"
-local default_subtheme = "oxocarbon"
+local default_theme = "tokyonight-night"
+local default_subtheme = "tokyonight-night"
 local default_bg = "dark"
 
 local M = { 
@@ -13,14 +13,14 @@ local M = {
     "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
-    name = "tokyonight",
+    name = "tokyonight-night",
   },
-  { 
+  {
     'projekt0n/github-nvim-theme',
     lazy = false,
     priority = 1000,
     name = "github",
-  }
+  },
 }
 
 for _, v in pairs(M) do
