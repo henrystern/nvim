@@ -12,10 +12,14 @@ local M = {
 function M.config()
   local dap = require("dap")
   local dapui = require("dapui")
-  
+
   dapui.setup {
     expand_lines = true,
     icons = { expanded = "", collapsed = "", circular = "" },
+    controls = {
+      enabled = true,
+      element = "console",
+    },
     mappings = {
       -- Use a table to apply multiple mappings
       expand = { "<CR>", "<2-LeftMouse>" },
@@ -28,20 +32,20 @@ function M.config()
     layouts = {
       {
         elements = {
-          { id = "scopes", size = 0.33 },
-          { id = "breakpoints", size = 0.17 },
-          { id = "stacks", size = 0.25 },
+          { id = "stacks", size = 0.15 },
+          { id = "breakpoints", size = 0.15 },
+          { id = "scopes", size = 0.3 },
           { id = "watches", size = 0.25 },
         },
-        size = 0.33,
+        size = 0.3,
         position = "left",
       },
       {
         elements = {
-          { id = "repl", size = 0.45 },
-          { id = "console", size = 0.55 },
+          { id = "console", size = 0.75 },
+          { id = "repl", size = 0.25 },
         },
-        size = 0.27,
+        size = 0.25,
         position = "bottom",
       },
     },
