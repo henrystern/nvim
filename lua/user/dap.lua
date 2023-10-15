@@ -22,9 +22,9 @@ function M.config()
                   os.execute("make debug")
               else
                   if filetype == "c" then
-                      os.execute(string.format("gcc -g -o \"%s\" \"%s\"", basename, filename))
+                      os.execute(string.format("gcc -g -o \"%s.exe\" \"%s\"", basename, filename))
                   else
-                      os.execute(string.format("g++ -g -o \"%s\" \"%s\"", basename, filename))
+                      os.execute(string.format("g++ -g -o \"%s.exe\" \"%s\"", basename, filename))
                   end
               end
               return basename
