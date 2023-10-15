@@ -11,7 +11,7 @@ local M = {
 }
 
 function M.config()
-  require('dap-python').setup('~/Envs/nvim/Scripts/pythonw.exe')
+  require('dap-python').setup('~/Envs/debugpy/Scripts/pythonw.exe')
 end
 
 return M
