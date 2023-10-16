@@ -63,6 +63,22 @@ M.lspconfig = {
 
   n = {
     ["<leader>lf"] = { "<cmd>lua vim.lsp.buf.format{ async = true }<cr>", "Format buffer" },
+    ["gD"] = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "Get declaration" },
+    ["gd"] = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Get definition" },
+    ["K"] = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Hover" },
+    ["gI"] = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "Get Implementation" },
+    ["gr"] = { "<cmd>lua vim.lsp.buf.references()<CR>", "Get references" },
+    ["gl"] = { "<cmd>lua vim.diagnostic.open_float()<CR>", "Open float" },
+    ["<leader>li"] = { "<cmd>LspInfo<cr>", "LspInfo" },
+    ["<leader>lI"] = { "<cmd>Mason<cr>", "Mason" },
+    ["<leader>la"] = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code action" },
+    ["<leader>lj"] = { "<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>", "Next diagnostic" },
+    ["<leader>lk"] = { "<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>", "Previous diagnostic" },
+    ["<leader>lr"] = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
+    ["<leader>ls"] = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "Signature help" },
+    ["<leader>lq"] = { "<cmd>TroubleToggle<CR>", "TroubleToggle" },
+    ["<leader>le"] = { "<cmd>lua vim.diagnostic.open_float()<CR>", "Open float" },
+    ["<leader>lo"] = { "<cmd>SymbolsOutline<CR>", "Outline symbols" },
   },
 
   v = {},
