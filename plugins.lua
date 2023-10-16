@@ -13,22 +13,6 @@ local plugins = {
       require "custom.configs.mason"
     end,
   },
-  -- {
-  --   "nvim-treesitter/nvim-treesitter",
-  --   commit = "226c1475a46a2ef6d840af9caa0117a439465500",
-  --   init = function()
-  --     require("core.utils").lazy_load "nvim-treesitter"
-  --   end,
-  --   cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
-  --   build = ":TSUpdate",
-  --   opts = function()
-  --     return require "plugins.configs.treesitter"
-  --   end,
-  --   config = function(_, opts)
-  --     dofile(vim.g.base46_cache .. "syntax")
-  --     require("nvim-treesitter.configs").setup(opts)
-  --   end,
-  -- },
   {
     "hrsh7th/nvim-cmp",
     event = {
