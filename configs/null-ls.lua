@@ -17,6 +17,7 @@ null_ls.setup {
     formatting.stylua,
     formatting.google_java_format,
     null_ls.builtins.formatting.clang_format,
+    null_ls.builtins.formatting.styler.with { extra_filetypes = { "quarto" } },
   },
   on_attach = function(client, bufnr)
     if client.supports_method "textDocument/formatting" then

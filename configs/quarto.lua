@@ -17,6 +17,7 @@ require("quarto").setup {
     hover = "K",
     definition = "gd",
     rename = "<leader>lr",
+    format = "<leader>lf",
     references = "gr",
   },
 }
