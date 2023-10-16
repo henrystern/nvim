@@ -4,7 +4,7 @@ require("quarto").setup {
   lspFeatures = {
     enabled = true,
     languages = { "javascript", "r", "python", "julia", "bash", "ojs" },
-    chunks = "curly", -- 'curly' or 'all'
+    chunks = "all",
     diagnostics = {
       enabled = true,
       triggers = { "BufWritePost" },

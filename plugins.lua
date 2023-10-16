@@ -163,6 +163,7 @@ local plugins = {
   },
   {
     "jalvesaq/Nvim-R",
+    lazy = false,
     ft = { "r", "rmd", "rrst", "rnoweb", "quarto", "rhelp" },
     init = function()
       require "custom.configs.r"
@@ -178,14 +179,12 @@ local plugins = {
   {
     "jmbuhr/otter.nvim",
     ft = "quarto",
+    event = "Bufenter",
     dependencies = {
       "hrsh7th/nvim-cmp",
       "neovim/nvim-lspconfig",
       "nvim-treesitter/nvim-treesitter",
     },
-    config = function()
-      require("otter").dev_setup()
-    end,
   },
   {
     "ahmedkhalf/project.nvim",
