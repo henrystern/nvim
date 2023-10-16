@@ -130,6 +130,7 @@ local plugins = {
     ft = { "markdown", "quarto", "rmarkdown" },
     config = function()
       require("core.utils").load_mappings "femaco"
+      require("femaco").setup()
     end,
   },
   {
@@ -162,7 +163,6 @@ local plugins = {
   },
   {
     "jalvesaq/Nvim-R",
-    lazy = true,
     ft = { "r", "rmd", "rrst", "rnoweb", "quarto", "rhelp" },
     init = function()
       require "custom.configs.r"
@@ -170,9 +170,9 @@ local plugins = {
   },
   {
     "kylechui/nvim-surround",
+    event = "Bufenter",
     config = function()
-      local surround = require "nvim-surround"
-      surround.setup {}
+      require("nvim-surround").setup()
     end,
   },
   {
