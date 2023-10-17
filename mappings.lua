@@ -65,7 +65,14 @@ M.general = {
     },
     ["<C-k>"] = { ":-tabnext<CR>", "Previous tab" },
     ["<C-j>"] = { ":tabnext<CR>", "Next tab" },
-    ["<leader>re"] = { ":e $MYVIMRC <CR>", "Edit config" },
+    -- ["<leader>re"] = { ":e $MYVIMRC <CR>", "Edit config" },
+    ["<leader>re"] = {
+      function()
+        local path = vim.fn.stdpath "config" .. "/lua/custom/plugins.lua"
+        vim.cmd(":e " .. path)
+      end,
+      "Edit config",
+    },
     ["<leader>rs"] = { ":lua require('luasnip.loaders').edit_snippet_files()<CR>", "Edit snippets" },
     ["<leader>rz"] = { "<cmd>ZenMode<cr>", "ZenMode" },
     ["<leader>rh"] = { "<cmd> Telescope themes <CR>", "Nvchad themes" },
