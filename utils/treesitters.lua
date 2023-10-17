@@ -12,6 +12,8 @@ M = {
   "typescript",
   "tsx",
   "json",
+  "r",
+  "yaml",
 }
 
 return M
