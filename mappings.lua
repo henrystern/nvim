@@ -1,6 +1,41 @@
 ---@type MappingsTable
 local M = {}
 
+M.disabled = {
+  i = {
+    ["<C-b>"] = "",
+    ["<C-e>"] = "",
+    ["<C-h>"] = "",
+    ["<C-l>"] = "",
+    ["<C-j>"] = "",
+    ["<C-k>"] = "",
+  },
+
+  n = {
+    ["<leader>ca"] = "",
+    ["<leader>cc"] = "",
+    ["<leader>ch"] = "",
+    ["<leader>cm"] = "",
+    ["<leader>fm"] = "",
+    ["<leader>ft"] = "",
+    ["<leader>fo"] = "",
+    ["<leader>fb"] = "",
+    ["<leader>ma"] = "",
+    ["<leader>ph"] = "",
+    ["<leader>pt"] = "",
+    ["<leader>ra"] = "",
+    ["<leader>rh"] = "",
+    ["<leader>th"] = "",
+    ["<leader>td"] = "",
+    ["<leader>wa"] = "",
+    ["<leader>wk"] = "",
+    ["<leader>wK"] = "",
+    ["<leader>wl"] = "",
+    ["<leader>wr"] = "",
+    ["<leader>b"] = "",
+  },
+}
+
 M.general = {
   n = {
     ["<leader>q"] = { ":q<CR>", "Quit nvim" },
@@ -16,11 +51,27 @@ M.general = {
     ["<S-j>"] = { "<C-w>j", "Change buffer down" },
     ["<S-k>"] = { "<C-w>k", "Change buffer left" },
     ["<S-l>"] = { "<C-w>l", "Change buffer right" },
+    ["<C-l>"] = {
+      function()
+        require("nvchad.tabufline").tabuflineNext()
+      end,
+      "Goto next buffer",
+    },
+    ["<C-h>"] = {
+      function()
+        require("nvchad.tabufline").tabuflinePrev()
+      end,
+      "Goto prev buffer",
+    },
+    ["<C-k>"] = { ":tablast<CR>", "Last tab" },
+    ["<C-j>"] = { ":tabnext<CR>", "Next tab" },
     ["<leader>re"] = { ":e $MYVIMRC <CR>", "Edit config" },
     ["<leader>rs"] = { ":lua require('luasnip.loaders').edit_snippet_files()<CR>", "Edit snippets" },
+    ["<leader>rz"] = { "<cmd>ZenMode<cr>", "ZenMode" },
+    ["<leader>rh"] = { "<cmd> Telescope themes <CR>", "Nvchad themes" },
     ["<M-j>"] = { "V:m'>+<cr>`<my`>mzgv`yo`z", "move line down" },
     ["<M-k>"] = { "V:m'<-2<cr>`>my`<mzgv`yo`z", "move line up" },
-    ["<leader>sz"] = { "<cmd>ZenMode<cr>", "ZenMode" },
+    ["<C-BS>"] = { "<Esc>cvb", "Delete word" },
   },
 
   i = {
@@ -54,7 +105,7 @@ M.tabufline = {
       end,
       "Close buffer",
     },
-    ["<leader><Tab>"] = { ":tabnext<CR>", "Next tab" },
+    ["<leader><Tab>"] = { ":tabnew<CR>", "New tab" },
   },
 }
 
@@ -194,8 +245,31 @@ M.femaco = {
 }
 
 M.markdown_preview = {
+  plugin = true,
   n = {
     ["<localleader>mp"] = { ":MarkdownPreview<CR>", "Preview" },
+  },
+}
+
+M.blankline = {
+  plugin = true,
+
+  n = {
+    ["<leader>p"] = {
+      function()
+        local ok, start = require("indent_blankline.utils").get_current_context(
+          vim.g.indent_blankline_context_patterns,
+          vim.g.indent_blankline_use_treesitter_scope
+        )
+
+        if ok then
+          vim.api.nvim_win_set_cursor(vim.api.nvim_get_current_win(), { start, 0 })
+          vim.cmd [[normal! _]]
+        end
+      end,
+
+      "Jump to current context",
+    },
   },
 }
 
