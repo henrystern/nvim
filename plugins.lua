@@ -1,5 +1,6 @@
 ---@type NvPluginSpec[]
 local plugins = {
+  -- Core IDE Plugins
   {
     "neovim/nvim-lspconfig",
     config = function()
@@ -67,50 +68,17 @@ local plugins = {
       require "custom.configs.cmp"
     end,
   },
-
   {
-    "nvim-telescope/telescope.nvim",
-    event = "Bufenter",
-    cmd = { "Telescope" },
+    "jose-elias-alvarez/null-ls.nvim",
+    event = "BufReadPre",
     dependencies = {
       {
-        "ahmedkhalf/project.nvim",
-      },
-    },
-    opts = require("custom.configs.telescope").opts,
-  },
-  {
-    "max397574/better-escape.nvim",
-    event = "InsertEnter",
-    config = function()
-      require("better_escape").setup {
-        mapping = { "ii" },
-      }
-    end,
-  },
-  {
-    "mfussenegger/nvim-dap-python",
-    ft = "python",
-    dependencies = {
-      {
-        "mfussenegger/nvim-dap",
-        event = "VeryLazy",
+        "nvim-lua/plenary.nvim",
       },
     },
     config = function()
-      require("dap-python").setup "~/Envs/debugpy/Scripts/pythonw.exe"
+      require "custom.configs.null-ls"
     end,
-  },
-  {
-    "jay-babu/mason-nvim-dap.nvim",
-    event = "VeryLazy",
-    dependencies = {
-      "williamboman/mason.nvim",
-      "mfussenegger/nvim-dap",
-    },
-    opts = {
-      handlers = {},
-    },
   },
   {
     "mfussenegger/nvim-dap",
@@ -132,47 +100,64 @@ local plugins = {
     end,
   },
   {
-    "AckslD/nvim-FeMaco.lua",
-    ft = { "markdown", "quarto", "rmarkdown" },
+    "jay-babu/mason-nvim-dap.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      "williamboman/mason.nvim",
+      "mfussenegger/nvim-dap",
+    },
     config = function()
-      require("core.utils").load_mappings "femaco"
-      require "custom.configs.femaco"
+      require("mason-nvim-dap").setup()
     end,
   },
   {
-    "henrystern/luasnip-md-utils",
-    ft = { "markdown", "rmarkdown", "quarto", "tex" },
-    dependencies = { "L3MON4D3/LuaSnip", "nvim-treesitter/nvim-treesitter" },
-  },
-  {
-    "iamcco/markdown-preview.nvim",
-    ft = { "markdown", "quarto" },
-    build = function()
-      vim.fn["mkdp#util#install"]()
-    end,
-    config = function()
-      require("core.utils").load_mappings "markdown_preview"
-      require "custom.configs.markdown-preview"
-    end,
-  },
-  {
-    "jose-elias-alvarez/null-ls.nvim",
-    event = "BufReadPre",
+    "mfussenegger/nvim-dap-python",
+    ft = "python",
     dependencies = {
       {
-        "nvim-lua/plenary.nvim",
+        "mfussenegger/nvim-dap",
+        event = "VeryLazy",
       },
     },
     config = function()
-      require "custom.configs.null-ls"
+      require("dap-python").setup "~/Envs/debugpy/Scripts/pythonw.exe"
     end,
   },
   {
-    "jalvesaq/Nvim-R",
-    event = "VeryLazy",
-    ft = { "r", "rmd", "rrst", "rnoweb", "quarto", "rhelp" },
+    "NvChad/nvterm",
+    config = function()
+      require "custom.configs.nvterm"
+    end,
+  },
+
+  -- Nice to have
+  {
+    "nvim-telescope/telescope.nvim",
+    event = "Bufenter",
+    cmd = { "Telescope" },
+    dependencies = {
+      {
+        "ahmedkhalf/project.nvim",
+      },
+    },
+    opts = require("custom.configs.telescope").opts,
+  },
+  {
+    "nvim-telescope/telescope-bibtex.nvim",
+    dependencies = {
+      "nvim-telescope/telescope.nvim",
+    },
     init = function()
-      require "custom.configs.r"
+      require("telescope").load_extension "bibtex"
+    end,
+  },
+  {
+    "max397574/better-escape.nvim",
+    event = "InsertEnter",
+    config = function()
+      require("better_escape").setup {
+        mapping = { "ii" },
+      }
     end,
   },
   {
@@ -181,15 +166,6 @@ local plugins = {
     config = function()
       require("nvim-surround").setup()
     end,
-  },
-  {
-    "jmbuhr/otter.nvim",
-    ft = "quarto",
-    dependencies = {
-      "hrsh7th/nvim-cmp",
-      "neovim/nvim-lspconfig",
-      "nvim-treesitter/nvim-treesitter",
-    },
   },
   {
     "ahmedkhalf/project.nvim",
@@ -205,24 +181,6 @@ local plugins = {
     end,
   },
   {
-    "quarto-dev/quarto-nvim",
-    dev = false,
-    ft = "quarto",
-    config = function()
-      require("core.utils").load_mappings "quarto"
-      require "custom.configs.quarto"
-    end,
-  },
-  {
-    "nvim-telescope/telescope-bibtex.nvim",
-    dependencies = {
-      "nvim-telescope/telescope.nvim",
-    },
-    init = function()
-      require("telescope").load_extension "bibtex"
-    end,
-  },
-  {
     "folke/trouble.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {},
@@ -233,10 +191,6 @@ local plugins = {
     event = "VeryLazy",
   },
   {
-    "lervag/vimtex",
-    ft = "tex",
-  },
-  {
     "folke/zen-mode.nvim",
     event = "VeryLazy",
     cmd = "ZenMode",
@@ -244,11 +198,64 @@ local plugins = {
       require "custom.configs.zen-mode"
     end,
   },
+
+  -- Markdown and Quarto
   {
-    "NvChad/nvterm",
+    "quarto-dev/quarto-nvim",
+    dev = false,
+    ft = "quarto",
     config = function()
-      require "custom.configs.nvterm"
+      require("core.utils").load_mappings "quarto"
+      require "custom.configs.quarto"
     end,
+  },
+  {
+    "jmbuhr/otter.nvim",
+    ft = "quarto",
+    dependencies = {
+      "hrsh7th/nvim-cmp",
+      "neovim/nvim-lspconfig",
+      "nvim-treesitter/nvim-treesitter",
+    },
+  },
+  {
+    "iamcco/markdown-preview.nvim",
+    ft = { "markdown", "quarto" },
+    build = function()
+      vim.fn["mkdp#util#install"]()
+    end,
+    config = function()
+      require("core.utils").load_mappings "markdown_preview"
+      require "custom.configs.markdown-preview"
+    end,
+  },
+  {
+    "AckslD/nvim-FeMaco.lua",
+    ft = { "markdown", "quarto", "rmarkdown" },
+    config = function()
+      require("core.utils").load_mappings "femaco"
+      require "custom.configs.femaco"
+    end,
+  },
+  {
+    "henrystern/luasnip-md-utils",
+    ft = { "markdown", "rmarkdown", "quarto", "tex" },
+    dependencies = { "L3MON4D3/LuaSnip", "nvim-treesitter/nvim-treesitter" },
+  },
+
+  -- Other Languages
+  {
+    "jalvesaq/Nvim-R",
+    lazy = false,
+    event = "VeryLazy",
+    ft = { "r", "rmd", "rrst", "rnoweb", "quarto", "rhelp" },
+    init = function()
+      require "custom.configs.r"
+    end,
+  },
+  {
+    "lervag/vimtex",
+    ft = "tex",
   },
 }
 
