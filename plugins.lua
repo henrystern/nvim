@@ -9,9 +9,15 @@ local plugins = {
   },
   {
     "williamboman/mason.nvim",
-    config = function()
-      require "custom.configs.mason"
-    end,
+    opts = {
+      ensure_installed = require "custom.utils.mason_servers",
+    },
+  },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = {
+      ensure_installed = require "custom.utils.treesitters",
+    },
   },
   {
     "hrsh7th/nvim-cmp",
@@ -164,6 +170,7 @@ local plugins = {
   {
     "jalvesaq/Nvim-R",
     lazy = false,
+    event = "VeryLazy",
     ft = { "r", "rmd", "rrst", "rnoweb", "quarto", "rhelp" },
     init = function()
       require "custom.configs.r"
@@ -222,10 +229,12 @@ local plugins = {
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {},
     lazy = false,
+    event = "VeryLazy",
   },
   {
     "tpope/vim-fugitive",
     lazy = false,
+    event = "VeryLazy",
   },
   {
     "lervag/vimtex",
@@ -234,6 +243,7 @@ local plugins = {
   {
     "folke/zen-mode.nvim",
     lazy = false,
+    event = "VeryLazy",
     cmd = "ZenMode",
     config = function()
       require "custom.configs.zen-mode"

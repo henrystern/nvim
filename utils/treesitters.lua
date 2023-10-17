@@ -8,6 +8,10 @@ M = {
   "c",
   "cpp",
   "python",
+  "vim",
+  "typescript",
+  "tsx",
+  "json",
 }
 
 return M
