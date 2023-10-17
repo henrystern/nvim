@@ -16,10 +16,15 @@ require("femaco").setup {
       width = vim.api.nvim_win_get_width(0) - 10,
       height = math.min(#code_block.lines, vim.api.nvim_win_get_height(0) - 6),
       style = "minimal",
-      border = "none",
+      -- border = "none",
+      border = { "", "", "", "│", "", "", "", "│" },
       zindex = 1,
     }
   end,
+
+  -- post_open_float = function(winnr)
+  --   vim.wo.signcolumn = "no"
+  -- end,
 
   ensure_newline = function(base_filetype)
     return true

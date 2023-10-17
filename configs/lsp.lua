@@ -29,12 +29,12 @@ for _, server in pairs(require "custom.utils.lsp_servers") do
       filetypes = { "markdown", "quarto" },
       root_dir = util.root_pattern(".git", ".marksman.toml", "_quarto.yml"),
     }
-  elseif server == "r_language_server" then
-    lspconfig[server].setup {
-      on_attach = on_attach,
-      capabilities = capabilities,
-      filetypes = { "r", "rmd", "quarto" },
-    }
+  -- elseif server == "r_language_server" then
+  --   lspconfig[server].setup {
+  --     on_attach = on_attach,
+  --     capabilities = capabilities,
+  --     -- filetypes = { "r", "rmd", "quarto" },
+  --   }
   elseif server == "tsserver" then
     lspconfig[server].setup {
       on_attach = on_attach,

@@ -2,8 +2,8 @@
 local M = {}
 
 M.ui = {
-  theme_toggle = { "tokyodark", "tokyonight" },
-  theme = "tokyodark",
+  theme_toggle = { "tokyonight", "tokyonight" },
+  theme = "github_dark",
   nvdash = {
     load_on_startup = true,
     header = {
@@ -30,8 +30,8 @@ M.ui = {
   statusline = {
     -- modules arg here is the default table of modules
     overriden_modules = function(modules)
-      local l, c = unpack(vim.api.nvim_win_get_cursor(0))
-      modules[11] = "Ln %l Col %c"
+      local _, c = unpack(vim.api.nvim_win_get_cursor(0))
+      modules[11] = "c%c"
     end,
   },
 }
