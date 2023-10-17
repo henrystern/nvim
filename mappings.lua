@@ -63,7 +63,7 @@ M.general = {
       end,
       "Goto prev buffer",
     },
-    ["<C-k>"] = { ":tablast<CR>", "Last tab" },
+    ["<C-k>"] = { ":-tabnext<CR>", "Previous tab" },
     ["<C-j>"] = { ":tabnext<CR>", "Next tab" },
     ["<leader>re"] = { ":e $MYVIMRC <CR>", "Edit config" },
     ["<leader>rs"] = { ":lua require('luasnip.loaders').edit_snippet_files()<CR>", "Edit snippets" },
@@ -241,6 +241,17 @@ M.femaco = {
 
   n = {
     ["<localleader>qe"] = { ":FeMaco<cr>", "Edit Block" },
+    ["M"] = {
+      function()
+        -- if floating window
+        if vim.api.nvim_win_get_config(0).relative ~= "" then
+          vim.cmd ":q"
+        else
+          require("femaco.edit").edit_code_block()
+        end
+      end,
+      "Open Lazygit",
+    },
   },
 }
 

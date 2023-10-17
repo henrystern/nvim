@@ -136,7 +136,7 @@ local plugins = {
     ft = { "markdown", "quarto", "rmarkdown" },
     config = function()
       require("core.utils").load_mappings "femaco"
-      require("femaco").setup()
+      require "custom.configs.femaco"
     end,
   },
   {
