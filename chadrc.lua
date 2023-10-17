@@ -27,6 +27,13 @@ M.ui = {
       { "⚙  Config", "Spc r e", "Config" },
     },
   },
+  statusline = {
+    -- modules arg here is the default table of modules
+    overriden_modules = function(modules)
+      local l, c = unpack(vim.api.nvim_win_get_cursor(0))
+      modules[11] = "Ln %l Col %c"
+    end,
+  },
 }
 
 M.plugins = "custom.plugins"
