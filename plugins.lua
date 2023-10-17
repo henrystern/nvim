@@ -185,7 +185,6 @@ local plugins = {
   {
     "jmbuhr/otter.nvim",
     ft = "quarto",
-    event = "Bufenter",
     dependencies = {
       "hrsh7th/nvim-cmp",
       "neovim/nvim-lspconfig",

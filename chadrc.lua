@@ -2,6 +2,7 @@
 local M = {}
 
 M.ui = {
+  theme_toggle = { "tokyodark", "tokyonight" },
   theme = "tokyodark",
   nvdash = {
     load_on_startup = true,
