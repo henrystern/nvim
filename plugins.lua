@@ -169,7 +169,6 @@ local plugins = {
   },
   {
     "jalvesaq/Nvim-R",
-    lazy = false,
     event = "VeryLazy",
     ft = { "r", "rmd", "rrst", "rnoweb", "quarto", "rhelp" },
     init = function()
@@ -228,12 +227,10 @@ local plugins = {
     "folke/trouble.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {},
-    lazy = false,
     event = "VeryLazy",
   },
   {
     "tpope/vim-fugitive",
-    lazy = false,
     event = "VeryLazy",
   },
   {
@@ -242,7 +239,6 @@ local plugins = {
   },
   {
     "folke/zen-mode.nvim",
-    lazy = false,
     event = "VeryLazy",
     cmd = "ZenMode",
     config = function()
