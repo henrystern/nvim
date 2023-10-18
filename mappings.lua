@@ -235,6 +235,10 @@ M.quarto = {
   n = {
     ["<localleader>qp"] = { ":lua require'quarto'.quartoPreview()<cr>", "preview" },
     ["<localleader>qq"] = { ":lua require'quarto'.quartoClosePreview()<cr>", "close" },
+    ["<localleader>gd"] = { ":lua require'otter'.ask_definition()<cr>", "Otter definition" },
+    ["<localleader>gD"] = { ":lua require'otter'.ask_type_definition()<cr>", "Otter type" },
+    ["K"] = { ":lua require'otter'.ask_hover()<cr>", "Otter hover" },
+    ["<localleader>lr"] = { ":lua require'otter'.ask_rename()<cr>", "Otter rename" },
   },
 
   i = {
