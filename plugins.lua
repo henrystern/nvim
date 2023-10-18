@@ -202,7 +202,6 @@ local plugins = {
   -- Markdown and Quarto
   {
     "quarto-dev/quarto-nvim",
-    dev = false,
     ft = "quarto",
     config = function()
       require("core.utils").load_mappings "quarto"
@@ -211,12 +210,12 @@ local plugins = {
   },
   {
     "jmbuhr/otter.nvim",
-    ft = "quarto",
     dependencies = {
       "hrsh7th/nvim-cmp",
       "neovim/nvim-lspconfig",
       "nvim-treesitter/nvim-treesitter",
     },
+    opts = {},
   },
   {
     "iamcco/markdown-preview.nvim",
@@ -249,6 +248,7 @@ local plugins = {
     lazy = false,
     event = "VeryLazy",
     ft = { "r", "rmd", "rrst", "rnoweb", "quarto", "rhelp" },
+    -- dependencies = { "jalvesaq/R-Vim-runtime" },
     init = function()
       require "custom.configs.r"
     end,

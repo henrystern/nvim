@@ -182,8 +182,8 @@ cmp.setup {
         luasnip = "",
         buffer = "",
         path = "",
-        emoji = "",
         otter = "",
+        pandoc_references = "",
       })[entry.source.name]
       return vim_item
     end,
