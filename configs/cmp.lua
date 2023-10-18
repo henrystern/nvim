@@ -177,13 +177,14 @@ cmp.setup {
     format = function(entry, vim_item)
       vim_item.kind = kind_icons[vim_item.kind]
       vim_item.menu = ({
-        nvim_lsp = "",
+        nvim_lsp = "λ",
         nvim_lua = "",
-        luasnip = "",
-        buffer = "",
-        path = "",
-        otter = "",
+        luasnip = "⋗",
+        buffer = "Ω",
+        path = "🖫",
+        otter = "ö",
         pandoc_references = "",
+        -- nvim_lsp_signature_help = "",
       })[entry.source.name]
       return vim_item
     end,
@@ -196,14 +197,15 @@ cmp.setup {
     { name = "path" },
     { name = "otter" },
     { name = "pandoc_references" },
+    -- { name = "nvim_lsp_signature_help" },
   },
   confirm_opts = {
     behavior = cmp.ConfirmBehavior.Replace,
     select = false,
   },
   window = {
-    completion = cmp.config.window.bordered(),
-    documentation = cmp.config.window.bordered(),
+    completion = { border = { "", "", "", "│", "", "", "", "│" } },
+    documentation = { border = { "", "", "", "│", "", "", "", "│" } },
   },
   experimental = {
     ghost_text = true,

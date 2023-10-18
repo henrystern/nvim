@@ -84,7 +84,8 @@ local config = {
   float = {
     focusable = false,
     style = "minimal",
-    border = "rounded",
+    -- border = "rounded",
+    border = { "", "", "", "│", "", "", "", "│" },
     source = "always",
     header = "",
     prefix = "",
@@ -95,9 +96,11 @@ local config = {
 vim.diagnostic.config(config)
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-  border = "rounded",
+  -- border = "rounded",
+  border = { "", "", "", "│", "", "", "", "│" },
 })
 
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-  border = "rounded",
+  -- border = "rounded",
+  border = { "", "", "", "│", "", "", "", "│" },
 })
