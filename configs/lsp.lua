@@ -36,7 +36,8 @@ for _, server in pairs(require "custom.utils.lsp_servers") do
       settings = {
         r = {
           lsp = {
-            rich_documentation = true,
+            rich_documentation = false,
+            max_completions = 50,
           },
         },
       },
