@@ -5,6 +5,7 @@ local plugins = {
     "neovim/nvim-lspconfig",
     config = function()
       require "plugins.configs.lspconfig"
+      require("core.utils").load_mappings "lsp"
       require "custom.configs.lsp"
     end,
   },
@@ -216,6 +217,9 @@ local plugins = {
       "nvim-treesitter/nvim-treesitter",
     },
     opts = {},
+    config = function()
+      require("core.utils").load_mappings "otter"
+    end,
   },
   {
     "iamcco/markdown-preview.nvim",

@@ -116,7 +116,7 @@ M.tabufline = {
   },
 }
 
-M.lspconfig = {
+M.lsp = {
   plugin = true,
 
   n = {
@@ -138,8 +138,6 @@ M.lspconfig = {
     ["<leader>le"] = { "<cmd>lua vim.diagnostic.open_float()<CR>", "Open float" },
     ["<leader>lo"] = { "<cmd>SymbolsOutline<CR>", "Outline symbols" },
   },
-
-  v = {},
 }
 
 M.dap = {
@@ -235,15 +233,24 @@ M.quarto = {
   n = {
     ["<localleader>qp"] = { ":lua require'quarto'.quartoPreview()<cr>", "preview" },
     ["<localleader>qq"] = { ":lua require'quarto'.quartoClosePreview()<cr>", "close" },
-    ["<localleader>gd"] = { ":lua require'otter'.ask_definition()<cr>", "Otter definition" },
-    ["<localleader>gD"] = { ":lua require'otter'.ask_type_definition()<cr>", "Otter type" },
-    ["K"] = { ":lua require'otter'.ask_hover()<cr>", "Otter hover" },
-    ["<localleader>lr"] = { ":lua require'otter'.ask_rename()<cr>", "Otter rename" },
   },
 
   i = {
     ["<m-->"] = { " <- ", "assign" },
     ["<m-m>"] = { " |>", "pipe" },
+  },
+}
+
+M.otter = {
+  plugin = true,
+
+  n = {
+    ["K"] = { ":lua require'otter'.ask_hover()<cr>", "Otter hover" },
+    ["gd"] = { ":lua require'otter'.ask_definition()<cr>", "Otter definition" },
+    ["gr"] = { ":lua require'otter'.ask_references()<cr>", "Otter references" },
+    ["gs"] = { ":lua require'otter'.ask_document_symbols()<cr>", "Otter symbols" },
+    ["<leader>lr"] = { ":lua require'otter'.ask_rename()<cr>", "Otter rename" },
+    ["<leader>lf"] = { ":lua require'otter'.ask_format()<cr>", "Otter format" },
   },
 }
 

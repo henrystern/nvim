@@ -10,4 +10,10 @@ require("quarto").setup {
       enabled = true,
     },
   },
+  keymap = {
+    hover = "<F20>",
+    definition = "<F20>",
+    rename = "<F20>",
+    references = "<F20>",
+  },
 }
