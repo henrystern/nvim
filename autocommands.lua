@@ -15,14 +15,6 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     vim.opt_local.spell = true
   end,
 })
--- Automatically close tab/vim when nvim-tree is the last window in the tab
-vim.cmd "autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif"
-
--- vim.api.nvim_create_autocmd({ "VimResized" }, {
---   callback = function()
---     vim.cmd "tabdo wincmd ="
---   end,
--- })
 
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
   callback = function()
@@ -30,9 +22,34 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
   end,
 })
 
-vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-  pattern = { "*.java" },
+-- vimtex ftplugin
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  pattern = { "tex" },
   callback = function()
-    vim.lsp.codelens.refresh()
+    vim.cmd [[
+      " if has('win32') |
+      let g:vimtex_view_general_viewer = 'SumatraPDF' |
+      let g:vimtex_view_general_options = '-reuse-instance -forward-search @tex @line @pdf' |
+      " else |
+        " let g:vimtex_view_method='zathura' |
+      " endif |
+
+      let g:tex_flavor='latex' |
+      let g:vimtex_quickfix_mode=0 |
+      set conceallevel=1 |
+      let g:tex_conceal='abdmg' |
+
+      let g:vimtex_compiler_latexmk = {
+              \ 'build_dir' : '',
+              \ 'callback' : 1,
+              \ 'continuous' : 1,
+              \ 'executable' : 'latexmk',
+              \ 'hooks' : [],
+              \ 'options' : [
+              \   '-synctex=1',
+          \   '-aux-directory=' . stdpath('data') . '/.latex_aux_files',
+              \ ],
+              \}
+  ]]
   end,
 })

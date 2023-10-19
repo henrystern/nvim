@@ -64,7 +64,7 @@ luasnip.filetype_extend("rmarkdown", { "md-math" })
 require("luasnip/loaders/from_vscode").lazy_load { exclude = { "quarto" } }
 -- custom snippets
 require("luasnip.loaders.from_lua").load {
-  paths = { vim.fn.stdpath "config" .. "/lua/custom/runtime/snips/luasnippets" },
+  paths = { vim.fn.stdpath "config" .. "/lua/custom/snippets/" },
 }
 
 local check_backspace = function()

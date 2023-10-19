@@ -123,7 +123,7 @@ M.lsp = {
     ["<leader>lf"] = { "<cmd>lua vim.lsp.buf.format{ async = true }<cr>", "Format buffer" },
     ["gD"] = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "Get declaration" },
     ["gd"] = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Get definition" },
-    ["K"] = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Hover" },
+    [","] = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Hover" },
     ["gI"] = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "Get Implementation" },
     ["gr"] = { "<cmd>lua vim.lsp.buf.references()<CR>", "Get references" },
     ["gl"] = { "<cmd>lua vim.diagnostic.open_float()<CR>", "Open float" },
@@ -245,7 +245,7 @@ M.otter = {
   plugin = true,
 
   n = {
-    ["K"] = { ":lua require'otter'.ask_hover()<cr>", "Otter hover" },
+    [","] = { ":lua require'otter'.ask_hover()<cr>", "Otter hover" },
     ["gd"] = { ":lua require'otter'.ask_definition()<cr>", "Otter definition" },
     ["gr"] = { ":lua require'otter'.ask_references()<cr>", "Otter references" },
     ["gs"] = { ":lua require'otter'.ask_document_symbols()<cr>", "Otter symbols" },
