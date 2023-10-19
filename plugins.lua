@@ -91,6 +91,7 @@ local plugins = {
   },
   {
     "rcarriga/nvim-dap-ui",
+    event = "VeryLazy",
     dependencies = {
       {
         "mfussenegger/nvim-dap",
@@ -108,9 +109,9 @@ local plugins = {
       "williamboman/mason.nvim",
       "mfussenegger/nvim-dap",
     },
-    config = function()
-      require("mason-nvim-dap").setup()
-    end,
+    opts = {
+      handlers = {},
+    },
   },
   {
     "mfussenegger/nvim-dap-python",
