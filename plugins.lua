@@ -257,6 +257,7 @@ local plugins = {
     -- dependencies = { "jalvesaq/R-Vim-runtime" },
     init = function()
       require "custom.configs.r"
+      require("core.utils").load_mappings "r"
     end,
   },
   {

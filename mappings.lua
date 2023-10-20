@@ -235,11 +235,6 @@ M.quarto = {
     ["<localleader>qp"] = { ":lua require'quarto'.quartoPreview()<cr>", "preview" },
     ["<localleader>qq"] = { ":lua require'quarto'.quartoClosePreview()<cr>", "close" },
   },
-
-  i = {
-    ["<m-->"] = { " <- ", "assign" },
-    ["<m-m>"] = { " |>", "pipe" },
-  },
 }
 
 M.otter = {
@@ -300,6 +295,21 @@ M.blankline = {
 
       "Jump to current context",
     },
+  },
+}
+
+M.r = {
+  plugin = true,
+
+  n = {
+    ["<localleader>rm"] = { ":call RAction('rm')<CR>", "Clear variable" },
+    ["<localleader>rM"] = { ":call RClearAll()<CR>", "Clear workspace" },
+    ["<CR>"] = { ":call SendLineToR('down')<CR>" },
+  },
+
+  i = {
+    ["<m-->"] = { " <- ", "assign" },
+    ["<m-m>"] = { " |>", "pipe" },
   },
 }
 

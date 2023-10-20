@@ -1,7 +1,7 @@
 vim.g.R_disable_cmds = {
   "RCustomStart",
   "RSaveClose",
-  -- "RClearAll",
+  "RClearAll",
   "RSimpleComment",
   "RSimpleUnComment",
   "RToggleComment",
@@ -36,11 +36,11 @@ vim.g.R_disable_cmds = {
   "RDputObj",
   "RSetwd",
   "RListSpace",
-  -- "RSendChunk",
-  -- "RDSendChunk",
+  "RSendChunk",
+  "RDSendChunk",
   -- "RESendChunk",
   -- "REDSendChunk",
-  -- "RSendChunkFH",
+  "RSendChunkFH",
   "RBibTeX",
   "RBibTeXK",
   "RSweave",
@@ -86,5 +86,3 @@ vim.g.R_assign = 0
 vim.g.R_rmdchunk = 0
 vim.g.R_csv_delim = ","
 vim.g.R_nvimpager = "tab" -- show docs in new tab
-vim.api.nvim_set_keymap("i", "<m-->", " <- ", { silent = true })
-vim.api.nvim_set_keymap("i", "<m-m>", " |> ", { silent = true })
