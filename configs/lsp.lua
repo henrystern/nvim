@@ -34,7 +34,7 @@ for _, server in pairs(require "custom.utils.lsp_servers") do
       on_attach = on_attach,
       capabilities = capabilities,
       settings = {
-        r = {
+        R = {
           lsp = {
             rich_documentation = false,
             max_completions = 50,
@@ -73,8 +73,7 @@ for _, sign in ipairs(signs) do
 end
 
 local config = {
-  -- disable virtual text
-  virtual_text = false,
+  virtual_text = true,
   -- show signs
   signs = {
     active = signs,

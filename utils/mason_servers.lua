@@ -2,7 +2,7 @@ M = {
   -- LSPs
   "lua-language-server",
   "pyright",
-  "r-languageserver",
+  -- "r-languageserver",
   "clangd",
   "marksman",
 

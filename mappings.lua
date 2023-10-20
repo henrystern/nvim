@@ -246,12 +246,12 @@ M.otter = {
   plugin = true,
 
   n = {
-    [","] = { ":lua require'otter'.ask_hover()<cr>", "Otter hover" },
-    ["gd"] = { ":lua require'otter'.ask_definition()<cr>", "Otter definition" },
-    ["gr"] = { ":lua require'otter'.ask_references()<cr>", "Otter references" },
-    ["gs"] = { ":lua require'otter'.ask_document_symbols()<cr>", "Otter symbols" },
-    ["<leader>lr"] = { ":lua require'otter'.ask_rename()<cr>", "Otter rename" },
-    ["<leader>lf"] = { ":lua require'otter'.ask_format()<cr>", "Otter format" },
+    [","] = { ":lua require'otter'.ask_hover()<cr>", "Otter hover", opts = { buffer = true } },
+    ["gd"] = { ":lua require'otter'.ask_definition()<cr>", "Otter definition", opts = { buffer = true } },
+    ["gr"] = { ":lua require'otter'.ask_references()<cr>", "Otter references", opts = { buffer = true } },
+    ["gs"] = { ":lua require'otter'.ask_document_symbols()<cr>", "Otter symbols", opts = { buffer = true } },
+    ["<leader>lr"] = { ":lua require'otter'.ask_rename()<cr>", "Otter rename", opts = { buffer = true } },
+    ["<leader>lf"] = { ":lua require'otter'.ask_format()<cr>", "Otter format", opts = { buffer = true } },
   },
 }
 

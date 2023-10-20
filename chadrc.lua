@@ -2,8 +2,8 @@
 local M = {}
 
 M.ui = {
-  theme_toggle = { "tokyonight", "tokyonight" },
-  theme = "github_dark",
+  theme_toggle = { "bearded-arc", "onenord_light" },
+  theme = "bearded-arc",
   nvdash = {
     load_on_startup = true,
     header = {
