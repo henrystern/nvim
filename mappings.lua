@@ -139,6 +139,10 @@ M.lsp = {
     ["<leader>le"] = { "<cmd>lua vim.diagnostic.open_float()<CR>", "Open float" },
     ["<leader>lo"] = { "<cmd>SymbolsOutline<CR>", "Outline symbols" },
   },
+
+  i = {
+    ["<C-s>"] = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "Signature help" },
+  },
 }
 
 M.dap = {

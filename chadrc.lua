@@ -34,6 +34,12 @@ M.ui = {
       modules[11] = "c%c"
     end,
   },
+  lsp = {
+    signature = {
+      disabled = true,
+      silent = true,
+    },
+  },
 }
 
 M.plugins = "custom.plugins"
