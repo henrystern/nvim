@@ -4,15 +4,22 @@ local capabilities = base.capabilities
 
 -- fixes clangd formatting error
 capabilities.offsetEncoding = { "utf-16" }
-require("lspconfig").clangd.setup { capabilities = capabilities }
 
 local lspconfig = require "lspconfig"
 local util = require "lspconfig.util"
+
+local border = { "", "", "", "│", "", "", "", "│" }
+
+local handlers = {
+  ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
+  ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border }),
+}
 
 for _, server in pairs(require "custom.utils.lsp_servers") do
   Opts = {
     on_attach = on_attach,
     capabilities = capabilities,
+    handlers = handlers,
   }
 
   server = vim.split(server, "@")[1]
@@ -26,6 +33,7 @@ for _, server in pairs(require "custom.utils.lsp_servers") do
     lspconfig[server].setup {
       on_attach = on_attach,
       capabilities = capabilities,
+      handlers = handlers,
       filetypes = { "markdown", "quarto" },
       root_dir = util.root_pattern(".git", ".marksman.toml", "_quarto.yml"),
     }
@@ -33,6 +41,7 @@ for _, server in pairs(require "custom.utils.lsp_servers") do
     lspconfig[server].setup {
       on_attach = on_attach,
       capabilities = capabilities,
+      handlers = handlers,
       settings = {
         R = {
           lsp = {
@@ -46,6 +55,7 @@ for _, server in pairs(require "custom.utils.lsp_servers") do
     lspconfig[server].setup {
       on_attach = on_attach,
       capabilities = capabilities,
+      handlers = handlers,
       filetypes = {
         "ojs",
         "javascript",
@@ -94,13 +104,3 @@ local config = {
 }
 
 vim.diagnostic.config(config)
-
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-  -- border = "rounded",
-  border = { "", "", "", "│", "", "", "", "│" },
-})
-
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-  -- border = "rounded",
-  border = { "", "", "", "│", "", "", "", "│" },
-})
