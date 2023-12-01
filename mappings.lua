@@ -317,4 +317,22 @@ M.r = {
   },
 }
 
+M.iron = {
+  plugin = true,
+  -- see plugin config for other mappings
+  n = {
+    ["<localleader>tf"] = { "<cmd>IronRepl<CR>", "Toggle Iron" },
+    ["<CR>"] = { "<localleader>td<CR>", "Send Line" },
+    ["<A-CR>"] = { "<localleader>t<CR>", "Send Enter" },
+  },
+
+  i = {
+    ["<C-J>"] = { "<Esc><localleader>tda", "Send Line" },
+  },
+
+  v = {
+    ["<C-J>"] = { "<localleader>td<Esc>", "Send Selection" },
+  },
+}
+
 return M

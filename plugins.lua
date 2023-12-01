@@ -201,6 +201,14 @@ local plugins = {
       require "custom.configs.zen-mode"
     end,
   },
+  {
+    "vigemus/iron.nvim",
+    ft = "python",
+    config = function()
+      require("core.utils").load_mappings "iron"
+      require "custom.configs.iron"
+    end,
+  },
 
   -- Markdown and Quarto
   {
@@ -251,13 +259,11 @@ local plugins = {
   -- Other Languages
   {
     "jalvesaq/Nvim-R",
-    lazy = false,
-    event = "VeryLazy",
     ft = { "r", "rmd", "rrst", "rnoweb", "quarto", "rhelp" },
     -- dependencies = { "jalvesaq/R-Vim-runtime" },
-    init = function()
-      require "custom.configs.r"
+    config = function()
       require("core.utils").load_mappings "r"
+      require "custom.configs.r"
     end,
   },
   {
