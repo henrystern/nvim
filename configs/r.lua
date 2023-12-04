@@ -31,7 +31,7 @@ vim.g.R_disable_cmds = {
   "REDSendFunction",
   "RShowEx",
   "RShowRout",
-  "RViewDFs",
+  -- "RViewDFs",
   "RViewDFa",
   "RDputObj",
   "RSetwd",
@@ -84,5 +84,6 @@ vim.g.R_objbr_w = math.floor(vim.fn.winwidth(0) / 4)
 vim.g.R_objbr_opendf = 0
 vim.g.R_assign = 0
 vim.g.R_rmdchunk = 0
-vim.g.R_csv_delim = ","
+-- vim.g.R_csv_delim = ","
+vim.g.R_csv_app = "open-with-excel"
 vim.g.R_nvimpager = "tab" -- show docs in new tab
