@@ -14,6 +14,7 @@ M = {
   "json",
   "r",
   "yaml",
+  "latex",
 }
 
 return M
