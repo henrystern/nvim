@@ -20,6 +20,11 @@ local plugins = {
     opts = {
       ensure_installed = require "custom.utils.treesitters",
     },
+    config = function()
+      dofile(vim.g.base46_cache .. "syntax")
+      require("nvim-treesitter.configs").setup(require "plugins.configs.treesitter")
+      require "custom.configs.treesitter"
+    end,
   },
   {
     "hrsh7th/nvim-cmp",
