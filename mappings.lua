@@ -33,6 +33,7 @@ M.disabled = {
     ["<leader>wl"] = "",
     ["<leader>wr"] = "",
     ["<leader>b"] = "",
+    ["<Esc>"] = "",
     ["K"] = "",
   },
 }
@@ -41,7 +42,6 @@ M.general = {
   n = {
     ["<leader>q"] = { ":q<CR>", "Quit nvim" },
     ["<leader>w"] = { ":w<CR>", "Save buffer" },
-    [";"] = { ":", "Enter Command Mode", opts = { nowait = true } },
     ["<leader>h"] = { "<cmd>nohlsearch<CR>", "Clear highlights" },
     ["<S-Up>"] = { ":resize -2<CR>", "Move buffer up" },
     ["<S-Down>"] = { ":resize +2<CR>", "Move buffer down" },
@@ -80,6 +80,7 @@ M.general = {
     ["<M-j>"] = { "V:m'>+<cr>`<my`>mzgv`yo`z", "move line down" },
     ["<M-k>"] = { "V:m'<-2<cr>`>my`<mzgv`yo`z", "move line up" },
     ["<C-BS>"] = { "<Esc>cvb", "Delete word" },
+    ["<CR>"] = { "<localleader>td<CR>", "Send Line" },
   },
 
   i = {
