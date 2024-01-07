@@ -28,7 +28,7 @@ return {
       { i(1), dl(2, l.LS_SELECT_RAW), rep(1) }
     )
   ),
-  md.b_math(
+  md.b_no_math(
     "ali",
     fmta(
       [[
@@ -87,11 +87,9 @@ return {
     "dm",
     fmta(
       [[
-      $$
-      \begin{align}
+      $$\begin{aligned}
         <>
-      \end{align}
-      $$
+      \end{aligned}[t]$$
     ]],
       dl(1, l.LS_SELECT_RAW)
     )

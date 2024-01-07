@@ -1,2 +1,1 @@
-vim.treesitter.language.register("markdown", "quarto")
-vim.treesitter.language.register("typescript", "ojs")
+vim.treesitter.language.register("javascript", "ojs")
