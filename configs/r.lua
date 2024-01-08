@@ -110,3 +110,4 @@ vim.g.R_rmdchunk = 0
 -- vim.g.R_csv_delim = ","
 vim.g.R_csv_app = "open-with-excel"
 vim.g.R_nvimpager = "tab" -- show docs in new tab
+vim.g.R_path = "C:\\Program Files\\R\\R-4.3.2\\bin\\x64"
