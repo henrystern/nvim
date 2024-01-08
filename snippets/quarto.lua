@@ -40,6 +40,37 @@ return {
       { i(1), i(2, os.date()) }
     )
   ),
+  md.b_no_math(
+    "yamlreport",
+    fmta(
+      [[
+      ---
+      title: "<>"
+      subtitle: ""
+      date: <>
+      author: "<>"
+      toc: false
+      date-format: long
+      format:
+        html:
+          theme: cosmo
+        pdf:
+          include-in-header:
+            text: |
+              % \usepackage{}
+        docx:
+          reference-doc: custom-reference-doc.docx
+      # add to _quarto.yml
+      # project:
+      #   output-dir: _out
+      #   preview:
+      #     port: 6465
+      #     navigate: false
+      ---
+      ]],
+      { i(1), i(2, "last-modified"), i(3) }
+    )
+  ),
 }, {
   -- autosnippets
   md.b_no_math(

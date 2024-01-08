@@ -52,3 +52,6 @@ vim.g.python3_host_prog = "~\\Envs\\nvim\\Scripts\\python.exe"
 vim.opt.shell = "pwsh"
 vim.opt.shellcmdflag = "-nologo -noprofile -ExecutionPolicy RemoteSigned -command"
 vim.opt.shellxquote = ""
+
+-- Custom filetypes
+vim.filetype.add { extension = { ojs = "ojs" } }
