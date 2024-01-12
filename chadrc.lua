@@ -30,6 +30,15 @@ M.ui = {
     overriden_modules = function(modules)
       local _, c = unpack(vim.api.nvim_win_get_cursor(0))
       modules[11] = "c%c"
+      table.insert(
+        modules,
+        5,
+        (function()
+          local active = orgmode.statusline()
+          local relevant_index, _ = string.find(active, "%(", 2)
+          return string.sub(active, relevant_index)
+        end)()
+      )
     end,
   },
   lsp = {
