@@ -42,12 +42,16 @@ return {
   ),
   md.b_no_math(
     "yamlhw",
-    t [[
+    fmta(
+      [[
       ---
       title-block-style: none
       format: pdf
       ---
-      ]]
+      <>
+      ]],
+      { i(1) }
+    )
   ),
   md.b_no_math(
     "prob",
