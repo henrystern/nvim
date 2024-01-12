@@ -291,6 +291,31 @@ local plugins = {
     "lervag/vimtex",
     ft = "tex",
   },
+
+  -- Orgmode
+  {
+    "nvim-orgmode/orgmode",
+    dependencies = {
+      { "nvim-treesitter/nvim-treesitter", lazy = true },
+      {
+        "akinsho/org-bullets.nvim",
+        config = function()
+          require("org-bullets").setup()
+        end,
+      },
+      { "dhruvasagar/vim-table-mode" },
+    },
+    event = "VeryLazy",
+    config = function()
+      -- Load treesitter grammar for org
+      require("orgmode").setup_ts_grammar()
+      -- Setup orgmode
+      require("orgmode").setup {
+        org_agenda_files = "~/Nextcloud/Sync/Notes/**/*.org",
+        org_default_notes_file = "~/Nextcloud/Sync/Notes/refile.org",
+      }
+    end,
+  },
 }
 
 return plugins
