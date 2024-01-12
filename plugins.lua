@@ -307,12 +307,38 @@ local plugins = {
     },
     event = "VeryLazy",
     config = function()
+      local org_path = "~/Nextcloud/Sync/Notes/"
       -- Load treesitter grammar for org
       require("orgmode").setup_ts_grammar()
       -- Setup orgmode
       require("orgmode").setup {
-        org_agenda_files = "~/Nextcloud/Sync/Notes/**/*.org",
-        org_default_notes_file = "~/Nextcloud/Sync/Notes/refile.org",
+        org_agenda_files = org_path .. "**/*.org",
+        org_default_notes_file = org_path .. "refile.org",
+        org_indent_mode = "noindent",
+        org_ellipsis = "…",
+        win_split_mode = "vertical",
+        org_agenda_span = "week",
+        org_agenda_skip_scheduled_if_done = true,
+        org_agenda_skip_deadline_if_done = true,
+        org_agenda_skip_if_done = true,
+        org_agenda_start_on_weekday = false,
+        org_todo_keyword_faces = {
+          DONE = ":foreground green",
+        },
+        org_capture_templates = {
+          j = {
+            description = "Journal",
+            template = "** %<%Y-%m-%d> %<%A>\n** %<%X>\n%?",
+            target = org_path .. "/journal.org",
+          },
+        },
+        mappings = {
+          org_return = false,
+          global = {
+            org_agenda = "<M-a>",
+            org_capture = "<M-c>",
+          },
+        },
       }
     end,
   },
