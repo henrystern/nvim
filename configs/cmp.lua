@@ -197,6 +197,7 @@ cmp.setup {
     { name = "path" },
     { name = "otter" },
     { name = "pandoc_references" },
+    { name = "orgmode" },
     -- { name = "nvim_lsp_signature_help" },
   },
   confirm_opts = {
