@@ -34,7 +34,14 @@ M.ui = {
         modules,
         5,
         (function()
+          local loaded = require("lazy.core.config").plugins["orgmode"]._.loaded
+          if loaded == nil then
+            return ""
+          end
           local active = orgmode.statusline()
+          if active == "" then
+            return ""
+          end
           local relevant_index, _ = string.find(active, "%(", 2)
           return string.sub(active, relevant_index)
         end)()
