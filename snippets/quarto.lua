@@ -41,6 +41,26 @@ return {
     )
   ),
   md.b_no_math(
+    "yamlhw",
+    t [[
+      ---
+      title-block-style: none
+      format: pdf
+      ---
+      ]]
+  ),
+  md.b_no_math(
+    "prob",
+    fmta(
+      [[
+      # Problem <>.
+      <>
+      ## Solution
+      ]],
+      { i(1), i(2) }
+    )
+  ),
+  md.b_no_math(
     "yamlreport",
     fmta(
       [[
