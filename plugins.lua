@@ -312,7 +312,7 @@ local plugins = {
       require("orgmode").setup_ts_grammar()
       -- Setup orgmode
       require("orgmode").setup {
-        org_agenda_files = org_path .. "**/*.org",
+        org_agenda_files = { org_path .. "**/*.org", org_path .. "**/*.org_archive" },
         org_default_notes_file = org_path .. "_.org",
         -- org_indent_mode = "noindent",
         org_ellipsis = "…",
