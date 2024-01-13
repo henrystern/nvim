@@ -308,42 +308,22 @@ local plugins = {
     event = "VeryLazy",
     config = function()
       local org_path = "~/Nextcloud/Sync/Notes/"
-      -- Load treesitter grammar for org
       require("orgmode").setup_ts_grammar()
-      -- Setup orgmode
       require("orgmode").setup {
-        org_agenda_files = org_path .. "**/*.org",
+        org_agenda_files = org_path .. "*.org",
         org_default_notes_file = org_path .. "_.org",
-        -- org_indent_mode = "noindent",
         org_ellipsis = "…",
-        -- win_split_mode = "vertical",
-        org_agenda_span = "week",
         org_log_into_drawer = "LOGBOOK",
         org_deadline_warning_days = 7,
-        -- org_agenda_skip_scheduled_if_done = true,
-        -- org_agenda_skip_deadline_if_done = true,
-        -- org_agenda_skip_if_done = true,
-        -- org_agenda_start_on_weekday = false,
-        org_blank_before_new_entry = false,
-        -- org_todo_keyword_faces = {
-        -- DONE = ":foreground #003601",
-        -- },
+        org_blank_before_new_entry = { heading = false, plain_list_item = false },
         org_capture_templates = {
-          y = {
-            description = "School",
-            template = "\n** %?\n",
-            target = org_path .. "/school.org",
-            -- headline = "%^{COMPLETION}",
-          },
           j = {
             description = "Journal",
-            -- template = "** %<%Y-%m-%d> %<%A>\n** %<%X>\n%?",
             template = "\n*** %<%Y-%m-%d> %<%A>\n**** %U\n    %?",
             target = org_path .. "/journal.org",
           },
         },
         mappings = {
-          org_return = false,
           global = {
             org_agenda = { "<M-a>", "<leader>oa" },
             org_capture = { "<M-c>", "<leader>oc" },
