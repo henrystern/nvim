@@ -297,13 +297,13 @@ local plugins = {
     "nvim-orgmode/orgmode",
     dependencies = {
       { "nvim-treesitter/nvim-treesitter", lazy = true },
-      {
-        "akinsho/org-bullets.nvim",
-        config = function()
-          require("org-bullets").setup()
-        end,
-      },
-      { "dhruvasagar/vim-table-mode" },
+      -- {
+      --   "akinsho/org-bullets.nvim",
+      --   config = function()
+      --     require("org-bullets").setup()
+      --   end,
+      -- },
+      -- { "dhruvasagar/vim-table-mode" },
     },
     event = "VeryLazy",
     config = function()
@@ -318,14 +318,16 @@ local plugins = {
         org_ellipsis = "…",
         -- win_split_mode = "vertical",
         org_agenda_span = "week",
-        org_agenda_skip_scheduled_if_done = true,
-        org_agenda_skip_deadline_if_done = true,
-        org_agenda_skip_if_done = true,
-        org_agenda_start_on_weekday = false,
+        org_log_into_drawer = "LOGBOOK",
+        org_deadline_warning_days = 7,
+        -- org_agenda_skip_scheduled_if_done = true,
+        -- org_agenda_skip_deadline_if_done = true,
+        -- org_agenda_skip_if_done = true,
+        -- org_agenda_start_on_weekday = false,
         org_blank_before_new_entry = false,
-        org_todo_keyword_faces = {
-          -- DONE = ":foreground #003601",
-        },
+        -- org_todo_keyword_faces = {
+        -- DONE = ":foreground #003601",
+        -- },
         org_capture_templates = {
           y = {
             description = "School",
