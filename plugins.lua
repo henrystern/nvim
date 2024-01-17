@@ -311,7 +311,7 @@ local plugins = {
       require("orgmode").setup_ts_grammar()
       require("orgmode").setup {
         org_agenda_files = org_path .. "*.org",
-        org_default_notes_file = org_path .. "_.org",
+        org_default_notes_file = org_path .. "inbox.org",
         org_ellipsis = "…",
         org_log_into_drawer = "LOGBOOK",
         org_deadline_warning_days = 7,
@@ -321,6 +321,12 @@ local plugins = {
             description = "Journal",
             template = "\n*** %<%Y-%m-%d> %<%A>\n**** %U\n    %?",
             target = org_path .. "/journal.org",
+          },
+          g = {
+            description = "Groceries",
+            template = "   - [ ] %? - %u",
+            target = org_path .. "/agenda.org",
+            headline = "Groceries",
           },
         },
         mappings = {
