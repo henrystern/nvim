@@ -135,6 +135,8 @@ return {
   md.A_math("=<", t "\\impliedby "),
   md.A_math("<=", t "\\le "),
   md.A_math(">=", t "\\ge "),
+  md.A_math(" or", t " \\vee "),
+  md.A_math(" and", t " \\wedge "),
 
   -- Shortcuts
   md.math("nd", t "&"),

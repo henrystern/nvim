@@ -46,7 +46,13 @@ return {
       [[
       ---
       title-block-style: none
-      format: pdf
+      format: 
+        pdf:
+          page-numbering: false
+          include-in-header:
+            text: |
+              \usepackage{mathtools}
+              \pagenumbering{gobble}
       ---
       <>
       ]],
