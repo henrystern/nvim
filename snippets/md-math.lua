@@ -89,9 +89,9 @@ return {
     "dm",
     fmta(
       [[
-      $$\begin{aligned}
+      $$\begin{align*}
         <>
-      \end{aligned}$$
+      \end{align*}$$
     ]],
       dl(1, l.LS_SELECT_RAW)
     )
