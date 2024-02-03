@@ -17,9 +17,6 @@ local plugins = {
   },
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = {
-      ensure_installed = require "custom.utils.treesitters",
-    },
     config = function()
       dofile(vim.g.base46_cache .. "syntax")
       require("nvim-treesitter.configs").setup(require "plugins.configs.treesitter")
@@ -290,6 +287,7 @@ local plugins = {
   {
     "lervag/vimtex",
     ft = "tex",
+    lazy = false,
   },
 
   -- Orgmode

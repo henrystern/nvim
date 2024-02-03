@@ -15,6 +15,7 @@ M = {
   "r",
   "yaml",
   "latex",
+  "org",
 }
 
 return M
