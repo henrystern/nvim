@@ -35,9 +35,9 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
       " endif |
 
       " let g:tex_flavor='latex' |
-      " let g:vimtex_quickfix_mode=0 |
-      " set conceallevel=1 |
-      " let g:tex_conceal='abdmg' |
+      let g:vimtex_quickfix_mode=0 |
+      set conceallevel=2 |
+      let g:tex_conceal='abdmg' |
 
       " let g:vimtex_compiler_latexmk = {
       "         \ 'build_dir' : '',

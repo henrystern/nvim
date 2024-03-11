@@ -59,7 +59,7 @@ luasnip.config.set_config {
 luasnip.filetype_extend("quarto", { "md-math" })
 luasnip.filetype_extend("markdown", { "md-math" })
 luasnip.filetype_extend("rmarkdown", { "md-math" })
-luasnip.filetype_extend("tex", { "md-math" })
+luasnip.filetype_extend("tex", { "tex-math" })
 
 -- friendly-snippets
 require("luasnip/loaders/from_vscode").lazy_load { exclude = { "quarto" } }
