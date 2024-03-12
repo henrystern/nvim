@@ -34,28 +34,10 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
         " let g:vimtex_view_method='zathura' |
       " endif |
 
-      " let g:tex_flavor='latex' |
+      let g:tex_flavor='latex' |
       let g:vimtex_quickfix_mode=0 |
       set conceallevel=2 |
       let g:tex_conceal='abdmg' |
-
-      " let g:vimtex_compiler_latexmk = {
-      "         \ 'build_dir' : '',
-      "         \ 'callback' : 1,
-      "         \ 'continuous' : 1,
-      "         \ 'executable' : 'latexmk',
-      "         \ 'hooks' : [],
-      "         \ 'options' : [
-      "         \   '-synctex=1',
-      "         \   '-aux-directory=' . stdpath('data') . '/.latex_aux_files',
-      "         \ ],
-      "         \}
-      " let g:vimtex_view_general_options_latexmk = 'reuse-instance'
   ]]
-    vim.g.vimtex_compiler_latexmk = {
-      options = {
-        "-aux-directory=" .. vim.fn.stdpath "data" .. "/.latex_aux_files",
-      },
-    }
   end,
 })
