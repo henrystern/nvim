@@ -34,9 +34,9 @@ return {
     "ali",
     fmta(
       [[
-      \begin{align}
+      \begin{align*}
         <>
-      \end{align}
+      \end{align*}
     ]],
       dl(1, l.LS_SELECT_RAW)
     )
@@ -63,7 +63,7 @@ return {
       dl(1, l.LS_SELECT_RAW)
     )
   ),
-  md.math(
+  md.b_no_math(
     "gather",
     fmta(
       [[
@@ -78,9 +78,9 @@ return {
     "#dm",
     fmta(
       [[
-      $$
+      \[
         <>
-      $$ {#eq-<>}
+      \] {#eq-<>}
     ]],
       { dl(1, l.LS_SELECT_RAW), i(2, "noref") }
     )
@@ -89,14 +89,12 @@ return {
     "dm",
     fmta(
       [[
-      $$\begin{align*}
-        <>
-      \end{align*}$$
+      \[ <> \]
     ]],
       dl(1, l.LS_SELECT_RAW)
     )
   ),
-  md.no_math("mk", fmta("$<>$", dl(1, l.LS_SELECT_RAW))),
+  md.no_math("mk", fmta("\\(<>\\)", dl(1, l.LS_SELECT_RAW))),
 
   -- Symbols
   md.A_math(";a", t "\\alpha "),
@@ -121,6 +119,7 @@ return {
   md.A_math("NN", t "\\mathbb{N}"),
   md.A_math("ee", t "\\in "),
   md.A_math("UU", t "\\cup "),
+  md.A_math("II", t "\\cap "),
   md.A_math("cc", t "\\subset "),
   md.A_math("<->", t "\\leftrightarrow "),
   md.A_math("...", t "\\ldots "),
@@ -155,6 +154,7 @@ return {
   md.A_math("//", fmta("\\frac{<>}{<>}", { i(1), i(2) })),
   md.A_math("compl", t "^{c}"),
   md.A_math("inv", t "^{-1}"),
+  md.A_math("str", t "^{*}"),
   md.A_math("mat ", fmta("\\begin{matrix} <> \\end{matrix}", { i(1) })),
   md.A_math("mat)", fmta("\\begin{pmatrix} <> \\end{pmatrix}", { i(1) })),
   md.A_math("mat]", fmta("\\begin{bmatrix} <> \\end{bmatrix}", { i(1) })),
@@ -229,6 +229,7 @@ return {
   md.A_math("box", fmta("\\Aboxed{<>}", { dl(1, l.LS_SELECT_RAW) })),
   md.A_math("}utt", fmta("\\underbrace{<>}_{\\text{<>}}", { dl(1, l.LS_SELECT_RAW), i(2) })),
   md.A_math("utt", fmta("\\underset{\\text{<>}}{<>}", { i(1), dl(2, l.LS_SELECT_RAW) })),
+  md.A_math("itt", fmta("\\shortintertext{<>}", { dl(1, l.LS_SELECT_RAW) })),
   md.A_math("tt", fmta("\\text{<>}", { dl(1, l.LS_SELECT_RAW) })),
   md.A_math("ta", fmta("\\tag{<>}", { dl(1, l.LS_SELECT_RAW) })),
   md.A_math("\\quad   ", t "\\qquad "),
